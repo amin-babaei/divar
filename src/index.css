@@ -10,3 +10,16 @@
     font-weight: normal;
     font-display: swap;
   }
+  *{
+    font-family: iransans;
+  }
+body{
+  -ms-overflow-style:none;
+  scrollbar-width: none;
+}
+.hide-scroll::-webkit-scrollbar{
+  display: none;
+}
+.side-h{
+  height: calc(100vh - 120px)
+}
