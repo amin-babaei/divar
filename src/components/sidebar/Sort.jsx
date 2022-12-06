@@ -11,11 +11,11 @@ const SidebarSort = () => {
           </button>
           {showDropdown && (
             <div className="flex flex-col mb-1">
-             <label class="inline-flex items-center">
+             <label className="inline-flex items-center">
                 <input type="radio" className="checked:bg-none text-red-700 focus:ring-0 focus:ring-offset-0" name="accountType" value="busines" />
                 <span className="text-sm mr-2">بالاترین قیمت</span>
               </label>
-              <label class="inline-flex items-center mt-4">
+              <label className="inline-flex items-center mt-4">
                 <input type="radio" className="checked:bg-none text-red-700 focus:ring-0 focus:ring-offset-0" name="accountType" value="busines" />
                 <span className="text-sm mr-2">کمترین قیمت</span>
               </label>
