@@ -1,4 +1,5 @@
-import Navbar from "../components/Navbar"
+import Navbar from "../components/navbar/Navbar"
+import AdsContainer from "./AdsContainer";
 import SidebarContainer from "./SidebarContainer"
 const AppContainers = () => {
   
@@ -7,6 +8,7 @@ const AppContainers = () => {
       <Navbar />
       <section className="container mx-auto px-3 relative">
         <SidebarContainer/>
+        <AdsContainer/>
       </section>
     </>
   );

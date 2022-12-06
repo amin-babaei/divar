@@ -11,8 +11,15 @@ module.exports = {
       }
     },
   },
+  variants: {
+    aspectRatio: ['responsive', 'hover']
+  },
+  corePlugins: {
+    aspectRatio: false,
+  },
   plugins: [
     require('flowbite/plugin'),
+    require('@tailwindcss/aspect-ratio'),
     function ({
       addComponents
     }) {
