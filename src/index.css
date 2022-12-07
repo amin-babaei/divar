@@ -26,3 +26,6 @@ body{
 aside > div{
   padding: 0 !important;
 }
+.title-modal > button{
+  margin: 0;
+}

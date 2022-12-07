@@ -8,8 +8,7 @@ function Drawer() {
     return (
             <div className="text-center z-20">
                 <GiHamburgerMenu className='sm:hidden' onClick={()=>setShow(true)}/>
-                {show && (
-                    <div className="w-fit min-h-screen top-0 absolute right-0 p-0 sm:hidden">
+                    <div className={`w-fit  min-h-screen shadow-xl duration-300 top-0 absolute p-0 sm:hidden ${show ? 'right-0' : '-right-full'}`}>
                         <Sidebar aria-label="Default sidebar example" className='relative p-0'>
                             <Sidebar.Items className='h-screen p-6 leading-10 w-64'>
                                <SidebarCategory/>
@@ -18,7 +17,6 @@ function Drawer() {
                             </Sidebar.Items>
                         </Sidebar>
                     </div>
-                )}
             </div>
     )
 }
