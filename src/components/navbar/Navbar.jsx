@@ -6,7 +6,7 @@ import DropDown from './DropDown'
 const Navbar = () => {
     
   return (
-    <header className='bg-white shadow-sm w-full sticky top-0 font-main py-2 z-10'>
+    <header className='bg-white shadow-sm w-full sticky top-0 font-Imedium py-2 z-10'>
         <nav className='flex items-center justify-between container mx-auto px-3'>
             <div className='flex items-center'>
                 <Link to='/'>

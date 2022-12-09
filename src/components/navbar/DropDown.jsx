@@ -19,7 +19,7 @@ const DropDown = () => {
     },[])
     return (
         <div ref={menuRef}>
-            <button className='relative rounded px-4 py-[10px] text-gray-400 text-sm flex items-center hover:bg-gray-100 hover:text-black'
+            <button className='wordspace relative rounded px-4 py-[10px] text-gray-400 text-sm flex items-center hover:bg-gray-100 hover:text-black'
                 onClick={() => setShow(!show)}>
                 <BsFillPersonFill className='ml-1 text-lg' />
                 دیوار من
@@ -35,6 +35,9 @@ const DropDown = () => {
                     </Link>
                     ) : (
                         <>
+                            <li className='p-3 text-xs border-b'>
+                                {user.phoneNumber}
+                            </li>
                             <li className='flex items-center gap-x-3 p-3 text-xs border-b cursor-pointer hover:bg-gray-200'>
                                 <BsBookmark size={16} />
                                 نشان ها

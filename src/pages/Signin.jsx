@@ -30,7 +30,7 @@ const Signin = () => {
     }, [user])
 
     return (
-        <form className="flex flex-col gap-4 px-3 md:w-1/3 md:mx-auto mt-10" onSubmit={formik.handleSubmit}>
+        <form className="flex flex-col gap-4 px-3 md:w-1/3 md:mx-auto mt-10 font-Imedium" onSubmit={formik.handleSubmit}>
             <h3 className='text-center text-gray-500 mb-5'>
                 ورود به حساب کاربری
             </h3>

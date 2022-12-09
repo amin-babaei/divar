@@ -2,17 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .wordspace {
+    word-spacing: -3px;
+  }
+}
 @font-face {
-    font-family: "iransans";
+    font-family: "iransansLight";
     src: 
-      url("/public/fonts/IRANSansX-Medium.woff2") format("woff2"),
-      url("/public/fonts/IRANSansX-Medium.woff") format("woff");
+      url("/public/fonts/IRANSansX-Light.woff") format("woff2"),
+      url("/public/fonts/IRANSansX-Light.woff2") format("woff");
     font-weight: normal;
     font-display: swap;
   }
-  *{
-    font-family: iransans;
+@font-face {
+    font-family: "iransansMedium";
+    src: 
+      url("/public/fonts/IRANSansX-Medium.woff") format("woff2"),
+      url("/public/fonts/IRANSansX-Medium.woff2") format("woff");
+    font-weight: normal;
+    font-display: swap;
   }
+h1,h2,h3,h4{
+  font-family: "iransansMedium";
+}
 body{
   -ms-overflow-style:none;
   scrollbar-width: none;

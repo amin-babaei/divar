@@ -6,7 +6,7 @@ const AppContainers = () => {
   return (
     <>
       <Navbar />
-      <section className="container mx-auto px-3 relative">
+      <section className="container mx-auto px-3 relative font-Ilight">
         <SidebarContainer/>
         <AdsContainer/>
       </section>

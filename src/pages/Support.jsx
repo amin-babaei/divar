@@ -8,7 +8,7 @@ import envelope from '../assets/envelope.svg'
 
 const Support = () => {
     return (
-        <section>
+        <section className="font-Ilight">
             <h3 className='text-center mt-10 text-lg'>چطور می‌توانیم کمکتان کنیم؟</h3>
             <div className="relative mt-5">
                 <input type="text" className="block w-3/4 md:w-1/3 m-auto text-md text-gray-900 border border-gray-300 rounded focus:outline-none focus:ring-white focus:border-red-700"
