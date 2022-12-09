@@ -44,6 +44,7 @@ const AuthProvider = ({ children }) => {
                     .then(() => {
                         toast.success('با موفقیت ثبت نام کردید')
                         navigate('/signin')
+                        dispatch({ type: 'SUCCESS'})
                     }).catch(err => {
                         toast.error(err?.response?.data?.message)
                         dispatch({ type: 'REJECT', error: err?.response?.data?.message })

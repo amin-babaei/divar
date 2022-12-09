@@ -6,18 +6,17 @@ import { useEffect } from 'react';
 import { useAuth, useAuthActions } from '../context/AuthContext';
 
 import Input from '../components/Input';
-
+import Loading from '../components/Loading'
 const initialValues = {
     email: '',
     password: '',
 }
 const Signin = () => {
     const dispatch = useAuthActions()
-    const { user, redirect } = useAuth()
+    const { user,loading } = useAuth()
     const navigate = useNavigate()
     const onSubmit = (values) => {
         dispatch({ type: 'SIGNIN', payload: values })
-        if(redirect)navigate("/", { replace: true })
     }
     const formik = useFormik({
         initialValues,
@@ -28,7 +27,7 @@ const Signin = () => {
     useEffect(() => {
         if (user) navigate("/", { replace: true })
     }, [user])
-
+    if(loading)return <Loading/>
     return (
         <form className="flex flex-col gap-4 px-3 md:w-1/3 md:mx-auto mt-10 font-Imedium" onSubmit={formik.handleSubmit}>
             <h3 className='text-center text-gray-500 mb-5'>

@@ -2,9 +2,10 @@ import { Button } from 'flowbite-react'
 import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
 import {validationSignup} from '../utils/validation.js'
-import { useAuthActions } from '../context/AuthContext';
+import { useAuth, useAuthActions } from '../context/AuthContext';
 
 import Input from '../components/Input'
+import Loading from '../components/Loading'
 const initialValues = {
     name:'',
     email:'',
@@ -14,6 +15,7 @@ const initialValues = {
 }
 const Signup = () => {
     const dispatch = useAuthActions()
+    const { loading } = useAuth()
     const onSubmit = (values) => {
         const {name,email,password,phoneNumber} = values
         dispatch({type:'SIGNUP',payload:{name,email,password,phoneNumber}})
@@ -25,7 +27,7 @@ const Signup = () => {
         validationSchema:validationSignup,
         validateOnMount:true
     })
-
+    if(loading)return <Loading/>
     return (
         <form className="flex flex-col gap-4 px-3 md:w-1/3 md:mx-auto mt-10 font-Imedium" onSubmit={formik.handleSubmit}>
             <h3 className='text-center text-gray-500 mb-5'>
