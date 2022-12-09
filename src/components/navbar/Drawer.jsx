@@ -13,7 +13,7 @@ function Drawer() {
                             <Sidebar.Items className='h-screen p-6 leading-10 w-64'>
                                <SidebarCategory/>
                                <SidebarSort/>
-                            <Button color="failure" size="sm" className='absolute top-1 left-3' onClick={()=>setShow(false)}>X</Button>
+                            <Button color="dark" size="sm" className='absolute top-1 left-3' onClick={()=>setShow(false)}>X</Button>
                             </Sidebar.Items>
                         </Sidebar>
                     </div>
