@@ -12,7 +12,7 @@ root.render(
   <BrowserRouter>
     <AuthProvider>
       <App/>
-      <ToastContainer rtl/>
+      <ToastContainer rtl limit={1}/>
     </AuthProvider>
   </BrowserRouter>
 );
