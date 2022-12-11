@@ -2,7 +2,7 @@ import useFetch from '../../hooks/useFetch.js'
 import LoadCategory from '../LoadCategory'
 import { toast } from "react-toastify";
 const SidebarCategory = () => {
-    const {data,loading,error} = useFetch(`${process.env.REACT_APP_BASE_URL}/api/post-category`)
+    const {data,loading,error} = useFetch(`${process.env.REACT_APP_BASE_API_URL}/api/post-category`)
     if(loading) return <LoadCategory/>
     if(error){
         toast.error(error.message)

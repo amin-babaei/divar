@@ -4,7 +4,7 @@ import {toast} from "react-toastify";
 import Loading from "../components/Loading";
 
 const AdsContainer = () => {
-  const {data, loading, error} = useFetch(`${process.env.REACT_APP_BASE_URL}/api/posts`)
+  const {data, loading, error} = useFetch(`${process.env.REACT_APP_BASE_API_URL}/api/posts`)
   if (loading) return <Loading/>
   if (error) {
       toast.error(error.message)
