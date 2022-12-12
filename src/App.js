@@ -5,6 +5,7 @@ import Support from "./pages/Support"
 import NotFound from "./pages/NotFound"
 import Signup from "./pages/Signup"
 import Signin from "./pages/Signin"
+import PostDetail from "./pages/posts/PostDetail"
 const App = () => {
   return (
     <Routes>
@@ -13,6 +14,7 @@ const App = () => {
       <Route path="/support" element={<Support/>} />
       <Route path="/signup" element={<Signup/>} />
       <Route path="/signin" element={<Signin/>} />
+      <Route path="/posts/:slug/:hashId" element={<PostDetail/>} />
       <Route path="*" element={<NotFound/>} />
     </Route>
   </Routes>
