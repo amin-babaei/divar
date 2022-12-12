@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import axios from "axios"
+import http from "../services/httpService"
 
 export default function useFetch(url,config){
 
@@ -12,7 +12,7 @@ export default function useFetch(url,config){
             async function(){
                 try{
                     setLoading(true)
-                    const {data} = await axios.get(url,config)
+                    const {data} = await http.get(url,config)
                     setData(data.data)
                 }catch(err){
                     setError(err)
