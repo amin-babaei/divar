@@ -6,6 +6,7 @@ import moment from 'jalali-moment';
 import { Button } from 'flowbite-react';
 import { BsQuestionCircle } from 'react-icons/bs'
 import { Breadcrumb, ShareLink, Bookmark, Contact } from './index';
+import { toPersianDigits } from '../../utils/persianDigit';
 
 const PostDetail = () => {
   const { slug, hashId } = useParams()
@@ -23,12 +24,32 @@ const PostDetail = () => {
             <div className='mt-5 order-1 md:order-none'>
               <h2 className='text-xl'>{data.title}</h2>
               <p className='text-md mt-5 text-gray-500'>{moment(data.createdAt).locale('fa').fromNow()}</p>
-              <div className="flex justify-between mt-5">
+              <div className='flex items-center justify-between mt-4 border-b py-3'>
+                <h3>قیمت : </h3>
+                <p className='text-gray-500'>
+                  {data.price > 0 ? (
+                    <>
+                      {toPersianDigits(new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'IRR'
+                      }).format(data.price).replace("IRR", ""))}
+                      <span className='pr-1'>تومان</span>
+                    </>
+                  ) : 'توافقی'}
+                </p>
+              </div>
+              <div className='flex items-center justify-between border-b py-3'>
+                <h3>مایل به معاوضه : </h3>
+                <p className='text-gray-500'>
+                  {data.isNetting ? 'هستم' : 'نیستم'}
+                </p>
+              </div>
+              <div className="flex justify-between mt-7">
                 <div className='flex gap-x-2'>
                   <Contact info={data.creator} />
                   <Button color='gray' className='w-24'>چت</Button>
                 </div>
-                <div className='flex items-center gap-x-2 xl:ml-10'>
+                <div className='flex items-center gap-x-2'>
                   <Bookmark postId={data._id} bookmarked={data.isBookmarked} />
                   <ShareLink slug={data.slug} hashId={data.hashId} />
                 </div>
