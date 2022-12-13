@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { BsFillPersonFill, BsBookmark } from 'react-icons/bs'
 import { GrLogin } from 'react-icons/gr'
+import { RiFilePaper2Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { useAuth, useAuthActions } from '../../context/AuthContext.js';
 const DropDown = () => {
@@ -38,10 +39,18 @@ const DropDown = () => {
                             <li className='p-3 text-xs border-b'>
                                 {user.phoneNumber}
                             </li>
-                            <li className='flex items-center gap-x-3 p-3 text-xs border-b cursor-pointer hover:bg-gray-200'>
-                                <BsBookmark size={16} />
-                                نشان ها
-                            </li>
+                            <Link to='/profile/bookmarks'>
+                                <li className='flex items-center gap-x-3 p-3 text-xs border-b cursor-pointer hover:bg-gray-200'>
+                                    <BsBookmark size={16} />
+                                    نشان ها
+                                </li>
+                            </Link>
+                            <Link to='/profile/my-posts'>
+                                <li className='flex items-center gap-x-3 p-3 text-xs border-b cursor-pointer hover:bg-gray-200'>
+                                    <RiFilePaper2Line size={16} />
+                                    آگهی های من 
+                                </li>
+                            </Link>
                             <li className='flex items-center gap-x-3 p-3 text-xs cursor-pointer hover:bg-gray-200'
                             onClick={()=>dispatch({type:'SIGNOUT'})}>
                                 <GrLogin size={16} />
