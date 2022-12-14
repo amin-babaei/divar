@@ -16,7 +16,7 @@ const Input = ({ lable, formik, name, type, className, placeholder = "" }) => {
                 value={formik.values[name]}
                 type={type || 'text'}
                 placeholder={placeholder}
-                className='w-full rounded-md focus:border-gray-300 focus:ring-0'
+                className='w-full rounded-md border-gray-300 focus:ring-0 focus:border-black'
             />
         </div>
     )
