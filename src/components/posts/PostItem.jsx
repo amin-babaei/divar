@@ -13,11 +13,15 @@ const AdsItem = ({ data }) => {
                             <h5 className='text-md break-words font-semibold'>{post.title}</h5>
                             <div>
                                 <h5 className='text-sm pb-4'>
-                                    {toPersianDigits(new Intl.NumberFormat('en-US', {
-                                        style: 'currency',
-                                        currency: 'IRR'
-                                    }).format(post.price).replace("IRR", ""))}
-                                    <span className='pr-1'>تومان</span>
+                                    {post.price > 0 ? (
+                                        <>
+                                            {toPersianDigits(new Intl.NumberFormat('en-US', {
+                                                style: 'currency',
+                                                currency: 'IRR'
+                                            }).format(post.price).replace("IRR", ""))}
+                                            <span className='pr-1'>تومان</span>
+                                        </>
+                                    ) : 'توافقی'}
                                 </h5>
                                 <p className='text-xs text-gray-500'>{moment(post.createdAt).locale('fa').fromNow()}</p>
                             </div>
