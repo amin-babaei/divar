@@ -13,7 +13,7 @@ const Input = ({ lable, formik, name, type, className, placeholder = "" }) => {
                 name={name}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values[name]}
+                value={formik.values[name] || ''}
                 type={type || 'text'}
                 placeholder={placeholder}
                 className='w-full rounded-md border-gray-300 focus:ring-0 focus:border-black'
