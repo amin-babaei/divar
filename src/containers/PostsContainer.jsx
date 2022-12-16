@@ -12,8 +12,7 @@ const AdsContainer = () => {
     const { page, setCategory, setSort, category, sort, query, lengthQuerys } = useContext(QueryContext)
 
     const [currentPage, setCurrentPage] = useState(page);
-    const { data, loading, error } = useFetch(`${process.env.REACT_APP_BASE_API_URL}/api/posts?page=${currentPage}&category=${category}
-    &sort=${sort}`)
+    const { data, loading, error } = useFetch(`${process.env.REACT_APP_BASE_API_URL}/api/posts?page=${currentPage}&category=${category}&sort=${sort}`)
 
     const onPageChange = (page) => {
         setCurrentPage(page);
