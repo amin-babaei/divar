@@ -1,13 +1,13 @@
-import useFetch from '../../hooks/useFetch.js'
 import LoadCategory from '../LoadCategory'
 import {toast} from "react-toastify";
 import QueryContext from '../../context/QueryContext.js';
 import {useCallback, useContext,} from 'react';
 import {useSearchParams} from 'react-router-dom';
+import { useAllCategorys } from '../../hooks/fetchData.js';
 
 const SidebarCategory = () => {
     const [, setSearchParams] = useSearchParams();
-    const {data, loading, error} = useFetch(`${process.env.REACT_APP_BASE_API_URL}/api/post-category`)
+    const {isLoading, data, error} = useAllCategorys()
     const {category, setCategory} = useContext(QueryContext)
 
     const getEnglishTitle = useCallback(title => {
@@ -15,7 +15,7 @@ const SidebarCategory = () => {
         setSearchParams({category})
     }, [setCategory, setSearchParams, category])
 
-    if (loading) return <LoadCategory/>
+    if (isLoading) return <LoadCategory/>
     if (error) {
         toast.error(error.message)
         return <LoadCategory/>

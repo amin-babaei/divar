@@ -1,10 +1,10 @@
 import { toast } from "react-toastify"
 import LoadCategory from "../../../components/LoadCategory"
-import useFetch from "../../../hooks/useFetch"
+import { useAllCategorys } from "../../../hooks/fetchData"
 
 const SelectCategory = ({ selectCategory }) => {
-  const { data, loading, error } = useFetch(`${process.env.REACT_APP_BASE_API_URL}/api/post-category`)
-  if (loading) return <LoadCategory />
+  const {isLoading, data, error} = useAllCategorys()
+  if (isLoading) return <LoadCategory />
   if (error) {
     toast.error(error.message)
     return <LoadCategory />

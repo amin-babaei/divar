@@ -1,18 +1,18 @@
 import PostItem from '../components/posts/PostItem'
-import useFetch from "../hooks/useFetch.js";
 import { toast } from "react-toastify";
 import Loading from "../components/Loading";
 import { Button, Pagination } from 'flowbite-react';
 import { useContext, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import QueryContext from '../context/QueryContext';
+import { usePosts } from '../hooks/fetchData';
 
 const AdsContainer = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const { page, setCategory, setSort, category, sort, query, lengthQuerys } = useContext(QueryContext)
 
     const [currentPage, setCurrentPage] = useState(page);
-    const { data, loading, error } = useFetch(`${process.env.REACT_APP_BASE_API_URL}/api/posts?page=${currentPage}&category=${category}&sort=${sort}`)
+    const {isLoading, data, error} = usePosts(currentPage,category,sort)
 
     const onPageChange = (page) => {
         setCurrentPage(page);
@@ -31,14 +31,12 @@ const AdsContainer = () => {
     }, [category, setSearchParams, sort, page])
 
     const deleteQuerys = () => {
-        const deletedCategory = query.delete('category') || ""
-        const deletedsort = query.delete('sort') || ""
-        setCategory(deletedCategory)
-        setSort(deletedsort)
+        setCategory(query.delete('category') || "")
+        setSort(query.delete('sort') || "")
         setSearchParams({})
     }
 
-    if (loading) return <Loading />
+    if (isLoading) return <Loading />
     if (error) {
         toast.error(error.message)
     }
@@ -51,7 +49,7 @@ const AdsContainer = () => {
             </div>
         )
     }
-
+    
     return (
         <>
             <section className="relative min-h-[55vh] mt-10 md:mt-24 sm:mr-72">

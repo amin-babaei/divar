@@ -1,12 +1,13 @@
 import { toast } from "react-toastify"
 import Loading from "../../components/Loading"
-import useFetch from "../../hooks/useFetch"
 import PostItem from '../../components/posts/PostItem'
+import { useMyPosts } from "../../hooks/fetchData"
 
 const MyPosts = () => {
-  const {data, loading, error} = useFetch(`${process.env.REACT_APP_BASE_API_URL}/api/posts/my-posts`)
-  if (loading) return <Loading/>
+  const {data, isLoading, error} = useMyPosts()
+  if (isLoading) return <Loading/>
   if (error) {
+    console.log(error)
       toast.error(error.message)
   }
   if(data?.docs?.length === 0){

@@ -1,11 +1,12 @@
 import { toast } from "react-toastify"
 import Loading from "../../components/Loading"
-import useFetch from "../../hooks/useFetch"
 import PostItem from '../../components/posts/PostItem'
 import { BsBookmark } from "react-icons/bs"
+import { useBookmarks } from "../../hooks/fetchData"
+
 const Bookmarks = () => {
-  const {data, loading, error} = useFetch(`${process.env.REACT_APP_BASE_API_URL}/api/posts/bookmarks`)
-  if (loading) return <Loading/>
+  const {data, isLoading, error} = useBookmarks()
+  if (isLoading) return <Loading/>
   if (error) {
       toast.error(error.message)
   }

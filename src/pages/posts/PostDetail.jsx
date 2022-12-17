@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom'
-import useFetch from "../../hooks/useFetch";
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
 import moment from 'jalali-moment';
@@ -7,11 +6,12 @@ import { Button } from 'flowbite-react';
 import { BsQuestionCircle } from 'react-icons/bs'
 import { Breadcrumb, ShareLink, Bookmark, Contact } from './index';
 import { toPersianDigits } from '../../utils/persianDigit';
+import { usePost } from '../../hooks/fetchData';
 
 const PostDetail = () => {
   const { slug, hashId } = useParams()
-  const { data, loading, error } = useFetch(`${process.env.REACT_APP_BASE_API_URL}/api/posts/${slug}/${hashId}`)
-  if (loading) return <Loading />
+  const { data, isLoading, error } = usePost(slug,hashId)
+  if (isLoading) return <Loading />
   if (error) {
     toast.error(error.message)
   }
