@@ -2,33 +2,37 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Input from "../../../components/Input";
-import http from "../../../services/httpService";
+import Loading from "../../../components/Loading";
+import { useCreatePost } from "../../../hooks/fetchData";
 
 const FormPost = ({ setState, state, formik, pre }) => {
   const [enabled, setEnabled] = useState(false);
+  const mutation = useCreatePost()
   const navigate = useNavigate()
+
   const toggleChange = (e) => {
-    setState({ ...formik.values,isNetting: e.target.checked });
+    setState({ ...formik.values, isNetting: e.target.checked });
   }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      let data = new FormData();
-      data.append("title", formik.values.title);
-      data.append("price", formik.values.price);
-      data.append("category", formik.values.category);
-      data.append("description", formik.values.description);
-      data.append("image", event.target.image.files[0]);
-
-      const { status } = await http.post(`${process.env.REACT_APP_BASE_API_URL}/api/posts/create`,data);
-      if (status === 201) {
-        toast.success("آگهی شما با موفقیت انتشار یافت");
-        navigate('/profile/my-posts')
-      }
-    } catch (ex) {
-      toast.error(ex?.response?.data?.message)
-      console.log(ex);
-    }
+    let data = new FormData();
+    data.append("title", formik.values.title);
+    data.append("price", formik.values.price);
+    data.append("category", formik.values.category);
+    data.append("description", formik.values.description);
+    data.append("image", event.target.image.files[0]);
+    mutation.mutate(data)
+  }
+  if (mutation.isSuccess) {
+    toast.success('با موفقیت ساخته شد')
+    navigate('/profile/my-posts')
+  }
+  if (mutation.isError) {
+    toast.error(mutation.error.message)
+  }
+  if (mutation.isLoading) {
+    return <Loading />
   }
 
   return (
@@ -54,7 +58,7 @@ const FormPost = ({ setState, state, formik, pre }) => {
             className="sr-only peer"
             readOnly
             value={state.isNetting}
-            onChange={(e)=>toggleChange(e)}
+            onChange={(e) => toggleChange(e)}
             name='isNetting'
           />
           <div onClick={() => { setEnabled(!enabled) }}
