@@ -18,11 +18,11 @@ export const useCreatePost = () => {
         },
     })
 }
-export const useMyPosts = () => {
-    return useQuery('my-posts', getMyPosts)
+export const useMyPosts = (currentPage) => {
+    return useQuery(['my-posts',currentPage], ()=>getMyPosts(currentPage))
 }
-export const useBookmarks = () => {
-    return useQuery('bookmarks', getBookmarks)
+export const useBookmarks = (currentPage) => {
+    return useQuery(['bookmarks',currentPage], ()=>getBookmarks(currentPage))
 }
 export const useBookmarked = () => {
     const queryClient = useQueryClient()

@@ -16,12 +16,12 @@ export const createPost = async (data) => {
     const response = await http.post(`/api/posts/create`,data)
     return response
 }
-export const getMyPosts = async () => {
-    const {data} = await http.get(`/api/posts/my-posts`)
+export const getMyPosts = async (currentPage) => {
+    const {data} = await http.get(`/api/posts/my-posts?page=${currentPage}`)
     return data.data
 }
-export const getBookmarks = async () => {
-    const {data} = await http.get(`/api/posts/bookmarks`)
+export const getBookmarks = async (currentPage) => {
+    const {data} = await http.get(`/api/posts/bookmarks?page=${currentPage}`)
     return data.data
 }
 export const editBookmark = async (postId) => {
