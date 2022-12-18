@@ -10,7 +10,7 @@ const ProfileContainer = () => {
     if(!user)navigate('/signin')
   },[user])
   return (
-    <section className={`container mx-auto px-3 relative font-Ilight ${user ? 'opacity-100' : 'opacity-0'}`}>
+    <section className={`container relative min-h-[66vh] mx-auto px-3 font-Ilight ${user ? 'opacity-100' : 'opacity-0'}`}>
         <ProfileSidebar/>
         <Outlet/>
     </section>
