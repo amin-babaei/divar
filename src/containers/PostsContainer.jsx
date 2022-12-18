@@ -2,22 +2,18 @@ import PostItem from '../components/posts/PostItem'
 import { toast } from "react-toastify";
 import Loading from "../components/Loading";
 import { Button, Pagination } from 'flowbite-react';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import QueryContext from '../context/QueryContext';
 import { usePosts } from '../hooks/fetchData';
+import usePaginate from '../hooks/usePaginate';
 
 const AdsContainer = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const { page, setCategory, setSort, category, sort, query, lengthQuerys } = useContext(QueryContext)
-
-    const [currentPage, setCurrentPage] = useState(page);
+    const {currentPage,onPageChange} = usePaginate()
     const {isLoading, data, error} = usePosts(currentPage,category,sort)
 
-    const onPageChange = (page) => {
-        setCurrentPage(page);
-        setSearchParams({ page })
-    };
     useEffect(() => {
         if (category.length > 0 && sort.length > 0) {
             setSearchParams({ ...{ page }, sort, category })

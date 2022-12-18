@@ -3,9 +3,13 @@ import Loading from "../../components/Loading"
 import PostItem from '../../components/posts/PostItem'
 import { BsBookmark } from "react-icons/bs"
 import { useBookmarks } from "../../hooks/fetchData"
+import { Pagination } from "flowbite-react"
+import usePaginate from "../../hooks/usePaginate"
 
 const Bookmarks = () => {
-  const {data, isLoading, error} = useBookmarks()
+  const {currentPage,searchParams,onPageChange} = usePaginate()
+  const {data, isLoading, error} = useBookmarks(currentPage)
+
   if (isLoading) return <Loading/>
   if (error) {
       toast.error(error.message)
@@ -23,9 +27,27 @@ const Bookmarks = () => {
     )
   }
   return (
-    <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 mt-12 md:mt-28 sm:mr-72">
-          <PostItem data={data}/>
-    </div>
+    <>
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 mt-10 md:mt-24 sm:mr-72">
+            <PostItem data={data}/>
+      </div>
+      {data && data.totalPages > 1 && (
+        <div className='flex justify-center sm:justify-end lg:justify-center my-10 md:mt-24'>
+          <Pagination
+            className='absolute -bottom-4'
+            dir='ltr'
+            currentPage={currentPage}
+            layout="pagination"
+            defaultValue={searchParams.get('page')}
+            onPageChange={onPageChange}
+            showIcons={true}
+            totalPages={data?.totalPages}
+            previousLabel="قبلی"
+            nextLabel="بعدی"
+          />
+        </div>
+      )}
+    </>
   )
 }
 
