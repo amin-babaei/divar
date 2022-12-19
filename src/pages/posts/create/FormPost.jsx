@@ -21,7 +21,7 @@ const FormPost = ({ setState, state, formik, pre }) => {
     data.append("price", formik.values.price);
     data.append("category", formik.values.category);
     data.append("description", formik.values.description);
-    data.append("image", event.target.image.files[0]);
+    data.append("image", formik.values.image);
     mutation.mutate(data)
   }
   if (mutation.isSuccess) {
@@ -68,7 +68,10 @@ const FormPost = ({ setState, state, formik, pre }) => {
       </div>
       <div className="my-3 flex border border-gray-300">
         <label htmlFor="files" className="flex items-center px-5 relative z-10 h-11 py-2 text-sm text-white bg-red-700 cursor-pointer">بارگذاری عکس</label>
-        <input id="files" type="file" name="image" className="absolute pr-3" />
+        {formik.touched.image && formik.errors.image ? (
+          <div className="flex-1 ml-2 text-rose-500 text-left text-xs">{formik.errors.image}</div>
+        ) : null}
+        <input id="files" type="file" name="image" className="absolute pr-3" onChange={(e) => formik.setFieldValue('image', e.target.files[0])} onBlur={formik.handleBlur} />
       </div>
       <div className='gap-3 flex justify-center items-center'>
         <button onClick={pre} className='py-2 w-full rounded text-white bg-red-700'>قبلی</button>
