@@ -1,4 +1,3 @@
-import { Button } from 'flowbite-react'
 import { useFormik } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import { validationSignin } from '../utils/validation';
@@ -35,9 +34,9 @@ const Signin = () => {
             </h3>
             <Input lable='ایمیل' name='email' type='email' placeholder='aminbabaei_dev@yahoo.com' formik={formik} />
             <Input lable='کلمه عبور' name='password' type='password' placeholder='****' formik={formik} />
-            <Button type="submit" color="failure">
+            <button type="submit" disabled={!(formik.isValid)} className={`py-3 text-sm w-full rounded text-white ${(formik.isValid) ? 'bg-red-700 hover:hover:opacity-80' : 'bg-gray-500'}`}>
                 ورود به حساب کاربری
-            </Button>
+            </button>
             <Link to='/signup' className='text-sm underline cursor-pointer w-fit'>
                 ثبت نام نکردید؟ ثبت نام
             </Link>
