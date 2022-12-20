@@ -20,6 +20,10 @@ export const getMyPosts = async (currentPage) => {
     const {data} = await http.get(`/api/posts/my-posts?page=${currentPage}`)
     return data.data
 }
+export const deleteMyPost = async (postId) => {
+    const response = await http.delete(`/api/posts/my-posts/${postId}`)
+    return response
+}
 export const getBookmarks = async (currentPage) => {
     const {data} = await http.get(`/api/posts/bookmarks?page=${currentPage}`)
     return data.data
