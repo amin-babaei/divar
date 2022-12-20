@@ -9,7 +9,7 @@ export const getPosts = async (currentPage,category,sort) => {
     return data.data
 }
 export const getPost = async (slug,hashId) => {
-    const {data} = await http.get(`/api/posts/${slug}/${hashId}`)
+    const {data} = await http.get(`/api/posts/${hashId}/${slug}`)
     return data.data
 }
 export const createPost = async (data) => {

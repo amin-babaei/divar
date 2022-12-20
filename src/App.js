@@ -18,7 +18,7 @@ const App = () => {
       <Route path="/support" element={<Support/>} />
       <Route path="/signup" element={<Signup/>} />
       <Route path="/signin" element={<Signin/>} />
-      <Route path="/posts/:slug/:hashId" element={<PostDetail/>} />
+      <Route path="/posts/:hashId/:slug" element={<PostDetail/>} />
       <Route path="/posts/create" element={<CreatePost/>} />
       <Route element={<ProfileContainer/>}>
         <Route path="/profile/bookmarks" element={<Bookmarks/>} />
