@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import React, { Fragment, useEffect, useState } from 'react';
+import Helmet from 'react-helmet';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../../context/AuthContext';
 import { validationCreatePost } from '../../../utils/validation';
@@ -50,6 +51,9 @@ const CreatePost = () => {
     <>
       {loggedin ? (
         <section className={`container mx-auto p-3 font-Ilight ${loggedin ? 'opacity-100' : 'opacity-0'}`}>
+          <Helmet>
+                <title>ثبت آگهی</title>
+          </Helmet>
           <div className='md:w-2/3 mx-auto'>
             <div className='flex items-center mt-5'>
               {formArray.map((v, i) => <Fragment key={i}><div className={`w-24 my-3 text-white rounded-full ${formNo - 1 === i || formNo - 1 === i + 1 || formNo === formArray.length ? 'bg-red-500' : 'bg-gray-400'} h-[35px] flex justify-center items-center`}>

@@ -5,6 +5,7 @@ import { useAuth, useAuthActions } from '../context/AuthContext';
 import ReCAPTCHA from "react-google-recaptcha";
 import Input from '../components/Input'
 import Loading from '../components/Loading'
+import { Helmet } from 'react-helmet';
 
 const initialValues = {
     name: '',
@@ -33,6 +34,9 @@ const Signup = () => {
 
     return (
         <form className="flex flex-col gap-4 px-3 md:w-1/3 md:mx-auto mt-8 font-Imedium" onSubmit={formik.handleSubmit}>
+            <Helmet>
+                <title>ثبت نام در دیوار</title>
+            </Helmet>
             <h3 className='text-center text-gray-500 mb-5'>
                 ثبت نام
             </h3>

@@ -5,10 +5,14 @@ import check from '../assets/03.png'
 import phone from '../assets/phone.svg'
 import warning from '../assets/warning-phone.svg'
 import envelope from '../assets/envelope.svg'
+import Helmet from 'react-helmet'
 
 const Support = () => {
     return (
         <section className="font-Ilight">
+            <Helmet>
+                <title>پشتیبانی دیوار</title>
+            </Helmet>
             <h3 className='text-center mt-10 text-lg'>چطور می‌توانیم کمکتان کنیم؟</h3>
             <div className="relative mt-5">
                 <input type="text" className="block w-3/4 md:w-1/3 m-auto text-md text-gray-900 border border-gray-300 rounded focus:outline-none focus:ring-white focus:border-red-700"

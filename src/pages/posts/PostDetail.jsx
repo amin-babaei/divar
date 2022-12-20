@@ -7,6 +7,7 @@ import { BsQuestionCircle } from 'react-icons/bs'
 import { Breadcrumb, ShareLink, Bookmark, Contact } from './index';
 import { toPersianDigits } from '../../utils/persianDigit';
 import { usePost } from '../../hooks/fetchData';
+import Helmet from 'react-helmet';
 
 const PostDetail = () => {
   const { slug, hashId } = useParams()
@@ -19,6 +20,9 @@ const PostDetail = () => {
     <section className='font-Ilight mt-5 container mx-auto px-3 lg:px-[170px]'>
       {data && (
         <>
+          <Helmet>
+                <title>{slug}</title>
+          </Helmet>
           <Breadcrumb data={data} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className='mt-5 order-1 md:order-none'>
