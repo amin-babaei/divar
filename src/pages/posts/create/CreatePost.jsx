@@ -1,20 +1,16 @@
 import { useFormik } from 'formik';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import Helmet from 'react-helmet';
 import { toast } from 'react-toastify';
-import { useAuth } from '../../../context/AuthContext';
 import { validationCreatePost } from '../../../utils/validation';
-import Authorized from './Authorized';
 import FormPost from './FormPost';
 import SelectCategory from './SelectCategory';
 
 const CreatePost = () => {
   const formArray = [1, 2, 3];
-  const {user} = useAuth()
   const [formNo, setFormNo] = useState(formArray[0])
   const [state, setState] = useState({ title: '', description: '', price: 0, category: ''})
   const [categoryName, setCategoryName] = useState('')
-  const [loggedin, setLoggedin] = useState(false)
 
   const formik = useFormik({
     initialValues: state,
@@ -44,13 +40,9 @@ const CreatePost = () => {
     setState({ category: id })
     setCategoryName(name)
   }
-  useEffect(()=>{
-    if(user)setLoggedin(true)
-  },[user])
+
   return (
-    <>
-      {loggedin ? (
-        <section className={`container mx-auto p-3 font-Ilight ${loggedin ? 'opacity-100' : 'opacity-0'}`}>
+        <section className={`container mx-auto p-3 font-Ilight`}>
           <Helmet>
                 <title>ثبت آگهی</title>
           </Helmet>
@@ -87,8 +79,6 @@ const CreatePost = () => {
             {formNo === 3 && <FormPost formik={formik} state={state} setState={setState} pre={pre} />}
           </div>
         </section>
-      ):<Authorized/>}
-    </>
   );
 }
 
