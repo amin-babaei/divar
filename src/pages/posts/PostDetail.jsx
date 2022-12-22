@@ -21,7 +21,7 @@ const PostDetail = () => {
       {data && (
         <>
           <Helmet>
-                <title>{slug}</title>
+                <title>{data?.title}</title>
           </Helmet>
           <Breadcrumb data={data} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
