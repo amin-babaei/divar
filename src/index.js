@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import AuthProvider from './context/AuthContext';
 import { QueryProvider } from './context/QueryContext';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import Compose from './context/store';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -18,14 +19,14 @@ const queryClient = new QueryClient({
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <AuthProvider>
-    <QueryClientProvider client={queryClient}>
-      <QueryProvider>
-        <App/>
-        <ToastContainer rtl limit={1}/>
-      </QueryProvider>
-    </QueryClientProvider>
-    </AuthProvider>
+    <Compose components={[AuthProvider, QueryProvider]}>
+      <QueryClientProvider client={queryClient}>
+        <App />
+        <ToastContainer rtl limit={1} />
+      </QueryClientProvider>
+    </Compose>
+
+
   </BrowserRouter>
 );
 
