@@ -21,6 +21,11 @@ const Navbar = () => {
             </div>
             <div className='flex gap-1 items-center'>
                 <DropDown/>
+                <Link to='/chat'>
+                    <button className='hidden rounded px-4 py-[10px] text-gray-400 text-sm sm:flex items-center hover:bg-gray-100 hover:text-black'>
+                        چت ها
+                    </button>
+                </Link>
                 <Link to='/support'>
                     <button className='hidden rounded px-4 py-[10px] text-gray-400 text-sm sm:flex items-center hover:bg-gray-100 hover:text-black'>
                         پشتیبانی

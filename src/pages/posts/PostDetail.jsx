@@ -2,12 +2,12 @@ import { useParams } from 'react-router-dom'
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
 import moment from 'jalali-moment';
-import { Button } from 'flowbite-react';
 import { BsQuestionCircle } from 'react-icons/bs'
 import { Breadcrumb, ShareLink, Bookmark, Contact } from './index';
 import { toPersianDigits } from '../../utils/persianDigit';
 import { usePost } from '../../hooks/fetchData';
 import Helmet from 'react-helmet';
+import ChatPost from '../../components/chat/ChatPost';
 
 const PostDetail = () => {
   const { slug, hashId } = useParams()
@@ -51,7 +51,7 @@ const PostDetail = () => {
               <div className="flex justify-between mt-7">
                 <div className='flex gap-x-2'>
                   <Contact info={data.creator} />
-                  <Button color='gray' className='w-24'>چت</Button>
+                  <ChatPost userId={data.creator._id}/>
                 </div>
                 <div className='flex items-center gap-x-2'>
                   <Bookmark postId={data._id} bookmarked={data.isBookmarked} />
