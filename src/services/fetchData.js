@@ -32,3 +32,7 @@ export const editBookmark = async (postId) => {
     const response = await http.put(`/api/posts/bookmark/${postId}`)
     return response
 }
+export const getUser = async (customerId) => {
+    const respnse = await http.get(`/api/user?userId=${customerId}`)
+    return respnse
+}
