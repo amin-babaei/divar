@@ -9,6 +9,7 @@ import AuthProvider from './context/AuthContext';
 import { QueryProvider } from './context/QueryContext';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Compose from './context/store';
+import { ChatProvider } from './context/ChatContext';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -19,14 +20,12 @@ const queryClient = new QueryClient({
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <Compose components={[AuthProvider, QueryProvider]}>
+    <Compose components={[AuthProvider, QueryProvider, ChatProvider]}>
       <QueryClientProvider client={queryClient}>
         <App />
         <ToastContainer rtl limit={1} />
       </QueryClientProvider>
     </Compose>
-
-
   </BrowserRouter>
 );
 
