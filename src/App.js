@@ -10,7 +10,9 @@ import ProfileContainer from "./containers/ProfileContainer"
 import Bookmarks from "./pages/profile/Bookmarks"
 import MyPosts from "./pages/profile/MyPosts"
 import CreatePost from "./pages/posts/create/CreatePost"
+import Chat from "./pages/chat/Chat"
 import { SecureRoute } from "./utils/SecureRoute"
+import Message from "./pages/chat/Message"
 const App = () => {
   return (
     <Routes>
@@ -22,6 +24,9 @@ const App = () => {
         <Route path="/posts/:hashId/:slug" element={<PostDetail />} />
         <Route element={<SecureRoute />}>
           <Route path="/posts/create" element={<CreatePost />} />
+          <Route path="/chat" element={<Chat/>}>
+            <Route path="/chat/:chatId" element={<Message/>}/>
+          </Route>
           <Route element={<ProfileContainer />}>
             <Route path="/profile/bookmarks" element={<Bookmarks />} />
             <Route path="/profile/my-posts" element={<MyPosts />} />
