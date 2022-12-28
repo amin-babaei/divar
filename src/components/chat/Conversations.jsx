@@ -11,7 +11,7 @@ const Conversation = ({ conversation, currentUser }) => {
   if(isLoading)return <LoadCategory/>
   if(error)return toast.error(error.message)
   return (
-    <li className="flex justify-between items-center px-3 py-5 border-b border-b-gray-100 cursor-pointer hover:bg-gray-100 duration-300">
+    <li className="flex flex-wrap justify-between items-center px-3 py-5 border-b border-b-gray-100 cursor-pointer hover:bg-gray-100 duration-300">
         <div className="flex items-center gap-x-1">
             <img src="/avatar.png" alt="" className="w-10 h-10 rounded-full"/>
             <h3>{user?.data?.name}</h3>
