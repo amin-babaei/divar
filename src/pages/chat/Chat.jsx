@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { io } from "socket.io-client";
 import { useAuth } from "../../context/AuthContext";
 import http from "../../services/httpService";
@@ -10,10 +10,9 @@ import ChatContext from "../../context/ChatContext";
 const Chat = () => {
 
   const [loading, setLoading] = useState(false)
-  const { conversations,setConversations,currentChat,setCurrentChat,entryMessage,setentryMessage } = useContext(ChatContext)
+  const { conversations,setConversations,setCurrentChat,setentryMessage, socket } = useContext(ChatContext)
   const location = useLocation()
 
-  const socket = useRef();
   const { user } = useAuth()
 
   useEffect(() => {
@@ -25,11 +24,11 @@ const Chat = () => {
         createdAt: Date.now(),
       });
     });
-  }, [setentryMessage]);
+  }, [setentryMessage, socket]);
 
   useEffect(() => {
     socket.current.emit("addUser", user._id);
-  }, [user]);
+  }, [socket, user]);
 
   useEffect(() => {
     const getConversations = async () => {
@@ -63,7 +62,7 @@ const Chat = () => {
             ))}
           </ul>
           <div className={`col-span-4 md:col-span-3 ${location.pathname === '/chat' ? 'hidden' : 'block'}`}>
-              <Outlet context={[currentChat, conversations, socket, entryMessage]} />
+              <Outlet />
           </div>
         </div>
         ) : loading ? <p className="text-center">لطفا منتظر بمانید ...</p> : <p className="text-center">شما هنوز گفتگو نکردید !</p>}
