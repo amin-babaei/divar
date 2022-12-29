@@ -1,22 +1,23 @@
 import moment from 'jalali-moment'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { FiSend } from 'react-icons/fi'
 import { RiMore2Fill } from 'react-icons/ri'
-import { useOutletContext } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { useAuth } from '../../context/AuthContext'
+import ChatContext from '../../context/ChatContext'
 import { useUser } from '../../hooks/fetchData'
 import http from '../../services/httpService'
 
 const Message = () => {
-    const [currentChat,conversations,socket,entryMessage] = useOutletContext();
+    const {socket,entryMessage,currentChat} = useContext(ChatContext)
     const {user} = useAuth()
 
     const [messages, setMessages] = useState([]);
+    const [userReceiver, setUserReceiver] = useState(user._id);
     const [newMessage, setNewMessage] = useState("");
     const scrollRef = useRef();
 
-    const customerId = conversations.map(member => member.members.find(m => m !== user?._id))
-    const {data} = useUser(customerId)
+    const {data} = useUser(userReceiver)
 
     useEffect(() => {
         const getMessages = async () => {
@@ -31,41 +32,50 @@ const Message = () => {
       }, [currentChat]);
       
       useEffect(() => {
-        entryMessage &&
+          entryMessage &&
           currentChat?.members.includes(entryMessage.sender) &&
           setMessages((prev) => [...prev, entryMessage]);
       }, [entryMessage, currentChat]);
-
+      useEffect(()=>{
+        const receiverId = currentChat?.members.find(
+          (member) => member !== user._id
+        );
+        setUserReceiver(receiverId)
+      },[currentChat?.members, user._id])
       const handleSubmit = async (e) => {
         e.preventDefault();
         const message = {
           sender: user._id,
           text: newMessage,
-          conversationId: currentChat._id,
+          conversationId: currentChat?._id,
         };
     
         const receiverId = currentChat.members.find(
           (member) => member !== user._id
         );
     
-        socket.current.emit("sendMessage", {
+        socket?.current.emit("sendMessage", {
           senderId: user._id,
           receiverId,
           text: newMessage,
         });
-    
+
         try {
-          const res = await http.post("/api/messages", message);
-          setMessages([...messages, res.data]);
-          setNewMessage("");
+          if(newMessage.trim().length === 0){
+            toast.error('متن ارسالی شما خالی است !')
+          }else{
+            const res = await http.post("/api/messages", message);
+            setMessages([...messages, res.data]);
+            setNewMessage("");
+          }
         } catch (err) {
-          console.log(err);
+          toast.error(err.message)
         }
       };
       useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" });
       }, [messages]);
-
+      
     return (
         <>
             <div className="flex justify-between items-center border-b border-b-gray-100 py-[3px]">
