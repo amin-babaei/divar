@@ -6,6 +6,7 @@ import Conversation from "../../components/chat/Conversations";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import ChatContext from "../../context/ChatContext";
+import {Helmet} from "react-helmet"
 
 const Chat = () => {
 
@@ -16,7 +17,7 @@ const Chat = () => {
   const { user } = useAuth()
 
   useEffect(() => {
-    socket.current = io("ws://localhost:5000");
+    socket.current = io(process.env.REACT_APP_BASE_API_URL);
     socket.current.on("getMessage", (data) => {
       setentryMessage({
         sender: data.senderId,
@@ -47,6 +48,9 @@ const Chat = () => {
 
   return (
     <section className="container mx-auto px-3 mt-10 font-Ilight">
+      <Helmet>
+        <title>چت های شما</title>
+      </Helmet>
       {conversations.length > 0 && !loading ? (
         <div className="grid grid-cols-4 gap-1 items-baseline">
           <ul className={`text-sm col-span-4 md:col-span-1 ${location.pathname !== '/chat' && 'hidden md:block'}`}>
