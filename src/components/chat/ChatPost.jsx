@@ -12,14 +12,14 @@ const ChatPost = ({userId}) => {
     useEffect(() => {
         const getConversation = async () => {
           try {
-            const res = await http.get(`/api/conversation/find/${user._id}/${userId}`);
+            const res = await http.get(`/api/conversation/find/${user?._id}/${userId}`);
             setConversation(res.data);
           } catch (err) {
             console.log(err);
           }
         };
         getConversation();
-      }, [user._id, userId]);
+      }, [user?._id, userId]);
 
     const onClickChat = () => {
         if(!user)toast.error('لطفا وارد حساب کاربری خود شوید')
@@ -43,7 +43,7 @@ const ChatPost = ({userId}) => {
     }
 
   return (
-    <Button color='gray' className={`w-24 ${userId === user._id ? 'hidden' : 'block'}`} onClick={()=> onClickChat()}>چت</Button>
+    <Button color='gray' className={`w-24 ${userId === user?._id ? 'hidden' : 'block'}`} onClick={()=> onClickChat()}>چت</Button>
   )
 }
 
