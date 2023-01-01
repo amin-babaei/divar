@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useReducerAsync } from "use-reducer-async";
 import http from "../services/httpService";
+import Cookies from 'js-cookie'
 
 const AuthContext = createContext();
 const AuthContextDispatch = createContext();
@@ -17,6 +18,7 @@ const reducer = (state, action) => {
         case "PENDING": return { user:null, loading: true, error:null };
         case "SUCCESS": return { user: action.payload, loading: false, error:null, }
         case "REJECT": return { user: null, loading: false, error: action.error, }
+        case "CLEAR": return { user: null, loading: false, error: false, }
         default: return { ...state }
     }
 }
@@ -65,7 +67,8 @@ const AuthProvider = ({ children }) => {
             return () => {
                 http.get('/api/user/logout')
                     .then(() => {
-                        window.location.href = '/'
+                        dispatch({ type: 'CLEAR'})
+                        Cookies.remove('userToken')
                     }).catch(err => {
                         dispatch({ type: 'REJECT', error: err?.response?.data?.message })
                     })
