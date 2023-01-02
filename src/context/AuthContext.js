@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useReducerAsync } from "use-reducer-async";
 import http from "../services/httpService";
-import Cookies from 'js-cookie'
 
 const AuthContext = createContext();
 const AuthContextDispatch = createContext();
@@ -65,10 +64,9 @@ const AuthProvider = ({ children }) => {
         },
         SIGNOUT: ({dispatch}) => {
             return () => {
-                http.get('/api/user/logout')
+                http.delete('/api/user/logout')
                     .then(() => {
                         dispatch({ type: 'CLEAR'})
-                        Cookies.remove('userToken')
                     }).catch(err => {
                         dispatch({ type: 'REJECT', error: err?.response?.data?.message })
                     })
