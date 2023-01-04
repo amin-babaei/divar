@@ -17,7 +17,9 @@ const Chat = () => {
   const { user } = useAuth()
 
   useEffect(() => {
-    socket.current = io(process.env.REACT_APP_BASE_API_URL);
+    socket.current = io(process.env.REACT_APP_BASE_API_URL,{
+      transports:['websocket', 'polling']
+    });
     socket.current.on("getMessage", (data) => {
       setentryMessage({
         sender: data.senderId,
