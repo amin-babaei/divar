@@ -1,3 +1,4 @@
+import { Spinner } from 'flowbite-react';
 import { useEffect, useRef, useState } from 'react'
 import { BsFillPersonFill, BsBookmark } from 'react-icons/bs'
 import { GrLogin } from 'react-icons/gr'
@@ -5,7 +6,7 @@ import { RiFilePaper2Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { useAuth, useAuthActions } from '../../context/AuthContext.js';
 const DropDown = () => {
-    const { user } = useAuth()
+    const { user, loading } = useAuth()
     const dispatch = useAuthActions()
     const menuRef = useRef(null);
     const [show, setShow] = useState(false)
@@ -55,6 +56,7 @@ const DropDown = () => {
                             onClick={()=>dispatch({type:'SIGNOUT'})}>
                                 <GrLogin size={16} />
                                 خروج
+                                {loading && <Spinner color="gray"/>}
                             </li>
                         </>
                     )}                   

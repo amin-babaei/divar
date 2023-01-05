@@ -63,6 +63,7 @@ const AuthProvider = ({ children }) => {
             }
         },
         SIGNOUT: ({dispatch}) => {
+            dispatch({ type: 'PENDING' })
             return () => {
                 http.delete('/api/user/logout')
                     .then(() => {
