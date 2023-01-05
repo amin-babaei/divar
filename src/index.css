@@ -42,3 +42,7 @@ aside > div{
 .title-modal > button{
   margin: 0;
 }
+.Toastify__toast-body{
+  font-family: 'iransansMedium';
+  font-size: 14px;
+}
