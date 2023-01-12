@@ -68,6 +68,7 @@ const AuthProvider = ({ children }) => {
                 http.delete('/api/user/logout')
                     .then(() => {
                         dispatch({ type: 'CLEAR'})
+                        navigate("/", { replace: true })
                     }).catch(err => {
                         dispatch({ type: 'REJECT', error: err?.response?.data?.message })
                     })
