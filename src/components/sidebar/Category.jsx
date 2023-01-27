@@ -2,10 +2,12 @@ import LoadCategory from '../LoadCategory'
 import {toast} from "react-toastify";
 import QueryContext from '../../context/QueryContext.js';
 import {useCallback, useContext,} from 'react';
-import {useSearchParams} from 'react-router-dom';
+import {useLocation, useNavigate, useSearchParams} from 'react-router-dom';
 import { useAllCategorys } from '../../hooks/fetchData.js';
 
 const SidebarCategory = () => {
+    const { pathname } = useLocation()
+    const navigate = useNavigate()
     const [, setSearchParams] = useSearchParams();
     const {isLoading, data, error} = useAllCategorys()
     const {category, setCategory} = useContext(QueryContext)
@@ -13,7 +15,10 @@ const SidebarCategory = () => {
     const getEnglishTitle = useCallback(title => {
         setCategory(title)
         setSearchParams({category})
-    }, [setCategory, setSearchParams, category])
+        if(pathname !== '/'){
+            navigate(`/?category=${category}`)
+        }
+    }, [setCategory, setSearchParams, category, pathname])
 
     if (isLoading) return <LoadCategory/>
     if (error) {
