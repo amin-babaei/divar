@@ -15,7 +15,7 @@ import {
 } from 'react-share';
 const ShareLink = ({ slug, hashId }) => {
     const [showModal, setShowModal] = useState(false)
-    const url = `${process.env.REACT_APP_BASE_URL}/posts/${slug}/${hashId}`
+    const url = `${process.env.REACT_APP_BASE_URL}/posts/${hashId}/${slug}`
     return (
         <div>
             <button className='rounded-full duration-500 hover:bg-gray-200 p-3' onClick={() => setShowModal(!showModal)}>
