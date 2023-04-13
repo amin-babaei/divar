@@ -16,6 +16,10 @@ export const createPost = async (data) => {
     const response = await http.post(`/api/posts/create`,data)
     return response
 }
+export const updatePost = async ({ postId, data }) => {
+    const response = await http.put(`/api/posts/edit/${postId}`,data)
+    return response
+}
 export const getMyPosts = async (currentPage) => {
     const {data} = await http.get(`/api/posts/my-posts?page=${currentPage}`)
     return data.data

@@ -1,5 +1,5 @@
 import {useMutation,useQuery,useQueryClient} from "react-query"
-import {createPost,deleteMyPost,editBookmark,getBookmarks,getCategorys,getMyPosts,getPost,getPosts, getUser} from "../services/fetchData"
+import {createPost,deleteMyPost,editBookmark,getBookmarks,getCategorys,getMyPosts,getPost,getPosts, getUser, updatePost} from "../services/fetchData"
 
 export const useAllCategorys = () => {
     return useQuery("category", getCategorys)
@@ -8,7 +8,9 @@ export const usePosts = (currentPage, category, sort) => {
     return useQuery(['posts', currentPage, category, sort], () => getPosts(currentPage, category, sort))
 }
 export const usePost = (slug, hashId) => {
-    return useQuery(['post', slug, hashId], () => getPost(slug, hashId))
+    return useQuery(['post', slug, hashId], () => getPost(slug, hashId),{
+        enabled:!!slug
+    })
 }
 export const useCreatePost = () => {
     const queryClient = useQueryClient()
@@ -17,6 +19,17 @@ export const useCreatePost = () => {
             queryClient.invalidateQueries('my-posts')
         },
     })
+}
+export const useUpdatePost = () => {
+    const queryClient = useQueryClient()
+    return  useMutation(
+        ({ postId, data }) => updatePost({ postId, data }),
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries(['post'])
+          }
+        }
+      )
 }
 export const useMyPosts = (currentPage) => {
     return useQuery(['my-posts',currentPage], ()=>getMyPosts(currentPage))

@@ -2,6 +2,8 @@ import { toPersianDigits } from '../../utils/persianDigit'
 import moment from 'jalali-moment'
 import { Link, useLocation } from 'react-router-dom'
 import ModalDelete from './ModalDelete'
+import { Button } from 'flowbite-react'
+import { AiFillEdit } from 'react-icons/ai'
 
 const AdsItem = ({ data }) => {
     const { pathname } = useLocation()
@@ -10,6 +12,9 @@ const AdsItem = ({ data }) => {
             {data?.docs.map(post => (
                 <div key={post._id} className='relative'>
                     {pathname === '/profile/my-posts' && <ModalDelete postId={post._id}/>}
+                    <Link to={`/posts/edit/${post.hashId}/${post.slug}`}>
+                        {pathname === '/profile/my-posts' && <Button color="warning" size='sm' className='absolute z-10 left-11'><AiFillEdit /></Button>}
+                    </Link>
                     <Link to={`/posts/${post.hashId}/${post.slug}`}>
                         <article className="border gap-2 flex justify-between border-gray-200 rounded px-2 py-4">
                             <div className="flex flex-col h-auto justify-between md:w-1/2">
@@ -31,7 +36,7 @@ const AdsItem = ({ data }) => {
                             </div>
                             <div
                                 className='relative overflow-hidden rounded-md w-36 h-36 bg-gray-300 aspect-w-16 aspect-h-9 aspect-none'>
-                                <img src={`${process.env.REACT_APP_BASE_API_URL}/${post.image}`} className="absolute w-full h-full object-center" alt="test" />
+                                <img src={`${process.env.REACT_APP_BASE_API_URL}/images/${post.image.filename}`} className="absolute w-full h-full object-center" alt="test" />
                             </div>
                         </article>
                     </Link>

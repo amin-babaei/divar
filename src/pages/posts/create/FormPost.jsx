@@ -1,18 +1,16 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Input from "../../../components/Input";
 import Loading from "../../../components/Loading";
 import { useCreatePost } from "../../../hooks/fetchData";
 
-const FormPost = ({ setState, state, formik, pre }) => {
-  const [enabled, setEnabled] = useState(false);
+const FormPost = ({ state, formik, pre, updatePost, id }) => {
+
+  const [enabled, setEnabled] = useState(state.isNetting);
   const mutation = useCreatePost()
   const navigate = useNavigate()
-
-  const toggleChange = (e) => {
-    setState({ ...formik.values, isNetting: e.target.checked });
-  }
+  const { pathname } = useLocation()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,7 +34,7 @@ const FormPost = ({ setState, state, formik, pre }) => {
   }
 
   return (
-    <form className='mt-5 flex flex-col gap-y-3' onSubmit={handleSubmit}>
+    <form className='mt-5 flex flex-col gap-y-3'>
       <Input lable='عنوان آگهی' name='title' placeholder='مثلا سامسونگ' formik={formik} />
       <Input lable='قیمت' name='price' type='number' placeholder='قیمت به تومان می باشد' formik={formik} />
       <div className='flex flex-col'>
@@ -57,9 +55,10 @@ const FormPost = ({ setState, state, formik, pre }) => {
             type="checkbox"
             className="sr-only peer"
             readOnly
-            value={state.isNetting}
-            onChange={(e) => toggleChange(e)}
+            value={enabled}
+            onChange={() => formik.setFieldValue('isNetting', enabled)}
             name='isNetting'
+            checked={enabled}
           />
           <div onClick={() => { setEnabled(!enabled) }}
             className="w-11 h-6 bg-gray-200 rounded-full peer  peer-focus:ring-red-300  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"
@@ -75,7 +74,9 @@ const FormPost = ({ setState, state, formik, pre }) => {
       </div>
       <div className='gap-3 flex justify-center items-center'>
         <button onClick={pre} className='py-2 w-full rounded text-white bg-red-700'>قبلی</button>
-        <button disabled={!(formik.isValid)} className={`py-2 w-full rounded text-white ${(formik.isValid) ? 'bg-green-700 hover:hover:opacity-80' : 'bg-gray-500'}`} type="submit">انتشار</button>
+        {pathname.startsWith('/posts/edit') ? 
+        <button disabled={!(formik.isValid) || !formik.dirty} className={`py-2 w-full rounded text-white ${(formik.isValid && formik.dirty) ? 'bg-yellow-500 hover:hover:opacity-80' : 'bg-gray-500'}`} onClick={() => updatePost(id)} type="button">ویرایش</button> 
+        : <button disabled={!(formik.isValid)} className={`py-2 w-full rounded text-white ${(formik.isValid) ? 'bg-green-700 hover:hover:opacity-80' : 'bg-gray-500'}`} onClick={handleSubmit}>انتشار</button>}
       </div>
     </form>
   )

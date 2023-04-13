@@ -63,7 +63,7 @@ const PostDetail = () => {
             </div>
             <div>
               <div className='relative overflow-hidden rounded-md w-full h-[26rem] bg-gray-300 aspect-w-10 aspect-h-9'>
-                <img src={`${process.env.REACT_APP_BASE_API_URL}/${data.image}`} className="absolute w-full h-full object-center" alt="test" />
+                <img src={`${process.env.REACT_APP_BASE_API_URL}/images/${data.image.filename}`} className="absolute w-full h-full object-center" alt="test" />
               </div>
               <div className='flex items-center gap-x-2 mt-5 border-b py-5 cursor-pointer'>
                 <BsQuestionCircle className='text-gray-500' />

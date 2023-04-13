@@ -24,6 +24,7 @@ const App = () => {
         <Route path="/posts/:hashId/:slug" element={<PostDetail />} />
         <Route element={<SecureRoute />}>
           <Route path="/posts/create" element={<CreatePost />} />
+          <Route path="/posts/edit/:hashId/:slug" element={<CreatePost />} />
           <Route path="/chat" element={<Chat/>}>
             <Route path="/chat/:chatId" element={<Message/>}/>
           </Route>
