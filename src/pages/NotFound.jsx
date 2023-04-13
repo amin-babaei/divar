@@ -15,7 +15,7 @@ const NotFound = () => {
         {" "}
         <Link to={'/'} className='text-red-700'>صفحهٔ اول دیوار</Link>
         {" "}
-        دیوار بزنید</p>
+        بزنید</p>
     </section>
   )
 }
