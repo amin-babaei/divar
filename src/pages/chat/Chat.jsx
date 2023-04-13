@@ -40,8 +40,8 @@ const Chat = () => {
         const res = await http.get("/api/conversation/" + user?._id);
         setConversations(res.data);
         setLoading(false)
-      } catch (err) {
-        toast.error(err.message)
+      } catch{
+        toast.error('مشکلی در دریافت گفتگو ها رخ داد')
         setLoading(false)
       }
     };

@@ -70,7 +70,7 @@ const CreatePost = () => {
     navigate('/profile/my-posts')
   }
   if (mutation.isError) {
-    toast.error(mutation.error.message)
+    toast.error('دوباره تلاش کنید')
   }
   if (mutation.isLoading) {
     return <Loading />

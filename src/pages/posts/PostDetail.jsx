@@ -8,20 +8,24 @@ import { toPersianDigits } from '../../utils/persianDigit';
 import { usePost } from '../../hooks/fetchData';
 import Helmet from 'react-helmet';
 import ChatPost from '../../components/chat/ChatPost';
+import { Button } from 'flowbite-react';
 
 const PostDetail = () => {
   const { slug, hashId } = useParams()
-  const { data, isLoading, error } = usePost(slug,hashId)
+  const { data, isLoading, isError, refetch } = usePost(slug, hashId)
   if (isLoading) return <Loading />
-  if (error) {
-    toast.error(error.message)
+  if (isError) {
+    toast.error('مشکلی در دریافت آگهی رخ داد')
   }
   return (
     <section className='font-Ilight mt-5 container mx-auto px-3 lg:px-[170px]'>
+      {isError && <Button color="failure" onClick={refetch} size='md' className='m-auto'>
+        تلاش مجدد
+      </Button>}
       {data && (
         <>
           <Helmet>
-                <title>{data?.title}</title>
+            <title>{data?.title}</title>
           </Helmet>
           <Breadcrumb data={data} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -51,7 +55,7 @@ const PostDetail = () => {
               <div className="flex justify-between mt-7">
                 <div className='flex gap-x-2'>
                   <Contact info={data.creator} />
-                  <ChatPost userId={data.creator._id}/>
+                  <ChatPost userId={data.creator._id} />
                 </div>
                 <div className='flex items-center gap-x-2'>
                   <Bookmark postId={data._id} bookmarked={data.isBookmarked} />

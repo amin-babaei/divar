@@ -12,7 +12,7 @@ const AdsContainer = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const { page, setCategory, setSort, category, sort, query, lengthQuerys } = useContext(QueryContext)
     const {currentPage,onPageChange} = usePaginate()
-    const {isLoading, data, error} = usePosts(currentPage,category,sort)
+    const {isLoading, data, isError, refetch} = usePosts(currentPage,category,sort)
 
     useEffect(() => {
         if (category.length > 0 && sort.length > 0) {
@@ -33,8 +33,8 @@ const AdsContainer = () => {
     }
 
     if (isLoading) return <Loading />
-    if (error) {
-        toast.error(error.message)
+    if (isError) {
+        toast.error('مشکلی در دریافت آگهی ها رخ داد')
     }
 
     if (data?.docs?.length === 0) {
@@ -55,6 +55,9 @@ const AdsContainer = () => {
                 <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3 mb-20">
                     <PostItem data={data} />
                 </div>
+                {isError && <Button color="failure" onClick={refetch} size='md' className='m-auto'>
+                      تلاش مجدد
+                </Button>}
             </section>
             {data && data.totalPages > 1 && (
                 <div className='flex justify-center sm:justify-end lg:justify-center my-5 md:mt-32'>

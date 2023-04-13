@@ -3,10 +3,10 @@ import LoadCategory from "../../../components/LoadCategory"
 import { useAllCategorys } from "../../../hooks/fetchData"
 
 const SelectCategory = ({ formik,setCategoryName }) => {
-  const {isLoading, data, error} = useAllCategorys()
+  const {isLoading, data, isError} = useAllCategorys()
   if (isLoading) return <LoadCategory />
-  if (error) {
-    toast.error(error.message)
+  if (isError) {
+    toast.error('مشکلی در دریافت دسته بندی ها رخ داد')
     return <LoadCategory />
   }
   

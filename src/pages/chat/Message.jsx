@@ -42,6 +42,7 @@ const Message = () => {
         );
         setUserReceiver(receiverId)
       },[currentChat?.members, user._id])
+      
       const handleSubmit = async (e) => {
         e.preventDefault();
         const message = {
@@ -69,9 +70,10 @@ const Message = () => {
             setNewMessage("");
           }
         } catch (err) {
-          toast.error(err.message)
+          toast.error('دوباره تلاش کنید')
         }
       };
+
       useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" });
       }, [messages]);

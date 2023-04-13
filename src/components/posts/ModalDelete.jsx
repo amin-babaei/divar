@@ -16,7 +16,7 @@ const ModalDelete = ({ postId }) => {
         toast.success('با موفقیت حذف شد')
       }
       if (mutation.isError) {
-        toast.error(mutation.error.message)
+        toast.error('دوباره تلاش کنید')
       }
       if (mutation.isLoading) {
         return <Loading />

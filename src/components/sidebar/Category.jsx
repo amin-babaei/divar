@@ -9,7 +9,7 @@ const SidebarCategory = () => {
     const { pathname } = useLocation()
     const navigate = useNavigate()
     const [, setSearchParams] = useSearchParams();
-    const {isLoading, data, error} = useAllCategorys()
+    const {isLoading, data, isError} = useAllCategorys()
     const {category, setCategory} = useContext(QueryContext)
 
     const getEnglishTitle = useCallback(title => {
@@ -21,8 +21,8 @@ const SidebarCategory = () => {
     }, [setCategory, setSearchParams, category, pathname])
 
     if (isLoading) return <LoadCategory/>
-    if (error) {
-        toast.error(error.message)
+    if (isError) {
+        toast.error('مشکلی در دریافت دسته بندی ها رخ داد')
         return <LoadCategory/>
     }
 

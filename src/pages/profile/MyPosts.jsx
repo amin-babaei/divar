@@ -1,4 +1,4 @@
-import { Pagination } from "flowbite-react"
+import { Button, Pagination } from "flowbite-react"
 import { toast } from "react-toastify"
 import Loading from "../../components/Loading"
 import PostItem from '../../components/posts/PostItem'
@@ -6,13 +6,12 @@ import { useMyPosts } from "../../hooks/fetchData"
 import usePaginate from "../../hooks/usePaginate"
 
 const MyPosts = () => {
-  const {currentPage,searchParams,onPageChange} = usePaginate()
-  const { data, isLoading, error } = useMyPosts(currentPage)
+  const { currentPage, searchParams, onPageChange } = usePaginate()
+  const { data, isLoading, isError, refetch } = useMyPosts(currentPage)
 
   if (isLoading) return <Loading />
-  if (error) {
-    console.log(error)
-    toast.error(error.message)
+  if (isError) {
+    toast.error('مشکلی در دریافت آگهی رخ داد')
   }
   if (data?.docs?.length === 0) {
     return (
@@ -26,6 +25,9 @@ const MyPosts = () => {
   }
   return (
     <>
+        {isError && <Button color="failure" onClick={refetch} size='md' className='mx-auto mt-40'>
+          تلاش مجدد
+        </Button>}
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 mt-10 md:mt-24 sm:mr-72">
         <PostItem data={data} />
       </div>
