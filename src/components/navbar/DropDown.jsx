@@ -1,6 +1,6 @@
 import { Spinner } from 'flowbite-react';
 import { useEffect, useRef, useState } from 'react'
-import { BsFillPersonFill, BsBookmark } from 'react-icons/bs'
+import { BsFillPersonFill, BsBookmark, BsFillChatLeftDotsFill } from 'react-icons/bs'
 import { GrLogin } from 'react-icons/gr'
 import { RiFilePaper2Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
@@ -50,6 +50,12 @@ const DropDown = () => {
                                 <li className='flex items-center gap-x-3 p-3 text-xs border-b cursor-pointer hover:bg-gray-200'>
                                     <RiFilePaper2Line size={16} />
                                     آگهی های من 
+                                </li>
+                            </Link>
+                            <Link to='/chat'>
+                                <li className='flex items-center gap-x-3 p-3 text-xs border-b cursor-pointer hover:bg-gray-200 sm:hidden'>
+                                    <BsFillChatLeftDotsFill size={16} />
+                                    چت
                                 </li>
                             </Link>
                             <li className='flex items-center gap-x-3 p-3 text-xs cursor-pointer hover:bg-gray-200'
