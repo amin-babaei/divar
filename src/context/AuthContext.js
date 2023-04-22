@@ -73,7 +73,22 @@ const AuthProvider = ({ children }) => {
                         dispatch({ type: 'REJECT', error: err?.response?.data?.message })
                     })
             }
-        }
+        },
+        DELETEUSER: ({dispatch}) => {
+            dispatch({ type: 'PENDING' })
+            return action => {
+                http.delete(`/api/user/delete/${action.payload}`)
+                    .then((res) => {
+                        toast.success('حساب شما با موفقیت حذف شد')
+                        dispatch({ type: 'CLEAR'})
+                        navigate("/", { replace: true })
+                        dispatch({ type: 'SUCCESS', payload: res.message })
+                    }).catch(err => {
+                        toast.error('دوباره تلاش کنید')
+                        dispatch({ type: 'REJECT', error: err?.response?.data?.message })
+                    })
+            }
+        },
     }
     const [user, dispatch] = useReducerAsync(reducer, initialState, asyncActionHandlers)
     useEffect(()=>{

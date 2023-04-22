@@ -4,6 +4,7 @@ import { BsFillPersonFill, BsBookmark } from 'react-icons/bs'
 import { RiFilePaper2Line } from 'react-icons/ri'
 import { GrLogin } from "react-icons/gr"
 import { NavLink } from "react-router-dom"
+import DeleteAccount from "./DeleteAccount"
 
 const ProfileSidebar = () => {
   const { user } = useAuth()
@@ -36,10 +37,11 @@ const ProfileSidebar = () => {
             <h3>آگهی های من</h3>
           </div>
         </NavLink>
-        <div className="border-b py-5 flex items-center gap-x-2 text-[15px] cursor-pointer hover:bg-gray-50 mb-10" onClick={() => dispatch({ type: 'SIGNOUT' })}>
+        <div className="border-b py-5 flex items-center gap-x-2 text-[15px] cursor-pointer hover:bg-gray-50" onClick={() => dispatch({ type: 'SIGNOUT' })}>
           <GrLogin/>
           <h3>خروج</h3>
         </div>
+        <DeleteAccount/>
         <SidebarFooter />
       </div>
     </section>
