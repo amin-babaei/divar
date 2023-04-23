@@ -37,7 +37,7 @@ const Bookmarks = () => {
       {data && data.totalPages > 1 && (
         <div className='flex justify-center sm:justify-end lg:justify-center my-10 md:mt-24'>
           <Pagination
-            className='absolute -bottom-4'
+            className='pagination'
             dir='ltr'
             currentPage={currentPage}
             layout="pagination"

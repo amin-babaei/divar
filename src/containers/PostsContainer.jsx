@@ -62,7 +62,7 @@ const AdsContainer = () => {
             {data && data.totalPages > 1 && (
                 <div className='flex justify-center sm:justify-end lg:justify-center my-5 md:mt-32'>
                     <Pagination
-                        className='absolute bottom-5'
+                        className='pagination'
                         dir='ltr'
                         currentPage={currentPage}
                         layout="pagination"

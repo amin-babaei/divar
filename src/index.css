@@ -7,6 +7,23 @@
     word-spacing: -3px;
   }
 }
+@layer components {
+  .pagination {
+    @apply absolute bottom-4
+  }
+  [aria-current]:not([aria-current="false"]) > button{
+    @apply bg-red-600 text-white
+  }
+  .pagination > ul > li button{
+    @apply p-3
+  }
+  .pagination > ul > li:first-child button{
+    @apply rounded-l-md
+  }
+  .pagination > ul > li:last-child button{
+    @apply rounded-r-md
+  }
+}
 @font-face {
     font-family: "iransansLight";
     src: 
