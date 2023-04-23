@@ -11,6 +11,31 @@ const ProfileSidebar = () => {
   const dispatch = useAuthActions()
   return (
     <section className="container mx-auto px-3 relative">
+      {/* mobile */}
+      <div className="flex mt-10 sm:hidden gap-x-4 overflow-auto">
+        <NavLink to={"/profile/bookmarks"} className={({ isActive }) =>
+          isActive && 'text-red-700'
+        }>
+          <div className="flex gap-x-2 items-center border border-gray-200 rounded-3xl py-2 px-3 text-[15px] whitespace-nowrap">
+            <BsBookmark />
+            <h3>نشان ها</h3>
+          </div>
+        </NavLink>
+        <NavLink to={"/profile/my-posts"} className={({ isActive }) =>
+          isActive && 'text-red-700'
+        }>
+          <div className="flex gap-x-2 items-center border border-gray-200 rounded-3xl py-2 px-3 text-[15px] whitespace-nowrap">
+            <RiFilePaper2Line />
+            <h3>آگهی های من</h3>
+          </div>
+        </NavLink>
+        <div className="flex gap-x-2 items-center border border-gray-200 rounded-3xl py-2 px-3 text-[15px] whitespace-nowrap" onClick={() => dispatch({ type: 'SIGNOUT' })}>
+          <GrLogin />
+          <h3>خروج</h3>
+        </div>
+        <DeleteAccount />
+      </div>
+      {/* desktop */}
       <div className="hidden sm:block fixed w-56 top-28 overflow-scroll side-h hide-scroll">
         <div className="flex items-center gap-x-2 text-gray-500 text-sm">
           <BsFillPersonFill />
@@ -38,10 +63,10 @@ const ProfileSidebar = () => {
           </div>
         </NavLink>
         <div className="border-b py-5 flex items-center gap-x-2 text-[15px] cursor-pointer hover:bg-gray-50" onClick={() => dispatch({ type: 'SIGNOUT' })}>
-          <GrLogin/>
+          <GrLogin />
           <h3>خروج</h3>
         </div>
-        <DeleteAccount/>
+        <DeleteAccount />
         <SidebarFooter />
       </div>
     </section>
