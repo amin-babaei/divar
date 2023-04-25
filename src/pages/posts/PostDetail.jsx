@@ -25,9 +25,9 @@ const PostDetail = () => {
       {data && (
         <>
           <Helmet>
-            <title>{data?.title}</title>
+            <title>{data.title}</title>
           </Helmet>
-          <Breadcrumb data={data} />
+          <Breadcrumb postCategory={data.category} title={data.title}/>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className='mt-5 order-1 md:order-none'>
               <h2 className='text-xl'>{data.title}</h2>
