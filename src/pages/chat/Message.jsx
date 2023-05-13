@@ -7,6 +7,7 @@ import { useAuth } from '../../context/AuthContext'
 import ChatContext from '../../context/ChatContext'
 import { useUser } from '../../hooks/fetchData'
 import http from '../../services/httpService'
+import { toPersianDigits } from '../../utils/persianDigit'
 
 const Message = () => {
     const {socket,entryMessage,currentChat} = useContext(ChatContext)
@@ -91,7 +92,7 @@ const Message = () => {
                     {messages.map(m => (
                         <div key={m._id} ref={scrollRef} className={`p-3 rounded-2xl rounded-br-none w-2/5 m-3 ${m.sender === user._id ? 'bg-blue-100' : 'bg-gray-100 mr-auto rounded-bl-none'}`}>
                             <p className='text-sm'>{m.text}</p>
-                            <p className="text-xs mt-5">{moment(m.createdAt).locale('fa').fromNow()}</p>
+                            <p className="text-xs mt-5">{toPersianDigits(moment(m.createdAt).locale('fa').fromNow())}</p>
                         </div>
                     ))}
                 </div>

@@ -31,7 +31,7 @@ const AdsItem = ({ data }) => {
                                             </>
                                         ) : 'توافقی'}
                                     </h5>
-                                    <p className='text-xs text-gray-500'>{moment(post.createdAt).locale('fa').fromNow()}</p>
+                                    <p className='text-xs text-gray-500'>{toPersianDigits(moment(post.createdAt).locale('fa').fromNow())}</p>
                                 </div>
                             </div>
                             <div

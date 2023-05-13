@@ -2,6 +2,7 @@ import moment from "jalali-moment";
 import { toast } from "react-toastify";
 import { useUser } from "../../hooks/fetchData";
 import LoadCategory from "../LoadCategory";
+import { toPersianDigits } from "../../utils/persianDigit";
 
 const Conversation = ({ conversation, currentUser }) => {
 
@@ -16,7 +17,7 @@ const Conversation = ({ conversation, currentUser }) => {
             <img src="/avatar.png" alt="" className="w-10 h-10 rounded-full"/>
             <h3>{user?.data?.name}</h3>
         </div>
-        <span className="text-xs">{moment(conversation?.updatedAt).locale('fa').fromNow()}</span>
+        <span className="text-xs">{toPersianDigits(moment(conversation?.updatedAt).locale('fa').fromNow())}</span>
     </li>
   );
 }

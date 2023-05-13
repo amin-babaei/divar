@@ -31,7 +31,7 @@ const PostDetail = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className='mt-5 order-1 md:order-none'>
               <h2 className='text-xl'>{data.title}</h2>
-              <p className='text-md mt-5 text-gray-500'>{moment(data.createdAt).locale('fa').fromNow()}</p>
+              <p className='text-md mt-5 text-gray-500'>{toPersianDigits(moment(data.createdAt).locale('fa').fromNow())}</p>
               <div className='flex items-center justify-between mt-4 border-b py-3'>
                 <h3>قیمت : </h3>
                 <p className='text-gray-500'>
