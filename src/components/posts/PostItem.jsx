@@ -18,7 +18,7 @@ const AdsItem = ({ data }) => {
                     <Link to={`/posts/${post.hashId}/${post.slug}`}>
                         <article className="border gap-2 flex justify-between border-gray-200 rounded px-2 py-4">
                             <div className="flex flex-col h-auto justify-between md:w-1/2">
-                                <h5 className='text-md break-words font-semibold'>{post.title}</h5>
+                                <h5 className='text-md break-words font-semibold max-w-[170px]'>{post.title}</h5>
                                 <div>
                                     <h5 className='text-sm pb-4'>
                                         {post.price > 0 ? (
