@@ -12,29 +12,31 @@ const DropDown = () => {
     const [show, setShow] = useState(false)
 
     const closeOpen = (e) => {
-        if(menuRef.current && setShow && !menuRef.current.contains(e.target)){
+        if (menuRef.current && setShow && !menuRef.current.contains(e.target)) {
             setShow(false)
         }
     }
-    useEffect(()=>{
-        document.addEventListener('click',closeOpen)
-    },[])
+    useEffect(() => {
+        document.addEventListener('click', closeOpen)
+    }, [])
+
     return (
         <div ref={menuRef}>
+            {loading ? <Spinner color="gray" className='ml-5'/> : 
             <button className='wordspace relative rounded px-4 py-[10px] text-gray-400 text-sm flex items-center hover:bg-gray-100 hover:text-black'
                 onClick={() => setShow(!show)}>
                 <BsFillPersonFill className='ml-1 text-lg' />
                 دیوار من
-            </button>
+            </button>}
             {show && (
                 <ul className='absolute top-16 shadow-md bg-white w-48'>
                     {!user ? (
                         <Link to='/signin'>
-                        <li className='flex cursor-pointer items-center gap-x-3 p-3 text-xs border-b hover:bg-gray-200'>
-                            <GrLogin size={16} className='rotate-180' />
-                            ورود
-                        </li>
-                    </Link>
+                            <li className='flex cursor-pointer items-center gap-x-3 p-3 text-xs border-b hover:bg-gray-200'>
+                                <GrLogin size={16} className='rotate-180' />
+                                ورود
+                            </li>
+                        </Link>
                     ) : (
                         <>
                             <li className='p-3 text-xs border-b'>
@@ -49,7 +51,7 @@ const DropDown = () => {
                             <Link to='/profile/my-posts'>
                                 <li className='flex items-center gap-x-3 p-3 text-xs border-b cursor-pointer hover:bg-gray-200'>
                                     <RiFilePaper2Line size={16} />
-                                    آگهی های من 
+                                    آگهی های من
                                 </li>
                             </Link>
                             <Link to='/chat'>
@@ -59,13 +61,12 @@ const DropDown = () => {
                                 </li>
                             </Link>
                             <li className='flex items-center gap-x-3 p-3 text-xs cursor-pointer hover:bg-gray-200'
-                            onClick={()=>dispatch({type:'SIGNOUT'})}>
+                                onClick={() => dispatch({ type: 'SIGNOUT' })}>
                                 <GrLogin size={16} />
                                 خروج
-                                {loading && <Spinner color="gray"/>}
                             </li>
                         </>
-                    )}                   
+                    )}
                 </ul>
             )}
         </div>

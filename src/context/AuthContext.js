@@ -53,6 +53,7 @@ const AuthProvider = ({ children }) => {
             }
         },
         LOAD_USER: ({dispatch}) => {
+            dispatch({ type: 'PENDING' })
             return () => {
                 http.get('/api/user/load')
                     .then(res => {
