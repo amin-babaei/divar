@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Input from "../../../components/Input";
@@ -6,11 +6,22 @@ import Loading from "../../../components/Loading";
 import { useCreatePost } from "../../../hooks/fetchData";
 
 const FormPost = ({ state, formik, pre, updatePost, id }) => {
-
   const [enabled, setEnabled] = useState(state.isNetting);
+  const [preview, setPreview] = useState('')
   const mutation = useCreatePost()
   const navigate = useNavigate()
   const { pathname } = useLocation()
+
+  useEffect(() => {
+    if (formik.values.image.filename) {
+      setPreview(`${process.env.REACT_APP_BASE_API_URL}/images/${formik.values.image.filename}`)
+    }
+    }, [formik.values.image])
+
+  const handleChangeImage = e => {
+    formik.setFieldValue('image', e.target.files[0])
+    setPreview(URL.createObjectURL(e.target.files[0]))
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -70,13 +81,20 @@ const FormPost = ({ state, formik, pre, updatePost, id }) => {
         {formik.touched.image && formik.errors.image ? (
           <div className="flex-1 ml-2 text-rose-500 text-left text-xs">{formik.errors.image}</div>
         ) : null}
-        <input id="files" type="file" name="image" className="absolute pr-3" onChange={(e) => formik.setFieldValue('image', e.target.files[0])} onBlur={formik.handleBlur} />
+        <input id="files" type="file" name="image" className="absolute pr-3" onChange={handleChangeImage} onBlur={formik.handleBlur} />
       </div>
+
+          {preview && !formik.errors.image ? (
+            <figure>
+              <img src={preview} alt="" className="w-24 h-24 m-auto"/>
+            </figure>
+          ) : null}
+
       <div className='gap-3 flex justify-center items-center'>
         <button onClick={pre} className='py-2 w-full rounded text-white bg-red-700'>قبلی</button>
-        {pathname.startsWith('/posts/edit') ? 
-        <button disabled={!(formik.isValid) || !formik.dirty} className={`py-2 w-full rounded text-white ${(formik.isValid && formik.dirty) ? 'bg-yellow-500 hover:hover:opacity-80' : 'bg-gray-500'}`} onClick={() => updatePost(id)} type="button">ویرایش</button> 
-        : <button disabled={!(formik.isValid)} className={`py-2 w-full rounded text-white ${(formik.isValid) ? 'bg-green-700 hover:hover:opacity-80' : 'bg-gray-500'}`} onClick={handleSubmit}>انتشار</button>}
+        {pathname.startsWith('/posts/edit') ?
+          <button disabled={!(formik.isValid) || !formik.dirty} className={`py-2 w-full rounded text-white ${(formik.isValid && formik.dirty) ? 'bg-yellow-500 hover:hover:opacity-80' : 'bg-gray-500'}`} onClick={() => updatePost(id)} type="button">ویرایش</button>
+          : <button disabled={!(formik.isValid)} className={`py-2 w-full rounded text-white ${(formik.isValid) ? 'bg-green-700 hover:hover:opacity-80' : 'bg-gray-500'}`} onClick={handleSubmit}>انتشار</button>}
       </div>
     </form>
   )
