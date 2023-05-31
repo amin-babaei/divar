@@ -6,6 +6,10 @@
 
 در این پروژه از socketio در چت کاربران استفاده شده است
 
+عملیات های pagination , sort از سمت فرانت به بکند query زده می شود
+
+از google recaptcha در صفحه ثبت نام استفاده شده است
+
 در این پروژه از yup و formik برای اعتبارسنجی فرم ها استفاده شده است.
 
 امکان ثبت نام و ثبت آگهی فراهم است !
@@ -20,5 +24,5 @@ Link Website : https://amindivar.vercel.app
 
 ## Contact ME
 
-- Email: [aminbabaei_dev@yahoo.com](mailto:aminbabaei_dev@yahoo.com)
-- Instagram: [@aminnymous](https://www.instagram.com/aminnymous)
+- Email : [aminbabaei_dev@yahoo.com](mailto:aminbabaei_dev@yahoo.com)
+- Linkedin : https://www.linkedin.com/in/amin-babaei
