@@ -11,9 +11,6 @@ export const QueryProvider = ({ children }) => {
     const [category, setCategory] = useState(query.get('category') || "")
     const [sort, setSort] = useState(query.get('sort') || "")
 
-    const querys = Object.fromEntries(query);
-    const lengthQuerys = Object.keys(querys).length
-
     return (
         <QueryContext.Provider
             value={{
@@ -21,7 +18,7 @@ export const QueryProvider = ({ children }) => {
                 category,
                 setCategory,
                 sort,
-                setSort, query, lengthQuerys
+                setSort, query
             }}>{children}</QueryContext.Provider>
     )
 }

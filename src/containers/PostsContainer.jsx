@@ -5,30 +5,41 @@ import { Button, Pagination } from 'flowbite-react';
 import { useContext, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import QueryContext from '../context/QueryContext';
-import { usePosts } from '../hooks/fetchData';
+import { useAllCategorys, usePosts } from '../hooks/fetchData';
 import usePaginate from '../hooks/usePaginate';
 
 const AdsContainer = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const { page, setCategory, setSort, category, sort, query, lengthQuerys } = useContext(QueryContext)
-    const {currentPage,onPageChange} = usePaginate()
-    const {isLoading, data, isError, refetch} = usePosts(currentPage,category,sort)
+    const { page, setCategory, setSort, category, sort, query } = useContext(QueryContext)
+    const { currentPage, onPageChange } = usePaginate()
+    const { isLoading, data, isError, refetch } = usePosts(currentPage, category, sort)
+    const { data: categorys } = useAllCategorys()
 
     useEffect(() => {
         if (category.length > 0 && sort.length > 0) {
-            setSearchParams({ ...{ page }, sort, category })
+            setSearchParams({ ...{ page : currentPage }, sort, category })
         }
         else if (category.length > 0) {
-            setSearchParams({ ...{ page }, category })
+            setSearchParams({ ...{ page : currentPage }, category })
         }
         else if (sort.length > 0) {
-            setSearchParams({ ...{ page }, sort })
+            setSearchParams({ ...{ page : currentPage }, sort })
         }
-    }, [category, setSearchParams, sort, page])
+    }, [category, setSearchParams, sort, page, currentPage])
 
-    const deleteQuerys = () => {
+    const deleteQueryCat = () => {
         setCategory(query.delete('category') || "")
+        searchParams.delete('category')
+        setSearchParams(searchParams)
+    }
+    const deleteQuerySort = () => {
         setSort(query.delete('sort') || "")
+        searchParams.delete('sort')
+        setSearchParams(searchParams)
+    }
+    const deleteَAllQuery = () => {
+        setSort(query.delete('sort') || "")
+        setCategory(query.delete('category') || "")
         setSearchParams({})
     }
 
@@ -40,23 +51,35 @@ const AdsContainer = () => {
     if (data?.docs?.length === 0) {
         return (
             <div className='flex flex-col gap-y-10 mt-20 items-center'>
+                <Button color="failure" onClick={deleteَAllQuery} size='xs' className='mb-3'>
+                    X حذف فیلتر ها
+                </Button>
                 <p className='text-2xl'>گشتم نبود ، نگرد نیست !</p>
                 <img src="/notpost.svg" alt="" className='md:w-1/4' />
             </div>
         )
     }
-    
+
     return (
         <>
             <section className="relative min-h-[55vh] mt-10 md:mt-24 sm:mr-72">
-                {lengthQuerys > 1 && (<Button color="failure" onClick={() => deleteQuerys()} size='xs' className='mb-3'>
-                    حذف فیلتر ها
-                </Button>)}
+                <div className='flex items-center gap-3'>
+                    {categorys?.filter(cat => cat.englishTitle === category).map(item => (
+                        <Button key={item._id} color="failure" onClick={deleteQueryCat} size='xs' className='mb-3'>
+                            X {item.title}
+                        </Button>
+                    ))}
+                    {sort &&
+                        <Button color="failure" onClick={deleteQuerySort} size='xs' className='mb-3'>
+                            X {sort === 'desc' ? 'بالاترین قیمت' : 'پایین ترین قیمت'}
+                        </Button>
+                    }
+                </div>
                 <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3 mb-20">
                     <PostItem data={data} />
                 </div>
                 {isError && <Button color="failure" onClick={refetch} size='md' className='m-auto'>
-                      تلاش مجدد
+                    تلاش مجدد
                 </Button>}
             </section>
             {data && data.totalPages > 1 && (
@@ -66,7 +89,7 @@ const AdsContainer = () => {
                         dir='ltr'
                         currentPage={currentPage}
                         layout="pagination"
-                        defaultValue={searchParams.get('page')}
+                        defaultValue={currentPage}
                         onPageChange={onPageChange}
                         showIcons={true}
                         totalPages={data.totalPages}
