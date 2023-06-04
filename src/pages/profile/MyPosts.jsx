@@ -1,5 +1,4 @@
 import { Button, Pagination } from "flowbite-react"
-import { toast } from "react-toastify"
 import Loading from "../../components/Loading"
 import PostItem from '../../components/posts/PostItem'
 import { useMyPosts } from "../../hooks/fetchData"
@@ -10,9 +9,6 @@ const MyPosts = () => {
   const { data, isLoading, isError, refetch } = useMyPosts(currentPage)
 
   if (isLoading) return <Loading />
-  if (isError) {
-    toast.error('مشکلی در دریافت آگهی رخ داد')
-  }
   if (data?.docs?.length === 0) {
     return (
       <div className="w-full flex flex-col items-center">

@@ -1,4 +1,3 @@
-import { toast } from "react-toastify"
 import Loading from "../../components/Loading"
 import PostItem from '../../components/posts/PostItem'
 import { BsBookmark } from "react-icons/bs"
@@ -11,9 +10,6 @@ const Bookmarks = () => {
   const {data, isLoading, isError, refetch} = useBookmarks(currentPage)
 
   if (isLoading) return <Loading/>
-  if (isError) {
-      toast.error('مشکلی در دریافت آگهی رخ داد')
-  }
   if(data?.docs?.length === 0){
     return(
       <div className="w-full flex flex-col items-center">

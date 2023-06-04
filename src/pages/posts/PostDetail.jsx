@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom'
-import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
 import moment from 'jalali-moment';
 import { BsQuestionCircle } from 'react-icons/bs'
@@ -14,9 +13,6 @@ const PostDetail = () => {
   const { slug, hashId } = useParams()
   const { data, isLoading, isError, refetch } = usePost(slug, hashId)
   if (isLoading) return <Loading />
-  if (isError) {
-    toast.error('مشکلی در دریافت آگهی رخ داد')
-  }
   return (
     <section className='font-Ilight mt-5 container mx-auto px-3 lg:px-[170px]'>
       {isError && <Button color="failure" onClick={refetch} size='md' className='m-auto'>

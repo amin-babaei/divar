@@ -1,5 +1,4 @@
 import PostItem from '../components/posts/PostItem'
-import { toast } from "react-toastify";
 import Loading from "../components/Loading";
 import { Button, Pagination } from 'flowbite-react';
 import { useContext, useEffect } from 'react';
@@ -44,9 +43,6 @@ const AdsContainer = () => {
     }
 
     if (isLoading) return <Loading />
-    if (isError) {
-        toast.error('مشکلی در دریافت آگهی ها رخ داد')
-    }
 
     if (data?.docs?.length === 0) {
         return (

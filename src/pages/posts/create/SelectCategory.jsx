@@ -1,4 +1,3 @@
-import { toast } from "react-toastify"
 import LoadCategory from "../../../components/LoadCategory"
 import { useAllCategorys } from "../../../hooks/fetchData"
 
@@ -6,7 +5,6 @@ const SelectCategory = ({ formik,setCategoryName }) => {
   const {isLoading, data, isError} = useAllCategorys()
   if (isLoading) return <LoadCategory />
   if (isError) {
-    toast.error('مشکلی در دریافت دسته بندی ها رخ داد')
     return <LoadCategory />
   }
   

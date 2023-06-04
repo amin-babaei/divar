@@ -1,5 +1,4 @@
 import LoadCategory from '../LoadCategory'
-import {toast} from "react-toastify";
 import QueryContext from '../../context/QueryContext.js';
 import {useCallback, useContext,} from 'react';
 import {useLocation, useNavigate, useSearchParams} from 'react-router-dom';
@@ -22,7 +21,6 @@ const SidebarCategory = () => {
 
     if (isLoading) return <LoadCategory/>
     if (isError) {
-        toast.error('مشکلی در دریافت دسته بندی ها رخ داد')
         return <LoadCategory/>
     }
 
