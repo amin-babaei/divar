@@ -65,18 +65,3 @@ aside > div{
   font-family: 'iransansMedium';
   font-size: 14px;
 }
-.Toastify__toast--error{
-  background-color: #c81e1e !important;
-  color: white !important;
-}
-.Toastify__toast--success{
-  background-color: #249444 !important;
-  color: white !important;
-}
-.Toastify__close-button--light{
-  color: white !important;
-  opacity: 1 !important;
-}
-.Toastify__toast-icon > svg{
-  fill: white !important;
-}
