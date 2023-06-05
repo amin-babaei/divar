@@ -23,7 +23,7 @@ const ModalDelete = ({ postId }) => {
       }
     return (
         <>
-            <Button color="failure" size='sm' className='absolute z-10 left-0' onClick={() => setShowModal(true)}><BsTrashFill /></Button>
+            <Button color="failure" size='sm' className='absolute z-[1] left-0' onClick={() => setShowModal(true)}><BsTrashFill /></Button>
             <Modal
                 show={showModal}
                 onClose={() => setShowModal(!showModal)}
