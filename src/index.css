@@ -6,6 +6,9 @@
   .wordspace {
     word-spacing: -3px;
   }
+  .side-h{
+    height: calc(100vh - 120px)
+  }
 }
 @layer components {
   .pagination {
@@ -49,9 +52,6 @@ body{
 }
 .hide-scroll::-webkit-scrollbar{
   display: none;
-}
-.side-h{
-  height: calc(100vh - 120px)
 }
 aside > div{
   padding: 0 !important;
