@@ -1,46 +1,41 @@
 import PostItem from '../components/posts/PostItem'
 import Loading from "../components/Loading";
 import { Button, Pagination } from 'flowbite-react';
-import { useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import QueryContext from '../context/QueryContext';
 import { useAllCategorys, usePosts } from '../hooks/fetchData';
 import usePaginate from '../hooks/usePaginate';
+import Skeleton from 'react-loading-skeleton';
 
 const AdsContainer = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const { page, setCategory, setSort, category, sort, query } = useContext(QueryContext)
+    const [, setSearchParams] = useSearchParams();
+    const { page, category, setCategory, sort, setSort, deleteَAllQuery, deleteQueryCat, deleteQuerySort } = useContext(QueryContext)
     const { currentPage, onPageChange } = usePaginate()
-    const { isLoading, data, isError, refetch } = usePosts(currentPage, category, sort)
-    const { data: categorys } = useAllCategorys()
+    const { isLoading, data, isError, refetch ,isSuccess } = usePosts(currentPage, category, sort)
+    const { data: categorys, isLoading: categoryLoading } = useAllCategorys()
 
     useEffect(() => {
         if (category.length > 0 && sort.length > 0) {
-            setSearchParams({ ...{ page : currentPage }, sort, category })
+            setSearchParams({ ...{ page: currentPage }, sort, category })
         }
         else if (category.length > 0) {
-            setSearchParams({ ...{ page : currentPage }, category })
+            setSearchParams({ ...{ page: currentPage }, category })
         }
         else if (sort.length > 0) {
-            setSearchParams({ ...{ page : currentPage }, sort })
+            setSearchParams({ ...{ page: currentPage }, sort })
         }
     }, [category, setSearchParams, sort, page, currentPage])
 
-    const deleteQueryCat = () => {
-        setCategory(query.delete('category') || "")
-        searchParams.delete('category')
-        setSearchParams(searchParams)
-    }
-    const deleteQuerySort = () => {
-        setSort(query.delete('sort') || "")
-        searchParams.delete('sort')
-        setSearchParams(searchParams)
-    }
-    const deleteَAllQuery = () => {
-        setSort(query.delete('sort') || "")
-        setCategory(query.delete('category') || "")
-        setSearchParams({})
-    }
+    const handleChangeCategory = useCallback(title => {
+        setCategory(title)
+        setSearchParams({ category })
+    }, [setCategory, setSearchParams, category])
+
+    const handleChangeSort = useCallback(e => {
+        setSort(e.target.value)
+        setSearchParams({ sort })
+    }, [setSort, setSearchParams, sort])
 
     if (isLoading) return <Loading />
 
@@ -59,6 +54,24 @@ const AdsContainer = () => {
     return (
         <>
             <section className="relative min-h-[55vh] mt-10 md:mt-24 sm:mr-72">
+                {categoryLoading ? <Skeleton containerClassName='flex gap-x-4 sm:hidden' count={3}/> : null}
+                <div className="flex mb-5 gap-x-4 overflow-auto sm:hidden">
+                    {categorys?.map(item => (
+                        <div className="flex gap-x-2 items-center border border-gray-200 rounded-3xl py-2 px-3 text-[15px] whitespace-nowrap sm:border-0 sm:rounded-none sm:border-b sm:py-5 cursor-pointer hover:bg-gray-50" key={item._id} onClick={() => handleChangeCategory(item.englishTitle)}>
+                            <p dangerouslySetInnerHTML={{ __html: item.icon }} />
+                            <p className="text-[15px] font-light">{item.title}</p>
+                        </div>
+                    ))}
+                </div>
+
+                {isSuccess && 
+                <select className="text-center border border-gray-200 text-gray-900 text-sm rounded-lg block w-1/2 mx-auto mb-5 p-2.5 focus:ring-0 focus:outline-none focus:border-gray-300 sm:hidden" value={sort} onChange={handleChangeSort}>
+                    <option value=''>مرتب سازی</option>
+                    <option value="desc">بالاترین قیمت</option>
+                    <option value="asc">کمترین قیمت</option>
+                </select>
+                }
+
                 <div className='flex items-center gap-3'>
                     {categorys?.filter(cat => cat.englishTitle === category).map(item => (
                         <Button key={item._id} color="failure" onClick={deleteQueryCat} size='xs' className='mb-3'>
