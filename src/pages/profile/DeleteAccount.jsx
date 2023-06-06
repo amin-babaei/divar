@@ -1,12 +1,17 @@
 import { BsPersonXFill } from "react-icons/bs"
 import { useAuth, useAuthActions } from "../../context/AuthContext"
-import { useState } from "react"
-import { Button, Modal } from "flowbite-react"
+import { useRef, useState } from "react"
+import { Button } from "flowbite-react"
+import useClickOutside from "../../hooks/useClickOutside"
+import Modal from "../../components/Modal"
 
 const DeleteAccount = () => {
     const [showModal, setShowModal] = useState(false)
     const { user } = useAuth()
     const dispatch = useAuthActions()
+
+    const modalRef = useRef(null);
+    useClickOutside(modalRef, () => setShowModal(false));
 
     return (
         <>
@@ -14,21 +19,12 @@ const DeleteAccount = () => {
                 <BsPersonXFill />
                 <h3>حذف حساب کاربری</h3>
             </div>
-            <Modal
-                show={showModal}
-                onClose={() => setShowModal(!showModal)}
-                size="md"
-                position="center"
-            >
-                <h3 className="p-5 leading-10">
-                    با حذف حساب کاربری ، آگهی های شما نیز حذف می شود . آیا مطمئن هستید ؟
-                </h3>
-                <hr />
-                <Modal.Body className="flex justify-around">
-                    <Button color='failure' onClick={() => setShowModal(false)}>خیر</Button>
-                    <Button color='success' onClick={() => dispatch({ type: 'DELETEUSER', payload: user?._id })}>بله</Button>
-                </Modal.Body>
-            </Modal>
+            {showModal && (
+                <Modal reference={modalRef} title='حذف حساب کاربری' desc='با حذف حساب کاربری ، آگهی های شما نیز حذف می شود . آیا مطمئن هستید ؟'>
+                    <Button fullSized color='failure' onClick={() => setShowModal(false)}>خیر</Button>
+                    <Button fullSized color='success' onClick={() => dispatch({ type: 'DELETEUSER', payload: user?._id })}>بله</Button>
+                </Modal>
+            )}    
         </>
     )
 }

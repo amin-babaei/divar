@@ -11,7 +11,7 @@ const ProfileSidebar = () => {
   const dispatch = useAuthActions()
   return (
     <section className="container mx-auto relative">
-      <div className="flex mt-5 gap-x-4 overflow-auto sm:block sm:mt-0 sm:fixed sm:w-56 sm:top-28 sm:overflow-scroll sm:side-h hide-scroll">
+      <div className="flex mt-5 gap-x-4 overflow-auto sm:block sm:mt-0 sm:fixed sm:w-56 sm:top-28 sm:overflow-scroll sm:side-h hide-scroll z-10">
         <div className="hidden sm:flex sm:items-center sm:gap-x-2 sm:text-gray-500 sm:text-sm">
           <BsFillPersonFill />
           <p>
