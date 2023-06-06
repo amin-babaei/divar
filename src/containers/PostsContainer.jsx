@@ -53,7 +53,7 @@ const AdsContainer = () => {
 
     return (
         <>
-            <section className="relative min-h-[55vh] mt-10 md:mt-24 sm:mr-72">
+            <section className="relative min-h-[55vh] mt-5 md:mt-24 sm:mr-72">
                 {categoryLoading ? <Skeleton containerClassName='flex gap-x-4 sm:hidden' count={3}/> : null}
                 <div className="flex mb-5 gap-x-4 overflow-auto sm:hidden">
                     {categorys?.map(item => (
