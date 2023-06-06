@@ -1,25 +1,19 @@
 import { Spinner } from 'flowbite-react';
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { BsFillPersonFill, BsBookmark, BsFillChatLeftDotsFill } from 'react-icons/bs'
 import { GrLogin } from 'react-icons/gr'
 import { RiFilePaper2Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { useAuth, useAuthActions } from '../../context/AuthContext.js';
+import useClickOutside from '../../hooks/useClickOutside';
+
 const DropDown = () => {
     const { user, loading } = useAuth()
     const dispatch = useAuthActions()
     const menuRef = useRef(null);
     const [show, setShow] = useState(false)
 
-    const closeOpen = (e) => {
-        if (menuRef.current && setShow && !menuRef.current.contains(e.target)) {
-            setShow(false)
-        }
-    }
-    useEffect(() => {
-        document.addEventListener('click', closeOpen)
-    }, [])
-
+    useClickOutside(menuRef, () => setShow(false));
     return (
         <div ref={menuRef}>
             {loading ? <Spinner color="gray" className='ml-5'/> : 
