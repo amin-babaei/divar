@@ -97,7 +97,7 @@ const Message = () => {
       
     return (
         <>
-            <div className="flex justify-between items-center border-b border-b-gray-100 py-[3px]">
+            <div className="flex justify-between items-center py-[3px]">
                 <h3 className="mr-4 border-r-2 pr-2">{data?.data?.name}</h3>
                 <button className='rounded-full duration-500 hover:bg-gray-200 p-3 ml-4'>
                     <RiMore2Fill className="text-gray-500" />
@@ -107,7 +107,7 @@ const Message = () => {
               {loading ? <Skeleton count={4} wrapper={Box} borderRadius='1rem' className='py-7 rounded-2xl rounded-br-none' /> : null}
                 <div>
                     {messages?.map(m => (
-                        <div key={m._id} ref={scrollRef} className={`p-3 rounded-2xl rounded-br-none w-2/5 m-3 ${m.sender === user._id ? 'bg-blue-100' : 'bg-gray-100 mr-auto rounded-bl-none'}`}>
+                        <div key={m._id} ref={scrollRef} className={`p-3 rounded-2xl w-2/5 m-3 ${m.sender === user._id ? 'bg-blue-100 rounded-br-none' : 'bg-gray-100 mr-auto rounded-bl-none'}`}>
                             <p className='text-sm'>{m.text}</p>
                             <p className="text-xs mt-5">{toPersianDigits(moment(m.createdAt).locale('fa').fromNow())}</p>
                         </div>
