@@ -9,11 +9,12 @@ import { useUser } from '../../hooks/fetchData'
 import http from '../../services/httpService'
 import { toPersianDigits } from '../../utils/persianDigit'
 import Skeleton from 'react-loading-skeleton'
+import { useParams } from 'react-router-dom'
 
 const Message = () => {
     const {socket,entryMessage,currentChat} = useContext(ChatContext)
     const {user} = useAuth()
-    
+    const { chatId } = useParams()
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
     const [loadingMsg, setLoadingMsg] = useState(false);
@@ -27,7 +28,7 @@ const Message = () => {
         const getMessages = async () => {
           setLoading(true)
           try {
-            const res = await http.get("/api/messages/" + currentChat?._id);
+            const res = await http.get("/api/messages/" + chatId);
             setMessages(res.data);
             setLoading(false)
           } catch (err) {
@@ -35,20 +36,20 @@ const Message = () => {
           }
         };
         getMessages();
-      }, [currentChat]);
-      
+      }, [chatId]);
+
       useEffect(() => {
           entryMessage &&
           currentChat?.members.includes(entryMessage.sender) &&
           setMessages((prev) => [...prev, entryMessage]);
-      }, [entryMessage, currentChat]);
-      useEffect(()=>{
-        const receiverId = currentChat?.members.find(
-          (member) => member !== user._id
-        );
-        setUserReceiver(receiverId)
-      },[currentChat?.members, user._id])
-      
+          const receiverId = currentChat?.members?.find(
+            (member) => member !== user._id
+          );
+          if(receiverId){
+            setUserReceiver(receiverId)
+          }else setUserReceiver(user._id)
+      }, [entryMessage, currentChat, user._id]);
+
       const handleSubmit = async (e) => {
         e.preventDefault();
         const message = {
@@ -57,7 +58,7 @@ const Message = () => {
           conversationId: currentChat?._id,
         };
     
-        const receiverId = currentChat.members.find(
+        const receiverId = currentChat?.members?.find(
           (member) => member !== user._id
         );
     

@@ -48,6 +48,10 @@ const Chat = () => {
     getConversations();
   }, [setConversations, user]);
 
+  useEffect(() => {
+    setCurrentChat(conversations?.map(c => c))
+  }, [conversations, setCurrentChat])
+
   return (
     <section className="container mx-auto px-3 mt-10 font-Ilight">
       <Helmet>
