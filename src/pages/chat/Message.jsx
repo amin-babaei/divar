@@ -8,12 +8,15 @@ import ChatContext from '../../context/ChatContext'
 import { useUser } from '../../hooks/fetchData'
 import http from '../../services/httpService'
 import { toPersianDigits } from '../../utils/persianDigit'
+import Skeleton from 'react-loading-skeleton'
 
 const Message = () => {
     const {socket,entryMessage,currentChat} = useContext(ChatContext)
     const {user} = useAuth()
-
+    
     const [messages, setMessages] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [loadingMsg, setLoadingMsg] = useState(false);
     const [userReceiver, setUserReceiver] = useState(user._id);
     const [newMessage, setNewMessage] = useState("");
     const scrollRef = useRef();
@@ -22,11 +25,13 @@ const Message = () => {
 
     useEffect(() => {
         const getMessages = async () => {
+          setLoading(true)
           try {
             const res = await http.get("/api/messages/" + currentChat?._id);
             setMessages(res.data);
+            setLoading(false)
           } catch (err) {
-            console.log(err);
+            setLoading(false)
           }
         };
         getMessages();
@@ -63,21 +68,32 @@ const Message = () => {
         });
 
         try {
+          setLoadingMsg(true)
           if(newMessage.trim().length === 0){
             toast.error('متن ارسالی شما خالی است !')
+            setLoadingMsg(false)
           }else{
             const res = await http.post("/api/messages", message);
             setMessages([...messages, res.data]);
+            setLoadingMsg(false)
             setNewMessage("");
           }
         } catch (err) {
           toast.error('دوباره تلاش کنید')
+          setLoadingMsg(false)
         }
       };
 
       useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-      }, [messages]);
+      }, [messages,loadingMsg]);
+      function Box({ children }) {
+        return (
+          <div className='w-2/3 p-3 my-5 even:mr-auto odd:ml-auto'>
+            {children}
+          </div>
+        );
+      }
       
     return (
         <>
@@ -88,17 +104,25 @@ const Message = () => {
                 </button>
             </div>
             <div className="border border-gray-100 h-[39rem] overflow-y-auto flex flex-col justify-between">
+              {loading ? <Skeleton count={4} wrapper={Box} borderRadius='1rem' className='py-7 rounded-2xl rounded-br-none' /> : null}
                 <div>
-                    {messages.map(m => (
+                    {messages?.map(m => (
                         <div key={m._id} ref={scrollRef} className={`p-3 rounded-2xl rounded-br-none w-2/5 m-3 ${m.sender === user._id ? 'bg-blue-100' : 'bg-gray-100 mr-auto rounded-bl-none'}`}>
                             <p className='text-sm'>{m.text}</p>
                             <p className="text-xs mt-5">{toPersianDigits(moment(m.createdAt).locale('fa').fromNow())}</p>
                         </div>
                     ))}
+
+                    {loadingMsg ? (
+                       <div ref={scrollRef} className={`p-3 rounded-2xl rounded-br-none w-2/5 m-3 bg-blue-50 ml-auto rounded-bl-none'}`}>
+                          <p className='text-sm'>{newMessage}</p>
+                        </div>
+                    ) : null}
+
                 </div>
                 <div className="sticky bottom-0">
                     <input type='text' placeholder="متنی بنویسید ..." className='w-full py-3 outline-none border-t-2 border-gray-100 focus:ring-0 focus:border-gray-300' onChange={(e) => setNewMessage(e.target.value)}
-                    value={newMessage}/>
+                    value={loadingMsg ? "" : newMessage}/>
                     <button className='absolute top-2 left-5 rounded-full duration-500 bg-red-700 hover:bg-red-500 p-2'onClick={handleSubmit}>
                         <FiSend className="text-white" size={21} />
                     </button>
