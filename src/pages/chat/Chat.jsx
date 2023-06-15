@@ -65,7 +65,7 @@ const Chat = () => {
             </li>
             {conversations.map((c) => (
               <Link to={`/chat/${c._id}`} key={c._id}>
-                <div onClick={() => setCurrentChat(c)}>
+                <div onClick={() => setCurrentChat([c])}>
                   <Conversation conversation={c} currentUser={user} />
                 </div>
               </Link>
