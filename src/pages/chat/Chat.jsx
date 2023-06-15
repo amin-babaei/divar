@@ -3,17 +3,19 @@ import { io } from "socket.io-client";
 import { useAuth } from "../../context/AuthContext";
 import http from "../../services/httpService";
 import Conversation from "../../components/chat/Conversations";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ChatContext from "../../context/ChatContext";
 import {Helmet} from "react-helmet"
+import { FiChevronRight } from "react-icons/fi";
 
 const Chat = () => {
 
   const [loading, setLoading] = useState(false)
   const { conversations,setConversations,setCurrentChat,setentryMessage, socket } = useContext(ChatContext)
   const location = useLocation()
-
+  const navigate = useNavigate()
+  
   const { user } = useAuth()
 
   useEffect(() => {
@@ -59,6 +61,9 @@ const Chat = () => {
       </Helmet>
       {conversations.length > 0 && !loading ? (
         <div className="grid grid-cols-4 items-baseline">
+          <button onClick={() => navigate(location.pathname !== '/chat' ? '/chat' : '/')} className='rounded-xl w-12 h-10 mb-6 -mt-3 bg-red-700 flex items-center justify-center md:hidden'>
+              <FiChevronRight size={25} className='text-white'/>
+          </button> 
           <ul className={`text-sm col-span-4 md:col-span-1 ${location.pathname !== '/chat' && 'hidden md:block'}`}>
             <li className="flex justify-between p-3 border border-l-0 border-gray-100">
               <h3>چت دیوار</h3>
