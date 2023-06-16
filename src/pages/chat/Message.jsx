@@ -42,20 +42,21 @@ const Message = () => {
           entryMessage &&
           currentChat?.members.includes(entryMessage.sender) &&
           setMessages((prev) => [...prev, entryMessage]);
-          const receiverId = currentChat[0]?.members?.find(
+          const currentReeiver = currentChat.filter(curr => curr._id === chatId)
+          const receiverId = currentReeiver[0]?.members?.find(
             (member) => member !== user._id
           );
           if(receiverId){
             setUserReceiver(receiverId)
           }
-      }, [entryMessage, currentChat, user._id]);
+      }, [entryMessage, currentChat, user._id, chatId]);
 
       const handleSubmit = async (e) => {
         e.preventDefault();
         const message = {
           sender: user._id,
           text: newMessage,
-          conversationId: currentChat?._id,
+          conversationId: chatId,
         };
     
         const receiverId = currentChat?.members?.find(
