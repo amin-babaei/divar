@@ -8,11 +8,16 @@ import { usePost } from '../../hooks/fetchData';
 import Helmet from 'react-helmet';
 import ChatPost from '../../components/chat/ChatPost';
 import { Button } from 'flowbite-react';
+import NotFound from '../NotFound';
 
 const PostDetail = () => {
   const { slug, hashId } = useParams()
-  const { data, isLoading, isError, refetch } = usePost(slug, hashId)
+  const { data, isLoading, isError, refetch, error } = usePost(slug, hashId)
   if (isLoading) return <Loading />
+  if(error?.response?.status === 404){
+    return <NotFound/>
+  }
+
   return (
     <section className='font-Ilight mt-5 container mx-auto px-3 lg:px-[170px]'>
       {isError && <Button color="failure" onClick={refetch} size='md' className='m-auto'>
