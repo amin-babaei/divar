@@ -2,14 +2,10 @@ import {useMutation,useQuery,useQueryClient} from "react-query"
 import {createPost,deleteMyPost,editBookmark,getBookmarks,getCategorys,getMyPosts,getPost,getPosts, getUser, updatePost} from "../services/fetchData"
 
 export const useAllCategorys = () => {
-    return useQuery("category", getCategorys,{
-        retry : 1
-    })
+    return useQuery("category", getCategorys)
 }
 export const usePosts = (currentPage, category, sort) => {
-    return useQuery(['posts', currentPage, category, sort], () => getPosts(currentPage, category, sort),{
-        retry : 1,
-    })
+    return useQuery(['posts', currentPage, category, sort], () => getPosts(currentPage, category, sort))
 }
 export const usePost = (slug, hashId) => {
     return useQuery(['post', slug, hashId], () => getPost(slug, hashId),{
