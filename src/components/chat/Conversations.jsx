@@ -13,7 +13,7 @@ const Conversation = ({ conversation, currentUser }) => {
     <li className="flex flex-wrap justify-between items-center px-3 py-5 border-b border-b-gray-100 cursor-pointer hover:bg-gray-100 duration-300">
         <div className="flex items-center gap-x-1">
             <img src="/avatar.png" alt="" className="w-10 h-10 rounded-full"/>
-            <h3>{user?.data?.name}</h3>
+            <h3>{user?.data ? user.data.name : 'حساب کاربری حذف شده'}</h3>
         </div>
         <span className="text-xs">{toPersianDigits(moment(conversation?.updatedAt).locale('fa').fromNow())}</span>
     </li>

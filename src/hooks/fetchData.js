@@ -1,5 +1,5 @@
 import {useMutation,useQuery,useQueryClient} from "react-query"
-import {createPost,deleteMyPost,editBookmark,getBookmarks,getCategorys,getMyPosts,getPost,getPosts, getUser, updatePost} from "../services/fetchData"
+import {createPost,deleteMyPost,editBookmark,getBookmarks,getCategorys,getConversation,getMyPosts,getPost,getPosts, getUser, updatePost} from "../services/fetchData"
 
 export const useAllCategorys = () => {
     return useQuery("category", getCategorys)
@@ -55,4 +55,7 @@ export const useBookmarked = () => {
 }
 export const useUser = (customerId) => {
     return useQuery(['user',customerId], ()=>getUser(customerId))
+}
+export const useConversation = (userId) => {
+    return useQuery(['conversation',userId], ()=>getConversation(userId))
 }

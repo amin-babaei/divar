@@ -40,3 +40,7 @@ export const getUser = async (customerId) => {
     const respnse = await http.get(`/api/user?userId=${customerId}`)
     return respnse
 }
+export const getConversation = async (userId) => {
+    const respnse = await http.get(`/api/conversation/${userId}`)
+    return respnse.data
+}

@@ -9,7 +9,7 @@ import { useUser } from '../../hooks/fetchData'
 import http from '../../services/httpService'
 import { toPersianDigits } from '../../utils/persianDigit'
 import Skeleton from 'react-loading-skeleton'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const Message = () => {
     const {socket,entryMessage,currentChat} = useContext(ChatContext)
@@ -21,8 +21,9 @@ const Message = () => {
     const [userReceiver, setUserReceiver] = useState(user._id);
     const [newMessage, setNewMessage] = useState("");
     const scrollRef = useRef();
+    const navigate = useNavigate()
 
-    const {data} = useUser(userReceiver)
+    const {data,error} = useUser(userReceiver)
 
     useEffect(() => {
         const getMessages = async () => {
@@ -33,20 +34,22 @@ const Message = () => {
             setLoading(false)
           } catch (err) {
             setLoading(false)
+            if(err?.response?.status === 404) navigate("/not-found", { replace: true })
           }
         };
         getMessages();
-      }, [chatId]);
+      }, [chatId, navigate]);
 
       useEffect(() => {
-          entryMessage &&
-          currentChat?.members.includes(entryMessage.sender) &&
+        if(entryMessage){
+          currentChat?.members.includes(entryMessage.sender)
           setMessages((prev) => [...prev, entryMessage]);
-          const currentReeiver = currentChat.filter(curr => curr._id === chatId)
-          const receiverId = currentReeiver[0]?.members?.find(
-            (member) => member !== user._id
-          );
-          if(receiverId){
+        }
+          const currentReeiver = currentChat?.filter(curr => curr._id === chatId)
+          if(currentReeiver){
+            const receiverId = currentReeiver[0]?.members?.find(
+              (member) => member !== user._id
+            );
             setUserReceiver(receiverId)
           }
       }, [entryMessage, currentChat, user._id, chatId]);
@@ -89,6 +92,20 @@ const Message = () => {
       useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" });
       }, [messages,loadingMsg]);
+
+      const handleDeleteChat = async (e) => {
+        e.preventDefault()
+        try {
+          const {status} = await http.delete(`/api/user/delete/chat/${chatId}/${user._id}`)
+          if(status === 200){
+            navigate("/", { replace: true })
+            toast.success('گفتگو مورد نظر با موفقیت حذف شد')
+          }
+        } catch (err) {
+          toast.error(err?.response?.data?.message)
+        }
+      }
+
       function Box({ children }) {
         return (
           <div className='w-2/3 p-3 my-5 even:mr-auto odd:ml-auto'>
@@ -96,11 +113,11 @@ const Message = () => {
           </div>
         );
       }
-      
+
     return (
         <>
             <div className="flex justify-between items-center py-[3px]">
-                <h3 className="mr-4 border-r-2 pr-2">{data?.data?.name}</h3>
+                <h3 className="mr-4 border-r-2 pr-2">{data?.data ? data.data.name : 'حساب کاربری حذف شده'}</h3>
                 <button className='rounded-full duration-500 hover:bg-gray-200 p-3 ml-4'>
                     <RiMore2Fill className="text-gray-500" />
                 </button>
@@ -122,13 +139,19 @@ const Message = () => {
                     ) : null}
 
                 </div>
-                <div className="sticky bottom-0 bg-white border-t border-gray-100">
-                    <textarea maxLength={200} type='text' placeholder="متنی بنویسید ..." className='w-3/4 hide-scroll h-full py-2 outline-none border-none resize-none focus:ring-0 focus:border-gray-300 sm:w-5/6' onChange={(e) => setNewMessage(e.target.value)}
-                    value={loadingMsg ? "" : newMessage}/>
-                    <button className='absolute top-4 left-5 rounded-xl w-16 flex justify-center duration-500 bg-red-700 hover:bg-red-500 p-3'onClick={handleSubmit}>
-                        <FiSend className="text-white" size={24} fill='white'/>
-                    </button> 
-                </div>
+                      {error?.response.status === 404 ? (
+                        <button onClick={handleDeleteChat} className='w-full flex justify-center text-white duration-500 bg-red-900 hover:bg-red-500 p-3'>
+                          حذف گفتگو
+                        </button> 
+                        ): (
+                          <div className="sticky bottom-0 bg-white border-t border-gray-100">
+                            <textarea maxLength={200} type='text' placeholder="متنی بنویسید ..." className='w-3/4 hide-scroll h-full py-2 outline-none border-none resize-none focus:ring-0 focus:border-gray-300 sm:w-5/6' onChange={(e) => setNewMessage(e.target.value)}
+                            value={loadingMsg ? "" : newMessage}/>
+                            <button className='absolute top-4 left-5 rounded-xl w-16 flex justify-center duration-500 bg-red-700 hover:bg-red-500 p-3'onClick={handleSubmit}>
+                            <FiSend className="text-white" size={24} fill='white'/>
+                            </button> 
+                          </div>
+                      )}
             </div>
         </>
     )

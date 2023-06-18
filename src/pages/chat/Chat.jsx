@@ -1,22 +1,21 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { io } from "socket.io-client";
 import { useAuth } from "../../context/AuthContext";
-import http from "../../services/httpService";
 import Conversation from "../../components/chat/Conversations";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import ChatContext from "../../context/ChatContext";
 import {Helmet} from "react-helmet"
 import { FiChevronRight } from "react-icons/fi";
+import { useConversation } from "../../hooks/fetchData";
 
 const Chat = () => {
 
-  const [loading, setLoading] = useState(false)
-  const { conversations,setConversations,setCurrentChat,setentryMessage, socket } = useContext(ChatContext)
+  const { setCurrentChat,setentryMessage, socket } = useContext(ChatContext)
   const location = useLocation()
   const navigate = useNavigate()
   
   const { user } = useAuth()
+  const {data:conversations, isLoading} = useConversation(user?._id)
 
   useEffect(() => {
     socket.current = io(process.env.REACT_APP_BASE_API_URL,{
@@ -36,22 +35,9 @@ const Chat = () => {
   }, [socket, user]);
 
   useEffect(() => {
-    const getConversations = async () => {
-      setLoading(true)
-      try {
-        const res = await http.get("/api/conversation/" + user?._id);
-        setConversations(res.data);
-        setLoading(false)
-      } catch{
-        toast.error('مشکلی در دریافت گفتگو ها رخ داد')
-        setLoading(false)
-      }
-    };
-    getConversations();
-  }, [setConversations, user]);
-
-  useEffect(() => {
-    setCurrentChat(conversations?.map(c => c))
+    if(conversations){
+      setCurrentChat(conversations?.map(c => c))
+    }
   }, [conversations, setCurrentChat])
 
   return (
@@ -59,7 +45,7 @@ const Chat = () => {
       <Helmet>
         <title>چت های شما</title>
       </Helmet>
-      {conversations.length > 0 && !loading ? (
+      {conversations?.length > 0 && !isLoading ? (
         <div className="grid grid-cols-4 items-baseline">
           <button onClick={() => navigate(location.pathname !== '/chat' ? '/chat' : '/')} className='rounded-xl w-12 h-10 mb-6 -mt-3 bg-red-700 flex items-center justify-center md:hidden'>
               <FiChevronRight size={25} className='text-white'/>
@@ -68,7 +54,7 @@ const Chat = () => {
             <li className="flex justify-between p-3 border border-l-0 border-gray-100">
               <h3>چت دیوار</h3>
             </li>
-            {conversations.map((c) => (
+            {conversations?.map((c) => (
               <Link to={`/chat/${c._id}`} key={c._id}>
                 <div onClick={() => setCurrentChat([c])}>
                   <Conversation conversation={c} currentUser={user} />
@@ -80,7 +66,7 @@ const Chat = () => {
               <Outlet />
           </div>
         </div>
-        ) : loading ? <p className="text-center">لطفا منتظر بمانید ...</p> : <p className="text-center">شما هنوز گفتگو نکردید !</p>}
+        ) : isLoading ? <p className="text-center">لطفا منتظر بمانید ...</p> : <p className="text-center">شما هنوز گفتگو نکردید !</p>}
     </section>
   );
 }
