@@ -12,7 +12,7 @@ import Skeleton from 'react-loading-skeleton'
 import { useNavigate, useParams } from 'react-router-dom'
 
 const Message = () => {
-    const {socket,entryMessage,currentChat} = useContext(ChatContext)
+    const {socket,entryMessage,currentChat,conversations,setCurrentChat} = useContext(ChatContext)
     const {user} = useAuth()
     const { chatId } = useParams()
     const [messages, setMessages] = useState([]);
@@ -41,13 +41,17 @@ const Message = () => {
       }, [chatId, navigate]);
 
       useEffect(() => {
+        let current = conversations.filter(c => c._id === chatId).map(c => c)
+        if(current)setCurrentChat(current[0])
+      }, [chatId, conversations, setCurrentChat])
+
+      useEffect(() => {
         if(entryMessage){
           currentChat?.members.includes(entryMessage.sender)
           setMessages((prev) => [...prev, entryMessage]);
         }
-          const currentReeiver = currentChat?.filter(curr => curr._id === chatId)
-          if(currentReeiver){
-            const receiverId = currentReeiver[0]?.members?.find(
+          if(currentChat){
+            const receiverId = currentChat.members.find(
               (member) => member !== user._id
             );
             setUserReceiver(receiverId)

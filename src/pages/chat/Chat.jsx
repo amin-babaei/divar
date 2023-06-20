@@ -10,7 +10,7 @@ import { useConversation } from "../../hooks/fetchData";
 
 const Chat = () => {
 
-  const { setCurrentChat,setentryMessage, socket } = useContext(ChatContext)
+  const { setConversations,setCurrentChat,setentryMessage, socket } = useContext(ChatContext)
   const location = useLocation()
   const navigate = useNavigate()
   
@@ -36,9 +36,9 @@ const Chat = () => {
 
   useEffect(() => {
     if(conversations){
-      setCurrentChat(conversations?.map(c => c))
+      setConversations(conversations?.map(c => c))
     }
-  }, [conversations, setCurrentChat])
+  }, [conversations, setConversations])
 
   return (
     <section className="container mx-auto px-3 mt-10 font-Ilight">
@@ -56,7 +56,7 @@ const Chat = () => {
             </li>
             {conversations?.map((c) => (
               <Link to={`/chat/${c._id}`} key={c._id}>
-                <div onClick={() => setCurrentChat([c])}>
+                <div onClick={() => setCurrentChat(c)}>
                   <Conversation conversation={c} currentUser={user} />
                 </div>
               </Link>
