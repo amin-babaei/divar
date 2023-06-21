@@ -23,7 +23,7 @@ const Message = () => {
     const scrollRef = useRef();
     const navigate = useNavigate()
 
-    const {data,error} = useUser(userReceiver)
+    const {data,isLoading,error} = useUser(userReceiver)
 
     useEffect(() => {
         const getMessages = async () => {
@@ -121,7 +121,9 @@ const Message = () => {
     return (
         <>
             <div className="flex justify-between items-center py-[3px]">
-                <h3 className="mr-4 border-r-2 pr-2">{data?.data ? data.data.name : 'حساب کاربری حذف شده'}</h3>
+              {isLoading ? <Skeleton count={1} width={150} height={30} className='mr-2'/> : (
+                <h3 className="mr-4 border-r-2 pr-2">{error?.response?.status === 404 ? 'حساب کاربری حذف شده' : data.data?.name}</h3>
+              )}
                 <button className='rounded-full duration-500 hover:bg-gray-200 p-3 ml-4'>
                     <RiMore2Fill className="text-gray-500" />
                 </button>
@@ -129,7 +131,7 @@ const Message = () => {
             <div className="border border-gray-100 h-[39rem] overflow-y-auto flex flex-col justify-between">
               {loading ? <Skeleton count={4} wrapper={Box} borderRadius='1rem' className='py-7 rounded-2xl rounded-br-none' /> : null}
                 <div>
-                    {messages?.map(m => (
+                    {!loading && messages?.map(m => (
                         <div key={m._id} ref={scrollRef} className={`p-3 rounded-2xl w-2/5 m-3 ${m.sender === user._id ? 'bg-blue-100 rounded-br-none' : 'bg-gray-100 mr-auto rounded-bl-none'}`}>
                             <p className='text-sm'>{m.text}</p>
                             <p className="text-xs mt-5">{toPersianDigits(moment(m.createdAt).locale('fa').fromNow())}</p>
