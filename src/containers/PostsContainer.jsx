@@ -10,8 +10,8 @@ import Skeleton from 'react-loading-skeleton';
 
 const AdsContainer = () => {
     const [, setSearchParams] = useSearchParams();
-    const { page, category, setCategory, sort, setSort, deleteَAllQuery, deleteQueryCat, deleteQuerySort } = useContext(QueryContext)
-    const { currentPage, onPageChange } = usePaginate()
+    const { currentPage, category, setCategory, sort, setSort, deleteَAllQuery, deleteQueryCat, deleteQuerySort } = useContext(QueryContext)
+    const { onPageChange } = usePaginate()
     const { isLoading, data, isError, refetch ,isSuccess } = usePosts(currentPage, category, sort)
     const { data: categorys, isLoading: categoryLoading } = useAllCategorys()
 
@@ -25,7 +25,7 @@ const AdsContainer = () => {
         else if (sort.length > 0) {
             setSearchParams({ ...{ page: currentPage }, sort })
         }
-    }, [category, setSearchParams, sort, page, currentPage])
+    }, [category, setSearchParams, sort, currentPage])
 
     const handleChangeCategory = useCallback(title => {
         setCategory(title)

@@ -6,10 +6,10 @@ const QueryContext = createContext()
 export const QueryProvider = ({ children }) => {
     const { search } = useLocation()
     const query = new URLSearchParams(search)
-    const page = query.get('page') || 1
     const [searchParams, setSearchParams] = useSearchParams();
     const [category, setCategory] = useState(query.get('category') || "")
     const [sort, setSort] = useState(query.get('sort') || "")
+    const [currentPage,setCurrentPage] = useState(query.get('page') || 1);
 
     const deleteQueryCat = () => {
         setCategory(query.delete('category') || "")
@@ -24,13 +24,14 @@ export const QueryProvider = ({ children }) => {
     const deleteَAllQuery = () => {
         setSort(query.delete('sort') || "")
         setCategory(query.delete('category') || "")
+        setCurrentPage(1)
         setSearchParams({})
     }
     return (
         <QueryContext.Provider
             value={{
-                page,category,
-    setCategory,
+                currentPage,setCurrentPage,category,
+                setCategory,
                 sort,
                 setSort,
                 query,
