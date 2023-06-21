@@ -60,7 +60,7 @@ const Signup = () => {
             <button type="submit" disabled={!(formik.isValid)} className={`py-2 w-full rounded text-white ${(formik.isValid) ? 'bg-red-700 hover:hover:opacity-80' : 'bg-gray-500'}`}>
                 ثبت نام
             </button>
-            <Link to='/signin' className='text-sm underline cursor-pointer w-fit'>
+            <Link to='/signin' className='text-sm underline cursor-pointer w-fit mb-3'>
                 قبلا ثبت نام کردید ؟ وارد شوید
             </Link>
         </form>

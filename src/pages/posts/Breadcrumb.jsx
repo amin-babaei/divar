@@ -16,13 +16,13 @@ const Breadcrumb = ({postCategory,title}) => {
     return (
         <nav className="rounded-md py-5 px-2">
             <ol className="list-reset flex text-xs">
-                <li className="text-gray-500 hover:text-xred">
+                <li className="text-gray-500 hover:text-xred whitespace-nowrap">
                     <Link to="/">صفحه اصلی</Link>
                 </li>
                 <li>
                     <span className="text-gray-400 mx-2">{">"}</span>
                 </li>
-                <li className="text-gray-500 hover:text-xred cursor-pointer" onClick={()=> sortCategory(postCategory?.englishTitle)}>
+                <li className="text-gray-500 hover:text-xred cursor-pointer whitespace-nowrap" onClick={()=> sortCategory(postCategory?.englishTitle)}>
                     <p>{postCategory.title}</p>
                 </li>
                 <li>
