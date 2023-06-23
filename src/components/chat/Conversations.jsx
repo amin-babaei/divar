@@ -1,7 +1,7 @@
 import { useUser } from "../../hooks/fetchData";
 import Skeleton from "react-loading-skeleton";
 
-const Conversation = ({ conversation, currentUser }) => {
+const Conversation = ({ conversation, currentUser, onlineUsers }) => {
 
   const customerId = conversation.members.find((m) => m !== currentUser._id);
 
@@ -14,6 +14,13 @@ const Conversation = ({ conversation, currentUser }) => {
             <h3>{error?.response?.status === 404 ? 'حساب کاربری حذف شده' : user?.data?.name}</h3>
             }
         </div>
+            {onlineUsers.filter(online => online.userId === customerId).map(online => {
+              return(
+                <span key={online.userId} className="bg-green-600 text-xs text-white mr-2 px-2 py-1 rounded-full">
+                  آنلاین
+                </span>
+            )})
+            }
     </li>
   );
 }

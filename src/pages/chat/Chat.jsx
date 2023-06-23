@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { io } from "socket.io-client";
 import { useAuth } from "../../context/AuthContext";
 import Conversation from "../../components/chat/Conversations";
@@ -16,6 +16,7 @@ const Chat = () => {
   
   const { user } = useAuth()
   const {data:conversations, isLoading} = useConversation(user?._id)
+const [onlineUsers, setOnlineUsers] = useState([]);
 
   useEffect(() => {
     socket.current = io(process.env.REACT_APP_BASE_API_URL,{
@@ -32,6 +33,15 @@ const Chat = () => {
 
   useEffect(() => {
     socket.current.emit("addUser", user._id);
+    socket.current.on('users:update', (users) => {
+      setOnlineUsers(users);
+    });
+    socket.current.on('getUsers' , (users)=> {
+      setOnlineUsers(users)
+    })
+    return () => {
+      socket.current.disconnect();
+    };
   }, [socket, user]);
 
   useEffect(() => {
@@ -57,7 +67,7 @@ const Chat = () => {
             {conversations?.map((c) => (
               <Link to={`/chat/${c._id}`} key={c._id}>
                 <div onClick={() => setCurrentChat(c)}>
-                  <Conversation conversation={c} currentUser={user} />
+                  <Conversation conversation={c} currentUser={user} onlineUsers={onlineUsers}/>
                 </div>
               </Link>
             ))}
