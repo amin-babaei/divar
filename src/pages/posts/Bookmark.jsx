@@ -1,4 +1,4 @@
-import { BsBookmark, BsBookmarkFill } from "react-icons/bs"
+import { BsBookmarkFill } from "react-icons/bs"
 import { toast } from "react-toastify"
 import { useAuth } from '../../context/AuthContext'
 import { useBookmarked } from "../../hooks/fetchData"
@@ -13,8 +13,8 @@ const Bookmark = ({ postId, bookmarked }) => {
     }
 
     return (
-        <button className='rounded-full duration-500 hover:bg-gray-200 p-3' onClick={() => handleBookmark(postId)}>
-            {bookmarked ? <BsBookmarkFill className="text-blue-500" /> : <BsBookmark className="text-gray-500" />}
+        <button className='rounded-full duration-500 hover:bg-gray-200 p-3 focus:bg-none' onClick={() => handleBookmark(postId)}>
+            <BsBookmarkFill className={`transition-shadow ${bookmarked ? 'text-blue-500' : 'stroke-gray-500 fill-white stroke-1'} ${mutation.isLoading ? 'animate-pulse' : 'animate-none'}`} />
         </button>
     )
 }
