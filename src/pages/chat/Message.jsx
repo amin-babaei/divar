@@ -100,21 +100,28 @@ const Message = () => {
 
       useEffect(() => {
         socket.current.on("userTyping", (data) => {
-          if(data === user._id){
+          if(data.senderId === user._id){
             setCurrentUserType(true)
           }
-          setIsTyping(true);
+          if(currentChat?.members?.includes(data.senderId) && currentChat?.members?.includes(data.reseverId[0]) && data.senderId !== data.reseverId[0]){
+            setIsTyping(true)
+          }else{
+            setIsTyping(false)
+          }
         });
         socket.current.on("userStopTyping", () => {
           setIsTyping(false);
           setCurrentUserType(false)
         });
-      }, [socket, user._id]);
+      }, [currentChat?.members, socket, user._id]);
 
       const handleChange = e => {
         if (e.target.value) {
-          socket.current.emit("typing",user._id);
-          setIsTyping(true);
+          socket.current.emit("typing", {
+            senderId: user._id,
+            reseverId: currentChat.members.filter(m => m !== user._id),
+            msg: e.target.value
+        });
         } else {
           socket.current.emit("stopTyping");
           setIsTyping(false);
