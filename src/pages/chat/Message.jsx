@@ -16,7 +16,6 @@ const Message = () => {
     const [loading, setLoading] = useState(false);
     const [loadingMsg, setLoadingMsg] = useState(false);
     const [newMessage, setNewMessage] = useState("");
-    const [currentUserType, setCurrentUserType] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
     const scrollRef = useRef();
     const navigate = useNavigate()
@@ -59,7 +58,6 @@ const Message = () => {
 
       const handleSubmit = async (e) => {
         e.preventDefault();
-        setCurrentUserType(false)
         setLoadingMsg(true)
 
         const message = {
@@ -99,35 +97,32 @@ const Message = () => {
       }, [messages,loadingMsg]);
 
       useEffect(() => {
-        socket.current.on("userTyping", (data) => {
-          if(data.senderId === user._id){
-            setCurrentUserType(true)
-          }
-          if(currentChat?.members?.includes(data.senderId) && currentChat?.members?.includes(data.reseverId[0]) && data.senderId !== data.reseverId[0]){
-            setIsTyping(true)
-          }else{
+        setNewMessage("");
+      }, [currentChat._id]);
+
+      useEffect(() => {
+        socket.current.on("typing", ({ senderId,receiverId }) => {
+          const values = [senderId,receiverId[0]]
+          if (senderId !== user._id && values.every(val => currentChat?.members?.includes(val))) {
+            setIsTyping(true);
+          }else {
             setIsTyping(false)
           }
         });
-        socket.current.on("userStopTyping", () => {
+    
+        socket.current.on("stopTyping", () => {
           setIsTyping(false);
-          setCurrentUserType(false)
         });
-      }, [currentChat?.members, socket, user._id]);
+      }, [currentChat?.members, user._id]);
 
-      const handleChange = e => {
-        if (e.target.value) {
-          socket.current.emit("typing", {
-            senderId: user._id,
-            reseverId: currentChat.members.filter(m => m !== user._id),
-            msg: e.target.value
-        });
+      const handleChange = (e) => {
+        setNewMessage(e.target.value);
+        if (e.target.value !== "") {
+          socket.current.emit("typing", { senderId: user._id,receiverId:currentChat.members.filter(m => m !== user._id) });
         } else {
           socket.current.emit("stopTyping");
-          setIsTyping(false);
         }
-        setNewMessage(e.target.value)
-      }
+      };
 
       const handleDeleteChat = async (e) => {
         e.preventDefault()
@@ -144,7 +139,7 @@ const Message = () => {
 
     return (
         <>
-            <UserMessage loading={isLoading} error={error} data={data} isTyping={isTyping} userType={currentUserType}/>
+            <UserMessage loading={isLoading} error={error} data={data} isTyping={isTyping}/>
             <div className="border border-gray-100 h-[39rem] overflow-y-auto flex flex-col justify-between">
               {loading ? <Skeleton count={4} wrapper={SkeletBox} borderRadius='1rem' className='py-7 rounded-2xl rounded-br-none' /> : null}
                <MessageBox loading={loading} messages={messages} scrollRef={scrollRef} user={user._id} loadingMsg={loadingMsg} newMessage={newMessage}/>
