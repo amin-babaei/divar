@@ -14,7 +14,7 @@ const SidebarSort = () => {
   }, [setSort, setSearchParams, sort])
   
   return (
-    <>
+    <div className="hidden sm:block">
         <button className="flex items-center text-sm w-full justify-between py-5" onClick={() => setShowDropdown(!showDropdown)}>
             مرتب سازی
             <IoIosArrowDown className={`ml-4 duration-300 ${showDropdown && 'rotate-180'}`} />
@@ -31,7 +31,7 @@ const SidebarSort = () => {
               </label>
             </div>
           )}
-    </>
+    </div>
   )
 }
 

@@ -5,15 +5,13 @@ import SidebarSort from '../components/sidebar/Sort'
 
 const SidebarContainer = () => {
   return (
-    <section className="container mx-auto px-3 relative">
-      <div className="hidden sm:block fixed w-56 top-28 overflow-scroll side-h hide-scroll">
+      <div className="flex mt-5 gap-x-4 overflow-auto sm:block sm:mt-0 sm:fixed sm:w-56 sm:top-28 sm:overflow-scroll sm:side-h hide-scroll z-10">
         <SidebarCategory/>
         <hr />
         <SidebarSort/>
         <hr />
         <SidebarFooter/>
       </div>
-    </section>
   )
 }
 

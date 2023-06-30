@@ -10,7 +10,7 @@ import Skeleton from 'react-loading-skeleton';
 
 const AdsContainer = () => {
     const [, setSearchParams] = useSearchParams();
-    const { currentPage, category, setCategory, sort, setSort, deleteَAllQuery, deleteQueryCat, deleteQuerySort } = useContext(QueryContext)
+    const { currentPage, category, sort, setSort, deleteَAllQuery, deleteQueryCat, deleteQuerySort } = useContext(QueryContext)
     const { onPageChange } = usePaginate()
     const { isLoading, data, isError, refetch ,isSuccess } = usePosts(currentPage, category, sort)
     const { data: categorys, isLoading: categoryLoading } = useAllCategorys()
@@ -26,11 +26,6 @@ const AdsContainer = () => {
             setSearchParams({ ...{ page: currentPage }, sort })
         }
     }, [category, setSearchParams, sort, currentPage])
-
-    const handleChangeCategory = useCallback(title => {
-        setCategory(title)
-        setSearchParams({ category })
-    }, [setCategory, setSearchParams, category])
 
     const handleChangeSort = useCallback(e => {
         setSort(e.target.value)
@@ -54,16 +49,8 @@ const AdsContainer = () => {
     return (
         <>
             <section className="relative min-h-[55vh] mt-5 md:mt-24 sm:mr-72">
-                {categoryLoading ? <Skeleton containerClassName='flex gap-x-4 sm:hidden' count={3}/> : null}
-                <div className="flex mb-5 gap-x-4 overflow-auto sm:hidden">
-                    {categorys?.map(item => (
-                        <div className="flex gap-x-2 items-center border border-gray-200 rounded-3xl py-2 px-3 text-[15px] whitespace-nowrap sm:border-0 sm:rounded-none sm:border-b sm:py-5 cursor-pointer hover:bg-gray-50" key={item._id} onClick={() => handleChangeCategory(item.englishTitle)}>
-                            <p dangerouslySetInnerHTML={{ __html: item.icon }} />
-                            <p className="text-[15px] font-light">{item.title}</p>
-                        </div>
-                    ))}
-                </div>
-
+                {categoryLoading && <div className='block sm:hidden -mt-2 mb-4'><Skeleton containerClassName='flex gap-x-4' count={3}/></div>}
+               
                 {isSuccess && 
                 <select className="border border-gray-200 text-gray-900 text-sm rounded-lg block w-1/2 mx-auto mb-5 p-2.5 focus:ring-0 focus:outline-none focus:border-gray-300 bg-left sm:hidden" value={sort} onChange={handleChangeSort}>
                     <option value=''>مرتب سازی</option>
