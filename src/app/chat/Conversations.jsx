@@ -1,0 +1,30 @@
+"use client"
+import { useUser } from "@/hooks/fetchData";
+import Image from "next/image";
+import Skeleton from "react-loading-skeleton";
+import avatar from '@/assets/avatar.png'
+
+const Conversation = ({ conversation, currentUser, onlineUsers }) => {
+
+  const customerId = conversation.members.find((m) => m !== currentUser._id);
+
+  const {data:user, isLoading, error} = useUser(customerId)
+  return (
+    <li className="flex flex-wrap justify-between items-center px-3 py-5 border-b border-b-gray-100 cursor-pointer hover:bg-gray-100 duration-300">
+        <div className="flex items-center gap-x-1">
+            <Image src={avatar} alt="avatar" className="w-10 h-10 rounded-full" width={100} height={100}/>
+            {isLoading ? <Skeleton count={1} width={100} height={30} className='mr-2'/> : 
+            <h3>{error?.response?.status === 404 ? 'حساب کاربری حذف شده' : user?.data?.name}</h3>
+            }
+        </div>
+            {onlineUsers.filter(online => online.userId === customerId).map(online => {
+              return(
+                <span key={online.userId} className="bg-green-600 text-xs text-white mr-2 px-2 py-1 rounded-full">
+                  آنلاین
+                </span>
+            )})
+            }
+    </li>
+  );
+}
+export default Conversation

@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .wordspace {
+    word-spacing: -3px;
+  }
+  .side-h{
+    height: calc(100vh - 120px)
+  }
+}
+@layer components {
+  .pagination {
+    @apply absolute bottom-4 font-light
+  }
+  [aria-current]:not([aria-current="false"]) > button{
+    @apply bg-red-600 text-white
+  }
+  .pagination > ul > li button{
+    @apply p-3
+  }
+  .pagination > ul > li:first-child button{
+    @apply rounded-l-md
+  }
+  .pagination > ul > li:last-child button{
+    @apply rounded-r-md
+  }
+}
+body{
+  -ms-overflow-style:none;
+  scrollbar-width: none;
+  font-family: var(--font-iransans) !important;
+}
+.hide-scroll::-webkit-scrollbar{
+  display: none;
+}
+aside > div{
+  padding: 0 !important;
+}
+.title-modal > button{
+  margin: 0;
+}
+
+/* customize toast */
+.Toastify__toast-body{
+  font-family: var(--font-iransans) !important;
+  font-size: 14px;
+  font-weight: 500;
+}
