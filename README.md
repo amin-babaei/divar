@@ -12,7 +12,7 @@
 
 <br/>
 
-This project utilizes React.js and Tailwind CSS on the front-end, and Node.js and Express on the back-end. React Query is used for data fetching, Socket.io is employed for user chat functionality. Pagination and sorting operations are performed by querying the back-end from the front-end. Additionally, Google reCAPTCHA is integrated within the registration page to prevent spam, and Yup and Formik are utilized for form validation throughout the project.
+<p align="justify">This project utilizes React.js and Tailwind CSS on the front-end, and Node.js and Express on the back-end. React Query is used for data fetching, Socket.io is employed for user chat functionality. Pagination and sorting operations are performed by querying the back-end from the front-end. Additionally, Google reCAPTCHA is integrated within the registration page to prevent spam, and Yup and Formik are utilized for form validation throughout the project.</p>
 
 This project was developed with React.js and Next.js. To view the Next.js version, please refer to the `next-js` branch.
 
