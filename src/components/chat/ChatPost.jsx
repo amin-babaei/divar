@@ -1,5 +1,4 @@
-import { Button } from 'flowbite-react'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useAuth } from '../../context/AuthContext'
@@ -43,7 +42,9 @@ const ChatPost = ({userId}) => {
     }
 
   return (
-    <Button color='gray' className={`w-24 ${userId === user?._id ? 'hidden' : 'block'}`} onClick={()=> onClickChat()}>چت</Button>
+    <button className={`w-24 tracking-wide font-medium transition-all duration-300 border border-gray-300 text-gray-500 rounded text-center hover:bg-gray-50 hover:text-black ${userId === user?._id ? 'hidden' : 'block'}`} onClick={()=> onClickChat()}>
+      چت
+    </button>
   )
 }
 

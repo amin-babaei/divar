@@ -16,12 +16,12 @@ class ErrorBoundary extends Component {
     render() {
         if (this.state.hasError) {
             return (
-                <section className='flex flex-col items-center font-Ilight'>
+                <section className='flex flex-col items-center font-normal'>
                     <Helmet>
                         <title>دیوار</title>
                     </Helmet>
                     <img src={notfound} alt="not found" className='w-48 h-full' />
-                    <h1 className='text-3xl py-8 text-gray-500'>به نظر مشکلی پیش آمده</h1>
+                    <h1 className='text-3xl py-8 text-gray-500 font-medium'>به نظر مشکلی پیش آمده</h1>
                     <p className='text-lg text-gray-500'>برای رفع مشکل سری به
                         {" "}
                         <Link to={'/'} className='text-red-700' onClick={()=>this.setState({hasError:false})}>صفحهٔ اول دیوار</Link>

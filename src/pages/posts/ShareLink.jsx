@@ -30,7 +30,7 @@ const ShareLink = ({ slug, hashId }) => {
             >
                 <Modal.Header />
                 <Modal.Body>
-                    <p className="font-Imedium text-sm text-center">اشتراک گذاری در :</p>
+                    <p className="font-normal text-sm text-center">اشتراک گذاری در :</p>
                     <div className="space-y-6 flex gap-x-3 justify-center items-baseline">
                         <FacebookShareButton
                             url={url}

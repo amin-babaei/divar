@@ -5,7 +5,7 @@ import ProfileSidebar from "../pages/profile/ProfileSidebar"
 const ProfileContainer = () => {
 
   return (
-    <section className={`container relative min-h-[66vh] mx-auto px-3 font-Ilight`}>
+    <section className={`container relative min-h-[66vh] mx-auto px-3 font-light`}>
       <Helmet>
         <title>دیوار من</title>
       </Helmet>

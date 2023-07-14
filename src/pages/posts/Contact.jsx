@@ -17,7 +17,7 @@ const Contact = ({info}) => {
                 position="center"
             >
                 <Modal.Header />
-                <Modal.Body className="font-Ilight leading-8">
+                <Modal.Body className="font-light leading-8">
                     <p>ایمیل : {info.email}</p>
                     <p>شماره تماس : {info.phoneNumber}</p>
                 </Modal.Body>

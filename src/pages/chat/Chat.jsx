@@ -51,7 +51,7 @@ const [onlineUsers, setOnlineUsers] = useState([]);
   }, [conversations, setConversations])
 
   return (
-    <section className="container mx-auto px-3 mt-10 font-Ilight">
+    <section className="container mx-auto px-3 mt-10 font-light">
       <Helmet>
         <title>چت های شما</title>
       </Helmet>
@@ -62,7 +62,7 @@ const [onlineUsers, setOnlineUsers] = useState([]);
           </button> 
           <ul className={`text-sm col-span-4 md:col-span-1 ${location.pathname !== '/chat' && 'hidden md:block'}`}>
             <li className="flex justify-between p-3 border border-l-0 border-gray-100">
-              <h3>چت دیوار</h3>
+              <h3 className="font-normal">چت دیوار</h3>
             </li>
             {conversations?.map((c) => (
               <Link to={`/chat/${c._id}`} key={c._id}>

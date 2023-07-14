@@ -25,7 +25,7 @@ const DropDown = () => {
     return (
         <div ref={menuRef}>
             {loading ? <Spinner color="gray" className='ml-5'/> : 
-            <button className='wordspace relative rounded px-4 py-[10px] text-gray-400 text-sm flex items-center hover:bg-gray-100 hover:text-black'
+            <button className='wordspace duration-300 relative rounded px-4 py-[10px] text-gray-400 text-sm flex items-center hover:bg-gray-100 hover:text-black'
                 onClick={handleShow}>
                 <BsFillPersonFill className='ml-1 text-lg' />
                 دیوار من
@@ -33,29 +33,29 @@ const DropDown = () => {
             {show && user && (
                 <>
                     <div className='h-5 w-5 bg-white mr-1 shadow rotate-45 absolute top-16'></div>
-                    <ul className='absolute top-[74px] shadow-md bg-white w-48'>
+                    <ul className='absolute top-[74px] shadow-md bg-white w-48 font-normal'>
                         <li className='p-4 text-xs border-b'>
                             {user.phoneNumber}
                         </li>
                             <Link to='/profile/bookmarks'>
-                                <li className='flex items-center gap-x-3 p-4 text-xs border-b cursor-pointer hover:bg-gray-200'>
+                                <li className='flex items-center gap-x-3 p-4 text-xs border-b cursor-pointer hover:bg-gray-50'>
                                     <BsBookmark size={16} />
                                         نشان ها
                                 </li>
                             </Link>
                             <Link to='/profile/my-posts'>
-                                <li className='flex items-center gap-x-3 p-4 text-xs border-b cursor-pointer hover:bg-gray-200'>
+                                <li className='flex items-center gap-x-3 p-4 text-xs border-b cursor-pointer hover:bg-gray-50'>
                                     <RiFilePaper2Line size={16} />
                                         آگهی های من
                                 </li>
                             </Link>
                             <Link to='/chat'>
-                                <li className='flex items-center gap-x-3 p-4 text-xs border-b cursor-pointer hover:bg-gray-200 sm:hidden'>
+                                <li className='flex items-center gap-x-3 p-4 text-xs border-b cursor-pointer hover:bg-gray-50 sm:hidden'>
                                     <BsFillChatLeftDotsFill size={16} />
                                         چت
                                 </li>
                             </Link>
-                            <li className='flex items-center gap-x-3 p-4 text-xs cursor-pointer hover:bg-gray-200'
+                            <li className='flex items-center gap-x-3 p-4 text-xs cursor-pointer hover:bg-gray-50'
                                 onClick={() => dispatch({ type: 'SIGNOUT' })}>
                                 <GrLogin size={16} />
                                     خروج

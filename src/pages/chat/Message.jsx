@@ -100,7 +100,7 @@ const Message = () => {
         setNewMessage("");
         setIsTyping(false)
         socket.current.emit("stopTyping");
-      }, [currentChat._id, socket]);
+      }, [currentChat?._id, socket]);
 
       useEffect(() => {
         socket.current.on("typing", ({ senderId,receiverId }) => {

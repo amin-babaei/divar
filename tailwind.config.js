@@ -7,8 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-          Ilight: ["iransansLight"],
-          Imedium: ["iransansMedium"]
+          iranSans: ["iransans"],
       }
     },
   },

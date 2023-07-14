@@ -23,7 +23,7 @@ const ProfileSidebar = () => {
         <NavLink to={"/profile/bookmarks"} className={({ isActive }) =>
           isActive ? 'text-red-700' : 'text-black'
         }>
-          <div className="flex gap-x-2 items-center border border-gray-200 rounded-3xl py-2 px-3 text-[15px] whitespace-nowrap sm:border-0 sm:rounded-none sm:border-b sm:py-5 cursor-pointer hover:bg-gray-50">
+          <div className="flex gap-x-2 items-center border border-gray-200 rounded-3xl py-2 px-3 text-[15px] whitespace-nowrap sm:border-0 sm:rounded-none sm:border-b sm:py-5 cursor-pointer hover:bg-gray-50 font-normal">
             <BsBookmark />
             <h3>نشان ها</h3>
           </div>
@@ -31,12 +31,12 @@ const ProfileSidebar = () => {
         <NavLink to={"/profile/my-posts"} className={({ isActive }) =>
           isActive ? 'text-red-700' : 'text-black'
         }>
-          <div className="flex gap-x-2 items-center border border-gray-200 rounded-3xl py-2 px-3 text-[15px] whitespace-nowrap sm:border-0 sm:rounded-none sm:border-b sm:py-5 cursor-pointer hover:bg-gray-50 mx-4 sm:mx-0">
+          <div className="flex gap-x-2 items-center border border-gray-200 rounded-3xl py-2 px-3 text-[15px] whitespace-nowrap sm:border-0 sm:rounded-none sm:border-b sm:py-5 cursor-pointer hover:bg-gray-50 mx-4 sm:mx-0 font-normal">
             <RiFilePaper2Line />
             <h3>آگهی های من</h3>
           </div>
         </NavLink>
-        <div className="flex gap-x-2 items-center border border-gray-200 rounded-3xl py-2 px-3 text-[15px] whitespace-nowrap sm:border-0 sm:rounded-none sm:border-b sm:py-5 cursor-pointer hover:bg-gray-50 ml-4 sm:ml-0" onClick={() => dispatch({ type: 'SIGNOUT' })}>
+        <div className="flex gap-x-2 items-center border border-gray-200 rounded-3xl py-2 px-3 text-[15px] whitespace-nowrap sm:border-0 sm:rounded-none sm:border-b sm:py-5 cursor-pointer hover:bg-gray-50 ml-4 sm:ml-0 font-normal" onClick={() => dispatch({ type: 'SIGNOUT' })}>
           <GrLogin />
           <h3>خروج</h3>
         </div>

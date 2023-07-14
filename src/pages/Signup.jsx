@@ -33,11 +33,11 @@ const Signup = () => {
     if (loading) return <Loading />
 
     return (
-        <form className="flex flex-col gap-4 px-3 md:w-1/3 md:mx-auto mt-8 font-Imedium" onSubmit={formik.handleSubmit}>
+        <form className="flex flex-col gap-4 px-3 md:w-1/3 md:mx-auto mt-8 font-light" onSubmit={formik.handleSubmit}>
             <Helmet>
                 <title>ثبت نام در دیوار</title>
             </Helmet>
-            <h3 className='text-center text-gray-500 mb-5'>
+            <h3 className='text-center text-gray-500 mb-5 font-medium'>
                 ثبت نام
             </h3>
             <Input lable='نام و نام خانوادگی' name='name' placeholder='امین بابایی' formik={formik} />
@@ -57,10 +57,10 @@ const Signup = () => {
                     {formik.errors.token}
                 </lable>
             )}
-            <button type="submit" disabled={!(formik.isValid)} className={`py-2 w-full rounded text-white ${(formik.isValid) ? 'bg-red-700 hover:hover:opacity-80' : 'bg-gray-500'}`}>
+            <button type="submit" disabled={!(formik.isValid)} className={`font-medium py-2 w-full rounded text-white ${(formik.isValid) ? 'bg-red-700 hover:hover:opacity-80' : 'bg-gray-500'}`}>
                 ثبت نام
             </button>
-            <Link to='/signin' className='text-sm underline cursor-pointer w-fit mb-3'>
+            <Link to='/signin' className='text-sm cursor-pointer w-fit mb-3 font-medium'>
                 قبلا ثبت نام کردید ؟ وارد شوید
             </Link>
         </form>

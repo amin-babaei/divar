@@ -28,7 +28,7 @@ const Breadcrumb = ({postCategory,title}) => {
                 <li>
                     <span className="text-gray-400 mx-2">{">"}</span>
                 </li>
-                <li className="text-gray-500">{title}</li>
+                <li className="text-gray-500 font-medium">{title}</li>
             </ol>
         </nav>
     );

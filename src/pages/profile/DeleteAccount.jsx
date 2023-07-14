@@ -15,7 +15,7 @@ const DeleteAccount = () => {
 
     return (
         <>
-            <div className="flex gap-x-2 items-center border border-gray-200 rounded-3xl py-2 px-3 text-[15px] whitespace-nowrap sm:border-0 sm:rounded-none sm:border-b sm:py-5 cursor-pointer hover:bg-gray-50"  onClick={() => setShowModal(true)}>
+            <div className="flex gap-x-2 items-center border border-gray-200 rounded-3xl py-2 px-3 text-[15px] whitespace-nowrap sm:border-0 sm:rounded-none sm:border-b sm:py-5 cursor-pointer hover:bg-gray-50 font-normal"  onClick={() => setShowModal(true)}>
                 <BsPersonXFill />
                 <h3>حذف حساب کاربری</h3>
             </div>

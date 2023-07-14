@@ -28,19 +28,19 @@ const Signin = () => {
     }, [user])
     if (loading) return <Loading />
     return (
-        <form className="flex flex-col gap-4 px-3 md:w-1/3 md:mx-auto mt-10 font-Imedium" onSubmit={formik.handleSubmit}>
+        <form className="flex flex-col gap-4 px-3 md:w-1/3 md:mx-auto mt-10 font-light" onSubmit={formik.handleSubmit}>
             <Helmet>
                 <title>ورود به حساب دیوار</title>
             </Helmet>
-            <h3 className='text-center text-gray-500 mb-5'>
+            <h3 className='text-center text-gray-500 mb-5 font-medium'>
                 ورود به حساب کاربری
             </h3>
             <Input lable='ایمیل' name='email' type='email' placeholder='aminbabaei_dev@yahoo.com' formik={formik} />
             <Input lable='کلمه عبور' name='password' type='password' placeholder='****' formik={formik} />
-            <button type="submit" disabled={!(formik.isValid)} className={`py-3 text-sm w-full rounded text-white ${(formik.isValid) ? 'bg-red-700 hover:hover:opacity-80' : 'bg-gray-500'}`}>
+            <button type="submit" disabled={!(formik.isValid)} className={`font-medium py-3 text-sm w-full rounded text-white ${(formik.isValid) ? 'bg-red-700 hover:hover:opacity-80' : 'bg-gray-500'}`}>
                 ورود به حساب کاربری
             </button>
-            <Link to='/signup' className='text-sm underline cursor-pointer w-fit'>
+            <Link to='/signup' className='text-sm cursor-pointer w-fit font-medium'>
                 ثبت نام نکردید؟ ثبت نام
             </Link>
         </form>

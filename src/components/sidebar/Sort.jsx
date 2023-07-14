@@ -20,7 +20,7 @@ const SidebarSort = () => {
             <IoIosArrowDown className={`ml-4 duration-300 ${showDropdown && 'rotate-180'}`} />
           </button>
           {showDropdown && (
-            <div className="flex flex-col mb-1">
+            <div className="flex flex-col mb-1 font-light">
              <label className="inline-flex items-center">
                 <input type="radio" className={`checked:bg-none focus:ring-0 focus:ring-offset-0 ${sort === 'desc' ? 'text-red-700 bg-red-700' : 'text-white checked:border-gray-500'}`} name="accountType" value="desc" onChange={handleChange}/>
                 <span className="text-sm mr-2">بالاترین قیمت</span>

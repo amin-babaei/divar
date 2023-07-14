@@ -19,7 +19,7 @@ const PostDetail = () => {
   }
 
   return (
-    <section className='font-Ilight mt-5 container mx-auto px-3 lg:px-[170px]'>
+    <section className='font-light mt-5 container mx-auto px-3 lg:px-[170px]'>
       {isError && <Button color="failure" onClick={refetch} size='md' className='m-auto'>
         تلاش مجدد
       </Button>}
@@ -31,7 +31,7 @@ const PostDetail = () => {
           <Breadcrumb postCategory={data.category} title={data.title}/>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className='mt-5 order-1 md:order-none'>
-              <h2 className='text-xl'>{data.title}</h2>
+              <h2 className='text-xl font-medium'>{data.title}</h2>
               <p className='text-md mt-5 text-gray-500'>{toPersianDigits(moment(data.createdAt).locale('fa').fromNow())}</p>
               <div className='flex items-center justify-between mt-4 border-b py-3'>
                 <h3>قیمت : </h3>
@@ -63,7 +63,7 @@ const PostDetail = () => {
                   <ShareLink slug={data.slug} hashId={data.hashId} />
                 </div>
               </div>
-              <h4 className='mt-8 mb-3'>توضیحات</h4>
+              <h4 className='mt-8 mb-3 font-medium'>توضیحات</h4>
               <div className='whitespace-pre-wrap text-[15px] leading-8' dangerouslySetInnerHTML={{ __html: data.description }} />
             </div>
             <div>

@@ -10,7 +10,7 @@ const AppContainers = () => {
         <title>دیوار</title>
       </Helmet>
       <Navbar />
-      <section className="container mx-auto px-3 relative font-Ilight">
+      <section className="container mx-auto px-3 relative">
         <SidebarContainer />
         <PostsContainer />
       </section>

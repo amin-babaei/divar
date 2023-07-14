@@ -11,7 +11,7 @@ const Conversation = ({ conversation, currentUser, onlineUsers }) => {
         <div className="flex items-center gap-x-1">
             <img src="/avatar.png" alt="" className="w-10 h-10 rounded-full"/>
             {isLoading ? <Skeleton count={1} width={100} height={30} className='mr-2'/> : 
-            <h3>{error?.response?.status === 404 ? 'حساب کاربری حذف شده' : user?.data?.name}</h3>
+            <h3 className="font-normal">{error?.response?.status === 404 ? 'حساب کاربری حذف شده' : user?.data?.name}</h3>
             }
         </div>
             {onlineUsers.filter(online => online.userId === customerId).map(online => {

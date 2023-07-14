@@ -28,27 +28,46 @@
   }
 }
 @font-face {
-    font-family: "iransansLight";
-    src: 
-      url("/public/fonts/IRANSansX-Light.woff") format("woff2"),
-      url("/public/fonts/IRANSansX-Light.woff2") format("woff");
-    font-weight: normal;
-    font-display: swap;
-  }
-@font-face {
-    font-family: "iransansMedium";
-    src: 
-      url("/public/fonts/IRANSansX-Medium.woff") format("woff2"),
-      url("/public/fonts/IRANSansX-Medium.woff2") format("woff");
-    font-weight: normal;
-    font-display: swap;
-  }
-h1,h2,h3,h4{
-  font-family: "iransansMedium";
+  font-family: "iransans";
+  src: 
+    url("/public/fonts/IRANSansX-Light.woff") format("woff"),
+    url("/public/fonts/IRANSansX-Light.woff2") format("woff2");
+  font-weight: normal;
+  font-display: swap;
+  font-weight: 300;
 }
+@font-face {
+  font-family: "iransans";
+  src: 
+    url("/public/fonts/IRANSansX-Regular.woff") format("woff"),
+    url("/public/fonts/IRANSansX-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-display: swap;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "iransans";
+  src: 
+    url("/public/fonts/IRANSansX-DemiBold.woff") format("woff"),
+    url("/public/fonts/IRANSansX-DemiBold.woff2") format("woff2");
+  font-weight: normal;
+  font-display: swap;
+  font-weight: 500;
+}
+@font-face {
+  font-family: "iransans";
+  src: 
+    url("/public/fonts/IRANSansX-Bold.woff") format("woff"),
+    url("/public/fonts/IRANSansX-Bold.woff2") format("woff2");
+  font-weight: normal;
+  font-display: swap;
+  font-weight: 700;
+}
+
 body{
   -ms-overflow-style:none;
   scrollbar-width: none;
+  font-family: 'iransans' !important;
 }
 .hide-scroll::-webkit-scrollbar{
   display: none;
@@ -62,6 +81,7 @@ aside > div{
 
 /* customize toast */
 .Toastify__toast-body{
-  font-family: 'iransansMedium';
+  font-family: 'iransans' !important;
   font-size: 14px;
+  font-weight: 500;
 }

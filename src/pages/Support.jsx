@@ -9,11 +9,11 @@ import Helmet from 'react-helmet'
 
 const Support = () => {
     return (
-        <section className="font-Ilight">
+        <section className="font-light">
             <Helmet>
                 <title>پشتیبانی دیوار</title>
             </Helmet>
-            <h3 className='text-center mt-10 text-lg'>چطور می‌توانیم کمکتان کنیم؟</h3>
+            <h3 className='text-center mt-10 text-lg font-thin'>چطور می‌توانیم کمکتان کنیم؟</h3>
             <div className="relative mt-5">
                 <input type="text" className="block w-3/4 md:w-1/3 m-auto text-md text-gray-900 border border-gray-300 rounded focus:outline-none focus:ring-white focus:border-red-700"
                  placeholder="جستجو در مقالات راهنما" />  
@@ -25,32 +25,32 @@ const Support = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10 mb-5">
                     <div className='flex flex-col items-center'>
                         <img src={signup} alt="" className='w-16 h-16'/>
-                        <h3 className='mb-3'>ورود و حساب کاربری</h3>
-                        <p className='text-gray-400 text-sm my-3'>چگونه در دیوار حساب کاربری بسازم ؟</p>
-                        <p className='text-gray-400 text-sm my-3'>چگونه اپلیکیشن دیوار را دانلود کنم ؟</p>
-                        <p className='text-gray-400 text-sm my-3'>آیا برای ثبت آگهی باید حساب کاربری بسازم ؟</p>
-                        <p className='text-gray-400 text-sm my-3'>چگونه وارد حساب کاربری خود بشوم ؟</p>  
-                        <p className='text-gray-400 text-sm my-3'>چگونه از حساب کاربری خود خارج بشوم ؟</p>
+                        <h3 className='mb-3 font-bold'>ورود و حساب کاربری</h3>
+                        <p className='text-gray-400 text-sm my-3 cursor-pointer'>چگونه در دیوار حساب کاربری بسازم ؟</p>
+                        <p className='text-gray-400 text-sm my-3 cursor-pointer'>چگونه اپلیکیشن دیوار را دانلود کنم ؟</p>
+                        <p className='text-gray-400 text-sm my-3 cursor-pointer'>آیا برای ثبت آگهی باید حساب کاربری بسازم ؟</p>
+                        <p className='text-gray-400 text-sm my-3 cursor-pointer'>چگونه وارد حساب کاربری خود بشوم ؟</p>  
+                        <p className='text-gray-400 text-sm my-3 cursor-pointer'>چگونه از حساب کاربری خود خارج بشوم ؟</p>
                         <button className='text-red-700 text-sm'>موارد بیشتر</button> 
                     </div>
                     <div className='flex flex-col items-center'>
                         <img src={management} alt="" className='w-16 h-16'/>
-                        <h3 className='mb-3'>ثبت و مدیریت آگهی</h3>
-                        <p className='text-gray-400 text-sm my-3'>شرایط ثبت آگهی در دیوار</p>
-                        <p className='text-gray-400 text-sm my-3'>چگونه در دیوار آگهی ثبت کنم ؟</p>
-                        <p className='text-gray-400 text-sm my-3'>دسته بندی های اصلی دیوار کدامند ؟</p>
-                        <p className='text-gray-400 text-sm my-3'>آیا برای ثبت آگهی باید حساب کاربری بسازم ؟</p>
-                        <p className='text-gray-400 text-sm my-3'>چگونه آگهی های خود را مدیریت کنم ؟</p>
+                        <h3 className='mb-3 font-bold'>ثبت و مدیریت آگهی</h3>
+                        <p className='text-gray-400 text-sm my-3 cursor-pointer'>شرایط ثبت آگهی در دیوار</p>
+                        <p className='text-gray-400 text-sm my-3 cursor-pointer'>چگونه در دیوار آگهی ثبت کنم ؟</p>
+                        <p className='text-gray-400 text-sm my-3 cursor-pointer'>دسته بندی های اصلی دیوار کدامند ؟</p>
+                        <p className='text-gray-400 text-sm my-3 cursor-pointer'>آیا برای ثبت آگهی باید حساب کاربری بسازم ؟</p>
+                        <p className='text-gray-400 text-sm my-3 cursor-pointer'>چگونه آگهی های خود را مدیریت کنم ؟</p>
                         <button className='text-red-700 text-sm'>موارد بیشتر</button> 
                     </div>
                     <div className='flex flex-col items-center'>
                         <img src={check} alt="" className='w-16 h-16'/>
-                        <h3 className='mb-3'>بررسی و رد آگهی</h3>
-                        <p className='text-gray-400 text-sm my-3'>چطور از علت حذف یا رد آگهی خود باخبر شوم ؟</p>
-                        <p className='text-gray-400 text-sm my-3'>چرا آگهی من به خاطر دسته‌بندی غیرمرتبط رد شده است ؟</p>
-                        <p className='text-gray-400 text-sm my-3'>چرا آگهی من منتشر نشده است ؟</p>
-                        <p className='text-gray-400 text-sm my-3'>چرا آگهی من از روی دیوار حذف شده است ؟</p>  
-                        <p className='text-gray-400 text-sm my-3'>پرتکرارترین دلایل رد عکس آگهی کدامند ؟</p>
+                        <h3 className='mb-3 font-bold'>بررسی و رد آگهی</h3>
+                        <p className='text-gray-400 text-sm my-3 cursor-pointer'>چطور از علت حذف یا رد آگهی خود باخبر شوم ؟</p>
+                        <p className='text-gray-400 text-sm my-3 cursor-pointer'>چرا آگهی من به خاطر دسته‌بندی غیرمرتبط رد شده است ؟</p>
+                        <p className='text-gray-400 text-sm my-3 cursor-pointer'>چرا آگهی من منتشر نشده است ؟</p>
+                        <p className='text-gray-400 text-sm my-3 cursor-pointer'>چرا آگهی من از روی دیوار حذف شده است ؟</p>  
+                        <p className='text-gray-400 text-sm my-3 cursor-pointer'>پرتکرارترین دلایل رد عکس آگهی کدامند ؟</p>
                         <button className='text-red-700 text-sm'>موارد بیشتر</button> 
                     </div>
                 </div>
