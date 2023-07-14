@@ -18,7 +18,7 @@ const CreatePost = () => {
   const { slug, hashId } = useParams()
   const {pathname} = useLocation()
   const navigate = useNavigate()
-  const { data } = usePost(slug, hashId)
+  const { isFetching, data, error } = usePost(slug, hashId)
 
   useEffect(() => {
     if (data && pathname.startsWith('/posts/edit')) {
@@ -29,6 +29,12 @@ const CreatePost = () => {
       setCategoryName('')
     }
   }, [data, pathname])
+
+  useEffect(() => {
+    if (pathname.startsWith('/posts/edit') && error?.response?.status === 404) {
+      navigate("/not-found", { replace: true });
+    }
+  }, [pathname, error]);
 
   const formik = useFormik({
     initialValues: state,
@@ -72,12 +78,10 @@ const CreatePost = () => {
   if (mutation.isError) {
     toast.error('دوباره تلاش کنید')
   }
-  if (mutation.isLoading) {
-    return <Loading />
-  }
+  if (mutation.isLoading || isFetching) return <Loading />
 
   return (
-    <section className={`container mx-auto p-3 font-Ilight`}>
+    <section className={`container mx-auto p-3 font-light`}>
       <Helmet>
         <title>ثبت آگهی</title>
       </Helmet>
@@ -93,10 +97,10 @@ const CreatePost = () => {
         </div>
         {formNo === 1 && <div>
           <div className='flex flex-col mb-2'>
-            <h3 className='my-3'>قوانین و مقررات</h3>
+            <h3 className='my-3 font-medium'>قوانین و مقررات</h3>
             <p className='text-justify leading-8'>ثبت آگهی در دیوار نیازمند در نظر گرفتن شرایطی است که باید از سوی کاربران رعایت شود. به مجموعهٔ این موارد، شرایط ثبت آگهی در دیوار گفته می‌شود.
               به منظور بهبود تجربهٔ کاربری، شرایط زیر برای ثبت آگهی در «دیوار» وضع شده‌ است. رعایت این موارد، علاوه بر افزایش رضایت کاربران، منجر به اثربخشی هرچه بیشتر آگهی‌ها نیز می‌گردد.</p>
-            <h4 className='pt-10 mb-3'>آگهی شما به مدت نامعلومی در سایت منتشر می شود و ما هیچ مسعولیتی در قبال آن نداریم</h4>
+            <h4 className='pt-10 mb-3 font-medium'>آگهی شما به مدت نامعلومی در سایت منتشر می شود و ما هیچ مسعولیتی در قبال آن نداریم</h4>
             <div className='mt-4 gap-3 flex justify-center items-center'>
               <button onClick={next} className='py-2 w-full rounded text-white bg-green-700'>ادامه</button>
             </div>
@@ -106,7 +110,7 @@ const CreatePost = () => {
         {formNo === 2 && <div className='flex flex-col md:flex-row justify-between gap-x-10'>
           <SelectCategory formik={formik} setCategoryName={setCategoryName} />
           <div className='mt-4 flex-1'>
-            <h3 className='text-center text-sm my-2'>انتخاب دسته بندی{categoryName === '' ? null : `: ${categoryName}`}</h3>
+            <h3 className='text-center text-sm my-2 font-medium'>انتخاب دسته بندی{categoryName === '' ? null : `: ${categoryName}`}</h3>
             <button onClick={next} className='py-2 my-5 w-full rounded text-white bg-green-700'>ادامه</button>
             <button onClick={pre} className='py-2 w-full rounded text-white bg-red-700'>قبلی</button>
           </div>
