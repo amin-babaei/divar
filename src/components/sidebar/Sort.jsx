@@ -19,8 +19,7 @@ const SidebarSort = () => {
             مرتب سازی
             <IoIosArrowDown className={`ml-4 duration-300 ${showDropdown && 'rotate-180'}`} />
           </button>
-          {showDropdown && (
-            <div className="flex flex-col mb-1 font-light">
+            <div className={`flex flex-col mb-1 font-light overflow-hidden transition-all duration-500 ease-out ${showDropdown ? "max-h-20 opacity-100" : "max-h-0 opacity-0"}`}>
              <label className="inline-flex items-center">
                 <input type="radio" className={`checked:bg-none focus:ring-0 focus:ring-offset-0 ${sort === 'desc' ? 'text-red-700 bg-red-700' : 'text-white checked:border-gray-500'}`} name="accountType" value="desc" onChange={handleChange}/>
                 <span className="text-sm mr-2">بالاترین قیمت</span>
@@ -30,7 +29,6 @@ const SidebarSort = () => {
                 <span className="text-sm mr-2">کمترین قیمت</span>
               </label>
             </div>
-          )}
     </div>
   )
 }
