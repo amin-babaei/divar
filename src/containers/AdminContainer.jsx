@@ -6,7 +6,7 @@ function AdminContainer() {
     return (
         <section className={`container relative min-h-[66vh] mx-auto px-3 font-light`}>
       <Helmet>
-        <title>دیوار من</title>
+        <title>ادمین</title>
       </Helmet>
       <div className="flex mt-5 overflow-auto sm:block sm:mt-0 sm:fixed sm:w-56 sm:top-28 sm:overflow-scroll sm:side-h hide-scroll z-10">
         <NavLink to={"/admin/post-verify"} className={({ isActive }) =>
