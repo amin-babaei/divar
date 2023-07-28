@@ -8,6 +8,10 @@ export const getPosts = async (currentPage,category,sort) => {
     const {data} = await http.get(`/api/posts?page=${currentPage}&category=${category}&sort=${sort}`)
     return data.data
 }
+export const getPostsVerify = async (currentPage) => {
+    const {data} = await http.get(`/api/posts/await-verify?page=${currentPage}`)
+    return data.data
+}
 export const getPost = async (slug,hashId) => {
     const {data} = await http.get(`/api/posts/${hashId}/${slug}`)
     return data.data
@@ -18,6 +22,10 @@ export const createPost = async (data) => {
 }
 export const updatePost = async ({ postId, data }) => {
     const response = await http.put(`/api/posts/edit/${postId}`,data)
+    return response
+}
+export const verifyPost = async ({ postId }) => {
+    const response = await http.put(`/api/posts/verify/${postId}`)
     return response
 }
 export const getMyPosts = async (currentPage) => {

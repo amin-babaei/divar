@@ -98,11 +98,14 @@ const CreatePost = () => {
         {formNo === 1 && <div>
           <div className='flex flex-col mb-2'>
             <h3 className='my-3 font-medium'>قوانین و مقررات</h3>
-            <p className='text-justify leading-8'>ثبت آگهی در دیوار نیازمند در نظر گرفتن شرایطی است که باید از سوی کاربران رعایت شود. به مجموعهٔ این موارد، شرایط ثبت آگهی در دیوار گفته می‌شود.
+            <p className='text-justify leading-8 max-w-2xl'>ثبت آگهی در دیوار نیازمند در نظر گرفتن شرایطی است که باید از سوی کاربران رعایت شود. به مجموعهٔ این موارد، شرایط ثبت آگهی در دیوار گفته می‌شود.
               به منظور بهبود تجربهٔ کاربری، شرایط زیر برای ثبت آگهی در «دیوار» وضع شده‌ است. رعایت این موارد، علاوه بر افزایش رضایت کاربران، منجر به اثربخشی هرچه بیشتر آگهی‌ها نیز می‌گردد.</p>
-            <h4 className='pt-10 mb-3 font-medium'>آگهی شما به مدت نامعلومی در سایت منتشر می شود و ما هیچ مسعولیتی در قبال آن نداریم</h4>
+            <h4 className='pt-10 mb-3 font-light'>
+              آگهی ایجاد شده شما بعد از تأیید توسط ناظران ، در سایت به نمایش گذاشته خواهد شد
+            </h4>
+            <h4 className='mb-3 font-light'>آگهی شما به مدت نامعلومی در سایت منتشر می شود و ما هیچ مسعولیتی در قبال آن نداریم</h4>
             <div className='mt-4 gap-3 flex justify-center items-center'>
-              <button onClick={next} className='py-2 w-full rounded text-white bg-green-700'>ادامه</button>
+              <button onClick={next} className='py-2 w-full sm:w-1/4 ml-auto rounded text-white bg-green-700'>موافقم</button>
             </div>
           </div>
         </div>}

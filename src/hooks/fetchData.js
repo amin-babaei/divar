@@ -1,11 +1,14 @@
 import {useMutation,useQuery,useQueryClient} from "react-query"
-import {createPost,deleteMyPost,editBookmark,getBookmarks,getCategorys,getConversation,getMyPosts,getPost,getPosts, getUser, updatePost} from "../services/fetchData"
+import {createPost,deleteMyPost,editBookmark,getBookmarks,getCategorys,getConversation,getMyPosts,getPost,getPosts, getPostsVerify, getUser, updatePost, verifyPost} from "../services/fetchData"
 
 export const useAllCategorys = () => {
     return useQuery("category", getCategorys)
 }
 export const usePosts = (currentPage, category, sort) => {
     return useQuery(['posts', currentPage, category, sort], () => getPosts(currentPage, category, sort))
+}
+export const usePostsVerify = (currentPage) => {
+    return useQuery(['posts-verify', currentPage], () => getPostsVerify(currentPage))
 }
 export const usePost = (slug, hashId) => {
     return useQuery(['post', slug, hashId], () => getPost(slug, hashId),{
@@ -31,15 +34,30 @@ export const useUpdatePost = () => {
         }
       )
 }
+export const useVerifyPost = () => {
+    const queryClient = useQueryClient()
+    return  useMutation(
+        (postId) => verifyPost({ postId }),
+        {
+            onSuccess: () => Promise.all([    
+                queryClient.invalidateQueries(['posts']),
+                queryClient.invalidateQueries(['posts-verify'])
+            ])
+        }
+      )
+}
 export const useMyPosts = (currentPage) => {
     return useQuery(['my-posts',currentPage], ()=>getMyPosts(currentPage))
 }
 export const useDeleteMyPost = () => {
     const queryClient = useQueryClient()
-    return useMutation(deleteMyPost,{
-        onSuccess: () => {
-            queryClient.invalidateQueries('my-posts')
-        },
+    return useMutation(
+        (postId) => deleteMyPost(postId),
+        {
+            onSuccess: () => {
+                queryClient.invalidateQueries("my-posts");
+                queryClient.invalidateQueries("posts-verify");
+            },
     })
 }
 export const useBookmarks = (currentPage) => {

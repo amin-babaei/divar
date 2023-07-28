@@ -34,9 +34,17 @@ const DropDown = () => {
                 <>
                     <div className='h-5 w-5 bg-white mr-1 shadow rotate-45 absolute top-16'></div>
                     <ul className='absolute top-[74px] shadow-md bg-white w-48 font-normal'>
-                        <li className='p-4 text-xs border-b'>
-                            {user.phoneNumber}
-                        </li>
+                        {user.isAdmin ? (
+                            <Link to='/admin/post-verify'>
+                                <li className='p-4 text-xs text-red-500 border-b hover:bg-gray-50 font-bold'>
+                                    پنل ادمین
+                                </li>
+                            </Link>
+                        ) : (
+                            <li className='p-4 text-xs border-b'>
+                                {user.phoneNumber}
+                            </li>
+                        )}
                             <Link to='/profile/bookmarks'>
                                 <li className='flex items-center gap-x-3 p-4 text-xs border-b cursor-pointer hover:bg-gray-50'>
                                     <BsBookmark size={16} />

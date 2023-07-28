@@ -11,6 +11,8 @@ const AdsItem = ({ data }) => {
         <>
             {data?.docs.map(post => (
                 <div key={post._id} className='relative'>
+                    {!post.verify ? <div className='absolute left-7 top-16 bg-yellow-100 text-center p-2 opacity-60 z-10 text-yellow-400 font-bold'>در انتظار تأیید</div>
+                    : null}
                     {pathname === '/profile/my-posts' && <ModalDelete postId={post._id}/>}
                     <Link to={`/posts/edit/${post.hashId}/${post.slug}`}>
                         {pathname === '/profile/my-posts' && 
