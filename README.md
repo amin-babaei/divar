@@ -31,6 +31,8 @@ This project was developed with React.js and Next.js. To view the Next.js versio
 - User isTyping
 - Show online status user
 - User can delete conversation if the opposite user has deleted account.
+- Admin panel
+- Admin must approve the post for it to be displayed on the website
 
 <br />
 
