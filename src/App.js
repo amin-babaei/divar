@@ -13,6 +13,8 @@ import CreatePost from "./pages/posts/create/CreatePost"
 import Chat from "./pages/chat/Chat"
 import { SecureRoute } from "./utils/SecureRoute"
 import Message from "./pages/chat/Message"
+import ProtectedAdmin from "./utils/checkAdmin"
+import VerifyPost from "./pages/admin/VerifyPost"
 const App = () => {
   return (
     <Routes>
@@ -32,6 +34,9 @@ const App = () => {
             <Route path="/profile/bookmarks" element={<Bookmarks />} />
             <Route path="/profile/my-posts" element={<MyPosts />} />
           </Route>
+            <Route element={<ProtectedAdmin/>}>
+              <Route path="/admin/post-verify" element={<VerifyPost/>} />
+            </Route>
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>

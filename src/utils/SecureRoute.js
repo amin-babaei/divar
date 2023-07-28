@@ -1,12 +1,11 @@
 import { Link, Outlet } from 'react-router-dom';
 import { Button } from 'flowbite-react';
 import { useAuth } from '../context/AuthContext';
+import Loading from '../components/Loading';
 
-export { SecureRoute };
-
-function SecureRoute() {
-    const { user } = useAuth()
-
+export const SecureRoute = () => {
+    const { user,loading  } = useAuth()
+    if(loading) return <Loading/>
     if (!user) {
         return (
             <section className="flex flex-col items-center min-h-screen mt-20">
