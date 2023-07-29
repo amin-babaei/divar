@@ -4,7 +4,7 @@ import moment from 'jalali-moment';
 import { BsQuestionCircle } from 'react-icons/bs'
 import { Breadcrumb, ShareLink, Bookmark, Contact } from './index';
 import { toPersianDigits } from '../../utils/persianDigit';
-import { usePost } from '../../hooks/fetchData';
+import { usePost } from '../../hooks/api/usePostApi';
 import Helmet from 'react-helmet';
 import ChatPost from '../../components/chat/ChatPost';
 import { Button } from 'flowbite-react';

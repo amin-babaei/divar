@@ -1,5 +1,5 @@
 import { Button, Pagination } from "flowbite-react"
-import { usePostsVerify, useVerifyPost } from "../../hooks/fetchData"
+import { usePostsVerify, useVerifyPost } from "../../hooks/api/usePostApi"
 import usePaginate from "../../hooks/usePaginate"
 import { Link } from "react-router-dom"
 import Loading from "../../components/Loading"

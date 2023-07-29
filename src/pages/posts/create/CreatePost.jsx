@@ -6,7 +6,7 @@ import { validationCreatePost } from '../../../utils/validation';
 import FormPost from './FormPost';
 import SelectCategory from './SelectCategory';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useUpdatePost, usePost } from '../../../hooks/fetchData';
+import { useUpdatePost, usePost } from '../../../hooks/api/usePostApi';
 import Loading from '../../../components/Loading';
 
 const CreatePost = () => {

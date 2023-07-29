@@ -6,7 +6,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import ChatContext from "../../context/ChatContext";
 import {Helmet} from "react-helmet"
 import { FiChevronRight } from "react-icons/fi";
-import { useConversation } from "../../hooks/fetchData";
+import { useConversation } from "../../hooks/api/useUserApi";
 
 const Chat = () => {
 

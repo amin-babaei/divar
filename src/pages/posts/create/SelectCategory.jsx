@@ -1,5 +1,5 @@
 import LoadCategory from "../../../components/LoadCategory"
-import { useAllCategorys } from "../../../hooks/fetchData"
+import { useAllCategorys } from "../../../hooks/api/usePostApi"
 
 const SelectCategory = ({ formik,setCategoryName }) => {
   const {isLoading, data, isError} = useAllCategorys()

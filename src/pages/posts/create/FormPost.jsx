@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Input from "../../../components/Input";
 import Loading from "../../../components/Loading";
-import { useCreatePost } from "../../../hooks/fetchData";
+import { useCreatePost } from "../../../hooks/api/usePostApi";
 
 const FormPost = ({ state, formik, pre, updatePost, id }) => {
   const [enabled, setEnabled] = useState(state.isNetting);

@@ -1,5 +1,5 @@
-import {useMutation,useQuery,useQueryClient} from "react-query"
-import {createPost,deleteMyPost,editBookmark,getBookmarks,getCategorys,getConversation,getMyPosts,getPost,getPosts, getPostsVerify, getUser, updatePost, verifyPost} from "../services/fetchData"
+import { useMutation, useQuery, useQueryClient } from "react-query"
+import { createPost, deleteMyPost, editBookmark, getBookmarks, getCategorys, getMyPosts, getPost, getPosts, getPostsVerify, updatePost, verifyPost } from "../../services/fetchData"
 
 export const useAllCategorys = () => {
     return useQuery("category", getCategorys)
@@ -11,13 +11,13 @@ export const usePostsVerify = (currentPage) => {
     return useQuery(['posts-verify', currentPage], () => getPostsVerify(currentPage))
 }
 export const usePost = (slug, hashId) => {
-    return useQuery(['post', slug, hashId], () => getPost(slug, hashId),{
-        enabled:!!slug
+    return useQuery(['post', slug, hashId], () => getPost(slug, hashId), {
+        enabled: !!slug
     })
 }
 export const useCreatePost = () => {
     const queryClient = useQueryClient()
-    return useMutation(createPost,{
+    return useMutation(createPost, {
         onSuccess: () => {
             queryClient.invalidateQueries('my-posts')
         },
@@ -25,29 +25,29 @@ export const useCreatePost = () => {
 }
 export const useUpdatePost = () => {
     const queryClient = useQueryClient()
-    return  useMutation(
+    return useMutation(
         ({ postId, data }) => updatePost({ postId, data }),
         {
-          onSuccess: () => {
-            queryClient.invalidateQueries(['post'])
-          }
+            onSuccess: () => {
+                queryClient.invalidateQueries(['post'])
+            }
         }
-      )
+    )
 }
 export const useVerifyPost = () => {
     const queryClient = useQueryClient()
-    return  useMutation(
+    return useMutation(
         (postId) => verifyPost({ postId }),
         {
-            onSuccess: () => Promise.all([    
+            onSuccess: () => Promise.all([
                 queryClient.invalidateQueries(['posts']),
                 queryClient.invalidateQueries(['posts-verify'])
             ])
         }
-      )
+    )
 }
 export const useMyPosts = (currentPage) => {
-    return useQuery(['my-posts',currentPage], ()=>getMyPosts(currentPage))
+    return useQuery(['my-posts', currentPage], () => getMyPosts(currentPage))
 }
 export const useDeleteMyPost = () => {
     const queryClient = useQueryClient()
@@ -58,22 +58,16 @@ export const useDeleteMyPost = () => {
                 queryClient.invalidateQueries("my-posts");
                 queryClient.invalidateQueries("posts-verify");
             },
-    })
+        })
 }
 export const useBookmarks = (currentPage) => {
-    return useQuery(['bookmarks',currentPage], ()=>getBookmarks(currentPage))
+    return useQuery(['bookmarks', currentPage], () => getBookmarks(currentPage))
 }
 export const useBookmarked = () => {
     const queryClient = useQueryClient()
-    return useMutation(editBookmark,{
+    return useMutation(editBookmark, {
         onSuccess: () => {
             queryClient.invalidateQueries('post')
         },
     })
-}
-export const useUser = (customerId) => {
-    return useQuery(['user',customerId], ()=>getUser(customerId))
-}
-export const useConversation = (userId) => {
-    return useQuery(['conversation',userId], ()=>getConversation(userId))
 }

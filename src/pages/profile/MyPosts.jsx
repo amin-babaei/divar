@@ -1,7 +1,7 @@
 import { Button, Pagination } from "flowbite-react"
 import Loading from "../../components/Loading"
 import PostItem from '../../components/posts/PostItem'
-import { useMyPosts } from "../../hooks/fetchData"
+import { useMyPosts } from "../../hooks/api/usePostApi"
 import usePaginate from "../../hooks/usePaginate"
 
 const MyPosts = () => {

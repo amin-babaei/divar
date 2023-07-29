@@ -1,4 +1,4 @@
-import { useUser } from "../../hooks/fetchData";
+import { useUser } from "../../hooks/api/useUserApi";
 import Skeleton from "react-loading-skeleton";
 
 const Conversation = ({ conversation, currentUser, onlineUsers }) => {

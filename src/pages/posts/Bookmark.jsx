@@ -1,7 +1,7 @@
 import { BsBookmarkFill } from "react-icons/bs"
 import { toast } from "react-toastify"
 import { useAuth } from '../../context/AuthContext'
-import { useBookmarked } from "../../hooks/fetchData"
+import { useBookmarked } from "../../hooks/api/usePostApi"
 
 const Bookmark = ({ postId, bookmarked }) => {
     const { user } = useAuth()

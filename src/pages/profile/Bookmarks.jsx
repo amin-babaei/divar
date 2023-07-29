@@ -1,7 +1,7 @@
 import Loading from "../../components/Loading"
 import PostItem from '../../components/posts/PostItem'
 import { BsBookmark } from "react-icons/bs"
-import { useBookmarks } from "../../hooks/fetchData"
+import { useBookmarks } from "../../hooks/api/usePostApi"
 import { Button, Pagination } from "flowbite-react"
 import usePaginate from "../../hooks/usePaginate"
 

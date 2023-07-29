@@ -2,7 +2,7 @@ import LoadCategory from '../LoadCategory'
 import QueryContext from '../../context/QueryContext.js';
 import {useCallback, useContext,} from 'react';
 import {useLocation, useNavigate, useSearchParams} from 'react-router-dom';
-import { useAllCategorys } from '../../hooks/fetchData.js';
+import { useAllCategorys } from '../../hooks/api/usePostApi';
 
 const SidebarCategory = () => {
     const { pathname } = useLocation()

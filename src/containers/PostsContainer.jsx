@@ -4,7 +4,7 @@ import { Button, Pagination } from 'flowbite-react';
 import { useCallback, useContext, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import QueryContext from '../context/QueryContext';
-import { useAllCategorys, usePosts } from '../hooks/fetchData';
+import { useAllCategorys, usePosts } from '../hooks/api/usePostApi';
 import usePaginate from '../hooks/usePaginate';
 import Skeleton from 'react-loading-skeleton';
 
