@@ -4,14 +4,15 @@ import QueryContext from "../../context/QueryContext";
 
 const Breadcrumb = ({postCategory,title}) => {
     const [, setSearchParams] = useSearchParams();
-    const {category, setCategory} = useContext(QueryContext)
+    const { setCurrentPage, category, setCategory} = useContext(QueryContext)
     const navigate = useNavigate()
 
     const sortCategory = useCallback(title => {
         setCategory(title)
         setSearchParams({category})
+        setCurrentPage(1)
         navigate(`/?category=${category}`)
-    }, [setCategory, setSearchParams, category, navigate])
+    }, [setCategory, setSearchParams, category, setCurrentPage, navigate])
 
     return (
         <nav className="rounded-md py-5 px-2">
