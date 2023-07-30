@@ -9,7 +9,7 @@ const Navbar = () => {
         <nav className='flex items-center justify-between container mx-auto px-3'>
             <div className='flex items-center'>
                 <Link to='/'>
-                    <img src="/download.svg" alt="logo" className='w-12 h-12 cursor-pointer'/>
+                    <img src="/logo.svg" alt="logo" className='w-12 h-12 cursor-pointer'/>
                 </Link>
                 <hr className='hidden sm:inline-block h-5 w-[1px] bg-gray-200 mx-3'/>
                 <button className='hidden duration-300 rounded px-4 py-[10px] text-gray-400 text-sm sm:flex items-center hover:bg-gray-100 hover:text-black'>
