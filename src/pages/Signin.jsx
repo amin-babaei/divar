@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { validationSignin } from '../utils/validation';
 import { useEffect } from 'react';
 import { useAuth, useAuthActions } from '../context/AuthContext';
-import { Helmet } from 'react-helmet';
+import { SEO } from '../utils/SEO';
 import Input from '../components/Input';
 import Loading from '../components/Loading'
 const initialValues = {
@@ -29,9 +29,7 @@ const Signin = () => {
     if (loading) return <Loading />
     return (
         <form className="flex flex-col gap-4 px-3 md:w-1/3 md:mx-auto mt-10 font-light" onSubmit={formik.handleSubmit}>
-            <Helmet>
-                <title>ورود به حساب دیوار</title>
-            </Helmet>
+            <SEO title="امین دیوار - ورود به حساب کاربری"/>
             <h3 className='text-center text-gray-500 mb-5 font-medium'>
                 ورود به حساب کاربری
             </h3>

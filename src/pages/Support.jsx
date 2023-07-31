@@ -5,14 +5,15 @@ import check from '../assets/03.png'
 import phone from '../assets/phone.svg'
 import warning from '../assets/warning-phone.svg'
 import envelope from '../assets/envelope.svg'
-import Helmet from 'react-helmet'
+import { SEO } from '../utils/SEO'
 
 const Support = () => {
     return (
         <section className="font-light">
-            <Helmet>
-                <title>پشتیبانی دیوار</title>
-            </Helmet>
+            <SEO 
+                title="امین دیوار - پشتیبانی"
+                description="پشتیبانی امین دیوار ، پاسخ به سوالات متداول و امکان تماس با پشتیبانی"
+            />
             <h3 className='text-center mt-10 text-lg font-thin'>چطور می‌توانیم کمکتان کنیم؟</h3>
             <div className="relative mt-5">
                 <input type="text" className="block w-3/4 md:w-1/3 m-auto text-md text-gray-900 border border-gray-300 rounded focus:outline-none focus:ring-white focus:border-red-700"

@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import Conversation from "../../components/chat/Conversations";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import ChatContext from "../../context/ChatContext";
-import {Helmet} from "react-helmet"
+import { SEO } from "../../utils/SEO";
 import { FiChevronRight } from "react-icons/fi";
 import { useConversation } from "../../hooks/api/useUserApi";
 
@@ -52,9 +52,7 @@ const [onlineUsers, setOnlineUsers] = useState([]);
 
   return (
     <section className="container mx-auto px-3 mt-10 font-light">
-      <Helmet>
-        <title>چت های شما</title>
-      </Helmet>
+      <SEO title="امین دیوار - چت"/>
       {conversations?.length > 0 && !isLoading ? (
         <div className="grid grid-cols-4 items-baseline">
           <button onClick={() => navigate(location.pathname !== '/chat' ? '/chat' : '/')} className='rounded-xl w-12 h-10 mb-6 -mt-3 bg-red-700 flex items-center justify-center md:hidden'>

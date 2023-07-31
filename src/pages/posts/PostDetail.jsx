@@ -5,7 +5,7 @@ import { BsQuestionCircle } from 'react-icons/bs'
 import { Breadcrumb, ShareLink, Bookmark, Contact } from './index';
 import { toPersianDigits } from '../../utils/persianDigit';
 import { usePost } from '../../hooks/api/usePostApi';
-import Helmet from 'react-helmet';
+import { SEO } from '../../utils/SEO';
 import ChatPost from '../../components/chat/ChatPost';
 import { Button } from 'flowbite-react';
 import NotFound from '../NotFound';
@@ -25,9 +25,15 @@ const PostDetail = () => {
       </Button>}
       {data && (
         <>
-          <Helmet>
-            <title>{data.title}</title>
-          </Helmet>
+          <SEO 
+            title={data.title}
+            description={`${data.title} | ${data.category.title} | ${data.description.substring(0, 100)}`}
+            ogUrl={`${process.env.REACT_APP_BASE_URL}/posts/${hashId}/${slug}`}
+            ogType="website"
+            ogTitle={data.title}
+            ogDescription={`${data.title} | ${data.category.title} | ${data.description.substring(0, 100)}`}
+            ogImage={`${process.env.REACT_APP_BASE_API_URL}/images/${data.image.filename}`}
+          />
           <Breadcrumb postCategory={data.category} title={data.title}/>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className='mt-5 order-1 md:order-none'>
