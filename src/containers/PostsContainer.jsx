@@ -1,7 +1,7 @@
 import PostItem from '../components/posts/PostItem'
 import Loading from "../components/Loading";
 import { Button, Pagination } from 'flowbite-react';
-import { useCallback, useContext, useEffect } from 'react';
+import { useCallback, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import QueryContext from '../context/QueryContext';
 import { useAllCategorys, usePosts } from '../hooks/api/usePostApi';
@@ -14,18 +14,6 @@ const AdsContainer = () => {
     const { onPageChange } = usePaginate()
     const { isLoading, data, isError, refetch ,isSuccess } = usePosts(currentPage, category, sort)
     const { data: categorys, isLoading: categoryLoading } = useAllCategorys()
-
-    useEffect(() => {
-        if (category.length > 0 && sort.length > 0) {
-            setSearchParams({ ...{ page: currentPage }, sort, category })
-        }
-        else if (category.length > 0) {
-            setSearchParams({ ...{ page: currentPage }, category })
-        }
-        else if (sort.length > 0) {
-            setSearchParams({ ...{ page: currentPage }, sort })
-        }
-    }, [category, setSearchParams, sort, currentPage])
 
     const handleChangeSort = useCallback(e => {
         setSort(e.target.value)

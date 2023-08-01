@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 
 const QueryContext = createContext()
@@ -9,7 +9,21 @@ export const QueryProvider = ({ children }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [category, setCategory] = useState(query.get('category') || "")
     const [sort, setSort] = useState(query.get('sort') || "")
-    const [currentPage,setCurrentPage] = useState(query.get('page') || 1);
+    const [currentPage, setCurrentPage] = useState(parseInt(query.get("page")) || 1);
+
+    useEffect(() => {
+        const params = new URLSearchParams();
+        if (category.length > 0) {
+          params.set("category", category);
+        }
+        if (sort.length > 0) {
+          params.set("sort", sort);
+        }
+        if (currentPage !== 1) {
+          params.set("page", currentPage.toString());
+        }
+        setSearchParams(params);
+      }, [category, sort, currentPage, setSearchParams]);
 
     const deleteQueryCat = () => {
         setCategory(query.delete('category') || "")
