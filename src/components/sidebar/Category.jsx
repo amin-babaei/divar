@@ -9,15 +9,16 @@ const SidebarCategory = () => {
     const navigate = useNavigate()
     const [, setSearchParams] = useSearchParams();
     const {isLoading, data, isError} = useAllCategorys()
-    const {category, setCategory} = useContext(QueryContext)
+    const {category, setCategory, setCurrentPage} = useContext(QueryContext)
 
-    const getEnglishTitle = useCallback(title => {
+    const categoryHandler = useCallback(title => {
         setCategory(title)
+        setCurrentPage(1)
         setSearchParams({category})
         if(pathname !== '/'){
             navigate(`/?category=${category}`)
         }
-    }, [setCategory, setSearchParams, category, pathname])
+    }, [setCategory, setCurrentPage, setSearchParams, category, pathname, navigate])
 
     return (
         <>
@@ -29,7 +30,7 @@ const SidebarCategory = () => {
                 {data?.map(item => (
                     <li key={item._id}
                         className="w-fit flex gap-x-1 items-center border border-gray-200 text-gray-500 rounded-3xl py-2 px-3 text-[15px] whitespace-nowrap sm:border-0 sm:rounded-none sm:p-0 sm:my-4 sm:gap-0 cursor-pointer hover:text-black hover:mr-1"
-                        onClick={() => getEnglishTitle(item.englishTitle)}>
+                        onClick={() => categoryHandler(item.englishTitle)}>
                         <p dangerouslySetInnerHTML={{__html: item.icon}}/>
                         <p className="text-[15px] font-light">{item.title}</p>
                     </li>
