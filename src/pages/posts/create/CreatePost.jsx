@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { SEO } from '../../../utils/SEO';
 import { toast } from 'react-toastify';
 import { validationCreatePost } from '../../../utils/validation';
@@ -61,7 +61,7 @@ const CreatePost = () => {
   }
 
   const mutation = useUpdatePost()
-  const handleUpdate = (postId) => {
+  const handleUpdate = useCallback((postId) => {
     let data = new FormData();
     data.append("title", formik.values.title);
     data.append("price", formik.values.price);
@@ -69,8 +69,9 @@ const CreatePost = () => {
     data.append("description", formik.values.description);
     data.append("isNetting", formik.values.isNetting);
     data.append("image", formik.values.image);
-    mutation.mutate({ postId, data })
-  }
+    mutation.mutate({ postId, data });
+  }, [formik.values, mutation]);
+  
   if (mutation.isSuccess) {
     toast.success('تغیرات اعمال شد')
     navigate('/profile/my-posts')
