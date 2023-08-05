@@ -22,13 +22,22 @@ const CreatePost = () => {
 
   useEffect(() => {
     if (data && pathname.startsWith('/posts/edit')) {
-      setState({ title: data.title, description: data.description, price: data.price, category: data.category, isNetting: data.isNetting, image: data.image })
-      setCategoryName(data.category.title)
-    }else{
+      setState({title: data.title,description: data.description,price: data.price,category: data.category,isNetting: data.isNetting,image: data.image});
+      setCategoryName(data.category.title);
+    } else {
       setState({ ...initialState });
-      setCategoryName('')
+      setCategoryName('');
+      setFormNo(1);
     }
-  }, [data, pathname])
+  }, [data]);
+  
+  useEffect(() => {
+    if (!data && pathname.startsWith('/posts/edit')) {
+      setState({ ...initialState });
+      setCategoryName('');
+      setFormNo(1);
+    }
+  }, [pathname]);
 
   useEffect(() => {
     if (pathname.startsWith('/posts/edit') && error?.response?.status === 404) {
