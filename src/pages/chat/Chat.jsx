@@ -55,8 +55,8 @@ const [onlineUsers, setOnlineUsers] = useState([]);
       <SEO title="امین دیوار - چت"/>
       {conversations?.length > 0 && !isLoading ? (
         <div className="grid grid-cols-4 items-baseline">
-          <button onClick={() => navigate(location.pathname !== '/chat' ? '/chat' : '/')} className='rounded-xl w-12 h-10 mb-6 -mt-3 bg-red-700 flex items-center justify-center md:hidden'>
-              <FiChevronRight size={25} className='text-white'/>
+          <button onClick={() => navigate(location.pathname !== '/chat' ? '/chat' : '/')} className='rounded w-12 h-10 mb-6 -mt-3 flex shadow-md items-center justify-center md:hidden'>
+              <FiChevronRight size={25}/>
           </button> 
           <ul className={`text-sm col-span-4 md:col-span-1 ${location.pathname !== '/chat' && 'hidden md:block'}`}>
             <li className="flex justify-between p-3 border border-l-0 border-gray-100">
