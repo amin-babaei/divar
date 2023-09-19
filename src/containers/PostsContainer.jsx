@@ -20,8 +20,6 @@ const AdsContainer = () => {
         setSearchParams({ sort })
     }, [setSort, setSearchParams, sort])
 
-    if (isLoading) return <Loading />
-
     if (data?.docs?.length === 0) {
         return (
             <div className='flex flex-col gap-y-10 mt-20 items-center'>
@@ -59,6 +57,7 @@ const AdsContainer = () => {
                         </Button>
                     }
                 </div>
+                {isLoading && <Loading height={'min-h-[60vh]'}/>}
                 <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3 mb-20">
                     <PostItem data={data} />
                 </div>
