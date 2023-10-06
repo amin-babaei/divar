@@ -1,18 +1,17 @@
-import { useCallback, useContext } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import QueryContext from "../../context/QueryContext";
+import { Link, createSearchParams, useNavigate } from "react-router-dom";
 
 const Breadcrumb = ({postCategory,title}) => {
-    const [, setSearchParams] = useSearchParams();
-    const { setCurrentPage, category, setCategory} = useContext(QueryContext)
     const navigate = useNavigate()
 
-    const sortCategory = useCallback(title => {
-        setCategory(title)
-        setSearchParams({category})
-        setCurrentPage(1)
-        navigate(`/?category=${category}`)
-    }, [setCategory, setSearchParams, category, setCurrentPage, navigate])
+    const categoryHandler = title => {
+        navigate({
+            pathname: "/",
+            search: createSearchParams({
+                category: title,
+                page: 1
+            }).toString()
+        });
+    }
 
     return (
         <nav className="rounded-md py-5 px-2">
@@ -23,7 +22,8 @@ const Breadcrumb = ({postCategory,title}) => {
                 <li>
                     <span className="text-gray-400 mx-2">{">"}</span>
                 </li>
-                <li className="text-gray-500 hover:text-xred cursor-pointer whitespace-nowrap" onClick={()=> sortCategory(postCategory?.englishTitle)}>
+                <li className="text-gray-500 hover:text-xred cursor-pointer whitespace-nowrap" 
+                onClick={()=> categoryHandler(postCategory?.englishTitle)}>
                     <p>{postCategory.title}</p>
                 </li>
                 <li>

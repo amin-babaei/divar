@@ -7,7 +7,7 @@ import ModalDelete from "../../components/posts/ModalDelete"
 import { toast } from "react-toastify"
 
 const VerifyPost = () => {
-    const { currentPage, searchParams, onPageChange } = usePaginate()
+    const { currentPage, onPageChange } = usePaginate()
     const { data, isLoading, isError, refetch } = usePostsVerify(currentPage)
     const mutation = useVerifyPost()
 
@@ -64,7 +64,7 @@ const VerifyPost = () => {
                         dir='ltr'
                         currentPage={currentPage}
                         layout="pagination"
-                        defaultValue={searchParams.get('page')}
+                        defaultValue={currentPage}
                         onPageChange={onPageChange}
                         showIcons={true}
                         totalPages={data?.totalPages}

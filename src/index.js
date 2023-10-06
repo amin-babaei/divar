@@ -6,7 +6,6 @@ import App from './App';
 import { Slide, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthProvider from './context/AuthContext';
-import { QueryProvider } from './context/QueryContext';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Compose from './context/store';
 import { ChatProvider } from './context/ChatContext';
@@ -24,7 +23,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <ErrorBoundary>
-      <Compose components={[AuthProvider, QueryProvider, ChatProvider]}>
+      <Compose components={[AuthProvider, ChatProvider]}>
         <QueryClientProvider client={queryClient}>
           <App />
           <ToastContainer rtl limit={1} theme="colored" transition={Slide}/>

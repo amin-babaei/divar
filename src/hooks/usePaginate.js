@@ -1,15 +1,15 @@
-import {useCallback, useContext} from "react";
 import { useSearchParams } from "react-router-dom";
-import QueryContext from "../context/QueryContext";
 
-export default function usePaginate (){
-    const [searchParams] = useSearchParams();
-    const { currentPage,setCurrentPage } = useContext(QueryContext)
+export default function usePaginate() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentPage = parseInt(searchParams.get('page')) || 1;
 
-    const onPageChange = useCallback((page) => {
-        setCurrentPage(page)
-      },[setCurrentPage]
-    );
+  const onPageChange = page => {
+    setSearchParams(prev => {
+      prev.set("page", page)
+      return prev
+    }, { replace: true })
+  }
 
-    return { searchParams, onPageChange, currentPage, setCurrentPage }
+  return { onPageChange, currentPage }
 }

@@ -5,7 +5,7 @@ import { useMyPosts } from "../../hooks/api/usePostApi"
 import usePaginate from "../../hooks/usePaginate"
 
 const MyPosts = () => {
-  const { currentPage, searchParams, onPageChange } = usePaginate()
+  const { currentPage, onPageChange } = usePaginate()
   const { data, isLoading, isError, refetch } = useMyPosts(currentPage)
 
   if (isLoading) return <Loading />
@@ -34,7 +34,7 @@ const MyPosts = () => {
             dir='ltr'
             currentPage={currentPage}
             layout="pagination"
-            defaultValue={searchParams.get('page')}
+            defaultValue={currentPage}
             onPageChange={onPageChange}
             showIcons={true}
             totalPages={data?.totalPages}

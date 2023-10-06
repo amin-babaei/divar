@@ -1,29 +1,35 @@
 import PostItem from '../components/posts/PostItem'
 import Loading from "../components/Loading";
 import { Button, Pagination } from 'flowbite-react';
-import { useCallback, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import QueryContext from '../context/QueryContext';
 import { useAllCategorys, usePosts } from '../hooks/api/usePostApi';
 import usePaginate from '../hooks/usePaginate';
 import Skeleton from 'react-loading-skeleton';
+import { sortQuery } from '../utils/queryHandler';
 
 const AdsContainer = () => {
-    const [, setSearchParams] = useSearchParams();
-    const { currentPage, category, sort, setSort, deleteَAllQuery, deleteQueryCat, deleteQuerySort } = useContext(QueryContext)
-    const { onPageChange } = usePaginate()
-    const { isLoading, data, isError, refetch ,isSuccess } = usePosts(currentPage, category, sort)
+    const [searchParams, setSearchParams] = useSearchParams();
+    const sort = searchParams.get('sort') || "";
+    const category = searchParams.get('category') || "";
+
+    const { currentPage, onPageChange } = usePaginate()
+    const { isLoading, data, isError, refetch, isSuccess } = usePosts(currentPage, category, sort)
     const { data: categorys, isLoading: categoryLoading } = useAllCategorys()
 
-    const handleChangeSort = useCallback(e => {
-        setSort(e.target.value)
-        setSearchParams({ sort })
-    }, [setSort, setSearchParams, sort])
+    const deleteQueryCat = () => {
+        searchParams.delete('category')
+        setSearchParams(searchParams)
+    }
+
+    const deleteQuerySort = () => {
+        searchParams.delete('sort')
+        setSearchParams(searchParams)
+    }
 
     if (data?.docs?.length === 0) {
         return (
             <div className='flex flex-col gap-y-10 mt-20 items-center'>
-                <Button color="failure" onClick={deleteَAllQuery} size='xs' className='mb-3'>
+                <Button color="failure" onClick={() => setSearchParams({})} size='xs' className='mb-3'>
                     X حذف فیلتر ها
                 </Button>
                 <p className='text-2xl'>گشتم نبود ، نگرد نیست !</p>
@@ -35,14 +41,15 @@ const AdsContainer = () => {
     return (
         <>
             <section className="relative min-h-[55vh] mt-5 md:mt-24 sm:mr-72">
-                {categoryLoading && <div className='block sm:hidden -mt-2 mb-4'><Skeleton containerClassName='flex gap-x-4' count={3}/></div>}
-               
-                {isSuccess && 
-                <select className="border border-gray-200 text-gray-900 text-sm rounded-lg block w-1/2 mx-auto mb-5 p-2.5 focus:ring-0 focus:outline-none focus:border-gray-300 bg-left sm:hidden" value={sort} onChange={handleChangeSort}>
-                    <option value=''>مرتب سازی</option>
-                    <option value="desc">بالاترین قیمت</option>
-                    <option value="asc">کمترین قیمت</option>
-                </select>
+                {categoryLoading && <div className='block sm:hidden -mt-2 mb-4'><Skeleton containerClassName='flex gap-x-4' count={3} /></div>}
+
+                {isSuccess &&
+                    <select className="border border-gray-200 text-gray-900 text-sm rounded-lg block w-1/2 mx-auto mb-5 p-2.5 focus:ring-0 focus:outline-none focus:border-gray-300 bg-left sm:hidden" value={sort}
+                        onChange={(e) => sortQuery(setSearchParams, e.target.value)}>
+                        <option value=''>مرتب سازی</option>
+                        <option value="desc">بالاترین قیمت</option>
+                        <option value="asc">کمترین قیمت</option>
+                    </select>
                 }
 
                 <div className='flex items-center gap-3'>
@@ -53,7 +60,7 @@ const AdsContainer = () => {
                     ))}
                     {sort &&
                         <Button color="failure" onClick={deleteQuerySort} size='xs' className='mb-3'>
-                            X {sort === 'desc' ? 'بالاترین قیمت' : 'پایین ترین قیمت'}
+                            X {sort === 'desc' ? 'بالاترین قیمت' : 'کمترین قیمت'}
                         </Button>
                     }
                 </div>

@@ -6,7 +6,7 @@ import { Button, Pagination } from "flowbite-react"
 import usePaginate from "../../hooks/usePaginate"
 
 const Bookmarks = () => {
-  const {currentPage,searchParams,onPageChange} = usePaginate()
+  const { currentPage, onPageChange } = usePaginate()
   const {data, isLoading, isError, refetch} = useBookmarks(currentPage)
 
   if (isLoading) return <Loading/>
@@ -37,7 +37,7 @@ const Bookmarks = () => {
             dir='ltr'
             currentPage={currentPage}
             layout="pagination"
-            defaultValue={searchParams.get('page')}
+            defaultValue={currentPage}
             onPageChange={onPageChange}
             showIcons={true}
             totalPages={data?.totalPages}
