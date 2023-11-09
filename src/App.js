@@ -18,8 +18,8 @@ import VerifyPost from "./pages/admin/VerifyPost"
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<AppContainers />} />
       <Route element={<Layout />}>
+        <Route index element={<AppContainers />} />  
         <Route path="/support" element={<Support />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />

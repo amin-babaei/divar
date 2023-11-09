@@ -1,5 +1,4 @@
 import { SEO } from "../utils/SEO";
-import Navbar from "../components/navbar/Navbar"
 import PostsContainer from "./PostsContainer";
 import SidebarContainer from "./SidebarContainer"
 const AppContainers = () => {
@@ -15,7 +14,6 @@ const AppContainers = () => {
         ogDescription="امین دیوار : مرجع انواع نیازمندی و آگهی‌های نو و دست دو در شهر مشهد"
         ogImage={`${process.env.REACT_APP_BASE_URL}/logo.svg`}
       />
-      <Navbar />
       <section className="container mx-auto px-3 relative">
         <SidebarContainer />
         <PostsContainer />
