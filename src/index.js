@@ -1,15 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
+import { RouterProvider } from 'react-router-dom';
 import { Slide, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AuthProvider from './context/AuthContext';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import Compose from './context/store';
-import { ChatProvider } from './context/ChatContext';
 import ErrorBoundary from './components/ErrorBoundary';
+import router from './routes';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,17 +16,13 @@ const queryClient = new QueryClient({
     },
   },
 });
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
     <ErrorBoundary>
-      <Compose components={[AuthProvider, ChatProvider]}>
         <QueryClientProvider client={queryClient}>
-          <App />
+          <RouterProvider router={router}/>
           <ToastContainer rtl limit={1} theme="colored" transition={Slide}/>
         </QueryClientProvider>
-      </Compose>
     </ErrorBoundary>
-  </BrowserRouter>
 );
-
