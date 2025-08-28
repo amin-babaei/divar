@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import Input from "../../../components/Input";
 import Loading from "../../../components/Loading";
 import { useCreatePost } from "../../../hooks/api/usePostApi";
 
-const FormPost = ({ state, formik, pre, updatePost, id }) => {
-  const [enabled, setEnabled] = useState(state.isNetting);
+const FormPost = ({ isNetting, formik, pre, updatePost, id }) => {
+  const [enabled, setEnabled] = useState(isNetting);
   const [preview, setPreview] = useState('')
   const mutation = useCreatePost()
   const navigate = useNavigate()

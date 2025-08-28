@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 import { BsFillPersonFill, BsBookmark, BsFillChatLeftDotsFill } from 'react-icons/bs'
 import { GrLogin } from 'react-icons/gr'
 import { RiFilePaper2Line } from 'react-icons/ri';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 import { useAuth, useAuthActions } from '../../context/AuthContext.js';
 import useClickOutside from '../../hooks/useClickOutside';
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { SEO } from '../utils/SEO'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import notfound from '../assets/404.png'
 const NotFound = () => {
   return (

@@ -1,4 +1,4 @@
-import { Link, createSearchParams, useNavigate } from "react-router-dom";
+import { Link, createSearchParams, useNavigate } from "react-router";
 
 const Breadcrumb = ({postCategory,title}) => {
     const navigate = useNavigate()

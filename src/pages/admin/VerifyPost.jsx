@@ -1,7 +1,7 @@
 import { Button, Pagination } from "flowbite-react"
 import { usePostsVerify, useVerifyPost } from "../../hooks/api/usePostApi"
 import usePaginate from "../../hooks/usePaginate"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import Loading from "../../components/Loading"
 import ModalDelete from "../../components/posts/ModalDelete"
 import { toast } from "react-toastify"

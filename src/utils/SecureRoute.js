@@ -1,4 +1,4 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router';
 import { Button } from 'flowbite-react';
 import { useAuth } from '../context/AuthContext';
 import Loading from '../components/Loading';

@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { validationSignup } from '../utils/validation.js'
 import { useAuth, useAuthActions } from '../context/AuthContext';
 import ReCAPTCHA from "react-google-recaptcha";
@@ -34,7 +34,12 @@ const Signup = () => {
 
     return (
         <form className="flex flex-col gap-4 px-3 md:w-1/3 md:mx-auto mt-8 font-light" onSubmit={formik.handleSubmit}>
-            <SEO title="امین دیوار - ثبت نام"/>
+            <SEO 
+                title="امین دیوار - ثبت نام"
+                description="حساب کاربری بسازید و رایگان آگهی ثبت کنید"
+                pageType="private"
+                ogType="website"
+            />
             <h3 className='text-center text-gray-500 mb-5 font-medium'>
                 ثبت نام
             </h3>

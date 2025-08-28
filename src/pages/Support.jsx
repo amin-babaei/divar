@@ -1,4 +1,3 @@
-import React from 'react'
 import signup from '../assets/01.png'
 import management from '../assets/02.png'
 import check from '../assets/03.png'
@@ -13,6 +12,8 @@ const Support = () => {
             <SEO 
                 title="امین دیوار - پشتیبانی"
                 description="پشتیبانی امین دیوار ، پاسخ به سوالات متداول و امکان تماس با پشتیبانی"
+                pageType="public"
+                ogType="website"
             />
             <h3 className='text-center mt-10 text-lg font-thin'>چطور می‌توانیم کمکتان کنیم؟</h3>
             <div className="relative mt-5">

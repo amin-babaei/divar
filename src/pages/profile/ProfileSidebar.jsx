@@ -3,7 +3,7 @@ import { useAuth, useAuthActions } from "../../context/AuthContext"
 import { BsFillPersonFill, BsBookmark } from 'react-icons/bs'
 import { RiFilePaper2Line } from 'react-icons/ri'
 import { GrLogin } from "react-icons/gr"
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router"
 import DeleteAccount from "./DeleteAccount"
 
 const ProfileSidebar = () => {

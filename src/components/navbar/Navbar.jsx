@@ -1,5 +1,5 @@
 import {GrLocation} from 'react-icons/gr'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import DropDown from './DropDown'
 
 const Navbar = () => {

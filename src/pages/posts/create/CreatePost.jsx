@@ -1,19 +1,20 @@
 import { useFormik } from 'formik';
-import { Fragment, useCallback, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { SEO } from '../../../utils/SEO';
 import { toast } from 'react-toastify';
 import { validationCreatePost } from '../../../utils/validation';
 import FormPost from './FormPost';
 import SelectCategory from './SelectCategory';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router';
 import { useUpdatePost, usePost } from '../../../hooks/api/usePostApi';
 import Loading from '../../../components/Loading';
+import { toPersianDigits } from '../../../utils/persianDigit';
 
 const CreatePost = () => {
   const formArray = [1, 2, 3];
   const initialState = { title: '', description: '', price: 0, category: '', isNetting: false, image: '' }
-  const [formNo, setFormNo] = useState(formArray[0])
-  const [state, setState] = useState(initialState)
+  const [stepForm, setStepForm] = useState(formArray[0])
+  const [post, setPost] = useState(initialState)
   const [categoryName, setCategoryName] = useState('')
   const { slug, hashId } = useParams()
   const {pathname} = useLocation()
@@ -22,20 +23,20 @@ const CreatePost = () => {
 
   useEffect(() => {
     if (data && pathname.startsWith('/posts/edit')) {
-      setState({title: data.title,description: data.description,price: data.price,category: data.category,isNetting: data.isNetting,image: data.image});
+      setPost({title: data.title,description: data.description,price: data.price,category: data.category,isNetting: data.isNetting,image: data.image});
       setCategoryName(data.category.title);
     } else {
-      setState({ ...initialState });
+      setPost({ ...initialState });
       setCategoryName('');
-      setFormNo(1);
+      setStepForm(1);
     }
   }, [data]);
   
   useEffect(() => {
     if (!data && pathname.startsWith('/posts/edit')) {
-      setState({ ...initialState });
+      setPost({ ...initialState });
       setCategoryName('');
-      setFormNo(1);
+      setStepForm(1);
     }
   }, [pathname]);
 
@@ -46,31 +47,29 @@ const CreatePost = () => {
   }, [pathname, error]);
 
   const formik = useFormik({
-    initialValues: state,
+    initialValues: post,
     validationSchema: validationCreatePost,
     enableReinitialize: true,
     validateOnMount: true,
   })
   
   const next = () => {
-    if (formNo === 1) {
-      setFormNo(formNo + 1)
+    if (stepForm === 1) {
+      setStepForm(stepForm + 1)
     }
-    else if (formNo === 2 && formik.values.category) {
-      setFormNo(formNo + 1)
+    else if (stepForm === 2 && formik.values.category) {
+      setStepForm(stepForm + 1)
     }
-    else if (formNo === 3 && formik.isValid && formik.dirty) {
-      setFormNo(formNo + 1)
+    else if (stepForm === 3 && formik.isValid && formik.dirty) {
+      setStepForm(stepForm + 1)
     } else {
-      toast.error('مقادیر خواسته شده را پر یا انتخاب کنید')
+      toast.error('دسته بندی آگهی خود را مشخص کنید')
     }
   }
-  const pre = () => {
-    setFormNo(formNo - 1)
-  }
+   const pre = () => setStepForm((prev) => prev - 1);
 
   const mutation = useUpdatePost()
-  const handleUpdate = useCallback((postId) => {
+  const handleUpdate = (postId) => {
     let data = new FormData();
     data.append("title", formik.values.title);
     data.append("price", formik.values.price);
@@ -79,7 +78,7 @@ const CreatePost = () => {
     data.append("isNetting", formik.values.isNetting);
     data.append("image", formik.values.image);
     mutation.mutate({ postId, data });
-  }, [formik.values, mutation]);
+  };
   
   if (mutation.isSuccess) {
     toast.success('تغیرات اعمال شد')
@@ -92,18 +91,23 @@ const CreatePost = () => {
 
   return (
     <section className={`container mx-auto p-3 font-light`}>
-      <SEO title={`امین دیوار - ${pathname.startsWith('/posts/edit') ? 'ویرایش' : 'ثبت'} آگهی`}/>
+      <SEO 
+        title={`امین دیوار - ${pathname.startsWith('/posts/edit') ? 'ویرایش' : 'ثبت'} آگهی`}
+        description="آگهی خود را رایگان ثبت کنید و در مشهد دیده شوید"
+        pageType='private'
+        ogType='website'
+      />
       <div className='md:w-2/3 mx-auto'>
         <div className='flex items-center mt-5'>
-          {formArray.map((v, i) => <Fragment key={i}><div className={`w-24 my-3 text-white rounded-full ${formNo - 1 === i || formNo - 1 === i + 1 || formNo === formArray.length ? 'bg-red-500' : 'bg-gray-400'} h-[35px] flex justify-center items-center`}>
-            {v}
+          {formArray.map((v, i) => <Fragment key={i}><div className={`w-24 my-3 text-white rounded-full ${stepForm - 1 === i || stepForm - 1 === i + 1 || stepForm === formArray.length ? 'bg-red-500' : 'bg-gray-400'} h-[35px] flex justify-center items-center`}>
+            {toPersianDigits(v)}
           </div>
-            {i !== formArray.length - 1 && <div className={`w-full h-[2px] ${formNo === i + 2 || formNo === formArray.length ? 'bg-red-500' : 'bg-gray-400'}`}></div>
+            {i !== formArray.length - 1 && <div className={`w-full h-[2px] ${stepForm === i + 2 || stepForm === formArray.length ? 'bg-red-500' : 'bg-gray-400'}`}></div>
             }
           </Fragment>)
           }
         </div>
-        {formNo === 1 && <div>
+        {stepForm === 1 && <div>
           <div className='flex flex-col mb-2'>
             <h3 className='my-3 font-medium'>قوانین و مقررات</h3>
             <p className='text-justify leading-8 max-w-2xl'>ثبت آگهی در دیوار نیازمند در نظر گرفتن شرایطی است که باید از سوی کاربران رعایت شود. به مجموعهٔ این موارد، شرایط ثبت آگهی در دیوار گفته می‌شود.
@@ -118,7 +122,7 @@ const CreatePost = () => {
           </div>
         </div>}
 
-        {formNo === 2 && <div className='flex flex-col md:flex-row justify-between gap-x-10'>
+        {stepForm === 2 && <div className='flex flex-col md:flex-row justify-between gap-x-10'>
           <SelectCategory formik={formik} setCategoryName={setCategoryName} />
           <div className='mt-4 flex-1'>
             <h3 className='text-center text-sm my-2 font-medium'>انتخاب دسته بندی{categoryName === '' ? null : `: ${categoryName}`}</h3>
@@ -126,7 +130,7 @@ const CreatePost = () => {
             <button onClick={pre} className='py-2 w-full rounded text-white bg-red-700'>قبلی</button>
           </div>
         </div>}
-        {formNo === 3 && <FormPost formik={formik} state={state} setState={setState} pre={pre} updatePost={handleUpdate} id={data?._id}/>}
+        {stepForm === 3 && <FormPost formik={formik} isNetting={post?.isNetting} pre={pre} updatePost={handleUpdate} id={data?._id}/>}
       </div>
     </section>
   );

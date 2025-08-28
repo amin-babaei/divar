@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { IoIosArrowDown } from "react-icons/io"
-import { useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router"
 import { sortQuery } from "../../utils/queryHandler"
 
 const SidebarSort = () => {

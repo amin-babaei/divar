@@ -1,5 +1,5 @@
 import LoadCategory from '../LoadCategory'
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router';
 import { useAllCategorys } from '../../hooks/api/usePostApi';
 import { setCategory } from '../../utils/queryHandler';
 

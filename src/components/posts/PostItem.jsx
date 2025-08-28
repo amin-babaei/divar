@@ -1,6 +1,6 @@
 import { toPersianDigits } from '../../utils/persianDigit'
 import moment from 'jalali-moment'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router'
 import ModalDelete from './ModalDelete'
 import { Button } from 'flowbite-react'
 import { AiFillEdit } from 'react-icons/ai'

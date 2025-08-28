@@ -1,7 +1,7 @@
 import PostItem from '../components/posts/PostItem'
 import Loading from "../components/Loading";
 import { Button, Pagination } from 'flowbite-react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router';
 import { useAllCategorys, usePosts } from '../hooks/api/usePostApi';
 import usePaginate from '../hooks/usePaginate';
 import Skeleton from 'react-loading-skeleton';

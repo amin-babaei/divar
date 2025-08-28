@@ -80,7 +80,7 @@ aside > div{
 }
 
 /* customize toast */
-.Toastify__toast-body{
+.Toastify__toast{
   font-family: 'iransans' !important;
   font-size: 14px;
   font-weight: 500;

@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router'
 import Loading from "../../components/Loading";
 import moment from 'jalali-moment';
 import { BsQuestionCircle } from 'react-icons/bs'
@@ -29,10 +29,11 @@ const PostDetail = () => {
             title={data.title}
             description={`${data.title} | ${data.category.title} | ${data.description.substring(0, 100)}`}
             ogUrl={`${process.env.REACT_APP_BASE_URL}/posts/${hashId}/${slug}`}
-            ogType="website"
+            ogType="article"
             ogTitle={data.title}
             ogDescription={`${data.title} | ${data.category.title} | ${data.description.substring(0, 100)}`}
             ogImage={`${process.env.REACT_APP_BASE_API_URL}/images/${data.image.filename}`}
+            pageType='public'
           />
           <Breadcrumb postCategory={data.category} title={data.title}/>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -74,7 +75,7 @@ const PostDetail = () => {
             </div>
             <div>
               <div className='relative overflow-hidden rounded-md w-full h-[26rem] bg-gray-300 aspect-w-10 aspect-h-9'>
-                <img src={`${process.env.REACT_APP_BASE_API_URL}/images/${data.image.filename}`} className="absolute w-full h-full object-center" alt="test" />
+                <img src={`${process.env.REACT_APP_BASE_API_URL}/images/${data.image.filename}`} className="absolute w-full h-full object-center" alt={data.title} />
               </div>
               <div className='flex items-center gap-x-2 mt-5 border-b py-5 cursor-pointer'>
                 <BsQuestionCircle className='text-gray-500' />
