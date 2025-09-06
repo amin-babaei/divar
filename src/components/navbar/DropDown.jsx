@@ -4,7 +4,7 @@ import { BsFillPersonFill, BsBookmark, BsFillChatLeftDotsFill } from 'react-icon
 import { GrLogin } from 'react-icons/gr'
 import { RiFilePaper2Line } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router';
-import { useAuth, useAuthActions } from '../../context/AuthContext.js';
+import { useAuth, useAuthActions } from '../../context/AuthContext';
 import useClickOutside from '../../hooks/useClickOutside';
 
 const DropDown = () => {

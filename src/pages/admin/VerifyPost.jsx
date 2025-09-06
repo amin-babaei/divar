@@ -45,7 +45,7 @@ const VerifyPost = () => {
                         <ModalDelete postId={post._id}/>
                         <div
                             className='relative overflow-hidden rounded-md w-full h-36 bg-gray-300 aspect-w-16 aspect-h-9 aspect-none'>
-                            <img src={`${process.env.REACT_APP_BASE_API_URL}/images/${post.image.filename}`} className="absolute w-full h-full object-center" alt="test" />
+                            <img src={`${import.meta.env.VITE_BASE_API_URL}/images/${post.image.filename}`} className="absolute w-full h-full object-center" alt="test" />
                         <div className="flex gap-x-2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm">
                             <button className="bg-green-500 text-white p-2 rounded-full w-20 hover:opacity-80" 
                             onClick={() => handleVerifyPost(post._id)}>تایید</button>

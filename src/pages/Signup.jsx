@@ -49,7 +49,7 @@ const Signup = () => {
             <Input lable='کلمه عبور' name='password' type='password' placeholder='****' formik={formik} />
             <Input lable='تکرار کلمه عبور' name='confirmPassword' type='password' placeholder='****' formik={formik} />
             <ReCAPTCHA
-                sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
+                sitekey={import.meta.env.VITE_RECAPTCHA_SITEKEY}
                 hl='fa'
                 onChange={value => {
                     formik.setFieldValue("token", value)

@@ -19,7 +19,7 @@ const Chat = () => {
 const [onlineUsers, setOnlineUsers] = useState([]);
 
   useEffect(() => {
-    socket.current = io(process.env.REACT_APP_BASE_API_URL,{
+    socket.current = io(import.meta.env.VITE_BASE_API_URL,{
       transports:['websocket', 'polling']
     });
     socket.current.on("getMessage", (data) => {

@@ -14,7 +14,7 @@ const FormPost = ({ isNetting, formik, pre, updatePost, id }) => {
 
   useEffect(() => {
     if (formik.values.image.filename) {
-      setPreview(`${process.env.REACT_APP_BASE_API_URL}/images/${formik.values.image.filename}`)
+      setPreview(`${import.meta.env.VITE_BASE_API_URL}/images/${formik.values.image.filename}`)
     }
     }, [formik.values.image])
 

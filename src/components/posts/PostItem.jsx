@@ -41,7 +41,7 @@ const AdsItem = ({ data }) => {
                             </div>
                             <div
                                 className='relative overflow-hidden rounded-md w-36 h-36 bg-gray-300 aspect-w-16 aspect-h-9 aspect-none'>
-                                <img src={`${process.env.REACT_APP_BASE_API_URL}/images/${post.image.filename}`} className="absolute w-full h-full object-center" alt="test" />
+                                <img src={`${import.meta.env.VITE_BASE_API_URL}/images/${post.image.filename}`} className="absolute w-full h-full object-center" alt="test" />
                             </div>
                         </article>
                     </Link>

@@ -28,11 +28,11 @@ const PostDetail = () => {
           <SEO 
             title={data.title}
             description={`${data.title} | ${data.category.title} | ${data.description.substring(0, 100)}`}
-            ogUrl={`${process.env.REACT_APP_BASE_URL}/posts/${hashId}/${slug}`}
+            ogUrl={`${import.meta.env.VITE_BASE_URL}/posts/${hashId}/${slug}`}
             ogType="article"
             ogTitle={data.title}
             ogDescription={`${data.title} | ${data.category.title} | ${data.description.substring(0, 100)}`}
-            ogImage={`${process.env.REACT_APP_BASE_API_URL}/images/${data.image.filename}`}
+            ogImage={`${import.meta.env.VITE_BASE_API_URL}/images/${data.image.filename}`}
             pageType='public'
           />
           <Breadcrumb postCategory={data.category} title={data.title}/>
@@ -75,7 +75,7 @@ const PostDetail = () => {
             </div>
             <div>
               <div className='relative overflow-hidden rounded-md w-full h-[26rem] bg-gray-300 aspect-w-10 aspect-h-9'>
-                <img src={`${process.env.REACT_APP_BASE_API_URL}/images/${data.image.filename}`} className="absolute w-full h-full object-center" alt={data.title} />
+                <img src={`${import.meta.env.VITE_BASE_API_URL}/images/${data.image.filename}`} className="absolute w-full h-full object-center" alt={data.title} />
               </div>
               <div className='flex items-center gap-x-2 mt-5 border-b py-5 cursor-pointer'>
                 <BsQuestionCircle className='text-gray-500' />

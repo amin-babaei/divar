@@ -30,8 +30,8 @@
 @font-face {
   font-family: "iransans";
   src: 
-    url("/public/fonts/IRANSansX-Light.woff") format("woff"),
-    url("/public/fonts/IRANSansX-Light.woff2") format("woff2");
+    url("/fonts/IRANSansX-Light.woff") format("woff"),
+    url("/fonts/IRANSansX-Light.woff2") format("woff2");
   font-weight: normal;
   font-display: swap;
   font-weight: 300;
@@ -39,8 +39,8 @@
 @font-face {
   font-family: "iransans";
   src: 
-    url("/public/fonts/IRANSansX-Regular.woff") format("woff"),
-    url("/public/fonts/IRANSansX-Regular.woff2") format("woff2");
+    url("/fonts/IRANSansX-Regular.woff") format("woff"),
+    url("/fonts/IRANSansX-Regular.woff2") format("woff2");
   font-weight: normal;
   font-display: swap;
   font-weight: 400;
@@ -48,8 +48,8 @@
 @font-face {
   font-family: "iransans";
   src: 
-    url("/public/fonts/IRANSansX-DemiBold.woff") format("woff"),
-    url("/public/fonts/IRANSansX-DemiBold.woff2") format("woff2");
+    url("/fonts/IRANSansX-DemiBold.woff") format("woff"),
+    url("/fonts/IRANSansX-DemiBold.woff2") format("woff2");
   font-weight: normal;
   font-display: swap;
   font-weight: 500;
@@ -57,8 +57,8 @@
 @font-face {
   font-family: "iransans";
   src: 
-    url("/public/fonts/IRANSansX-Bold.woff") format("woff"),
-    url("/public/fonts/IRANSansX-Bold.woff2") format("woff2");
+    url("/fonts/IRANSansX-Bold.woff") format("woff"),
+    url("/fonts/IRANSansX-Bold.woff2") format("woff2");
   font-weight: normal;
   font-display: swap;
   font-weight: 700;
