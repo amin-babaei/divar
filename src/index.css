@@ -1,30 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+@import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";  
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-sm: 680px;
+  --breakpoint-md: 992px;
+  --breakpoint-lg: 1200px;
+  --breakpoint-xl: 1450px;
+} 
 @layer utilities {
   .wordspace {
     word-spacing: -3px;
   }
   .side-h{
     height: calc(100vh - 120px)
-  }
-}
-@layer components {
-  .pagination {
-    @apply absolute bottom-4
-  }
-  [aria-current]:not([aria-current="false"]) > button{
-    @apply bg-red-600 text-white
-  }
-  .pagination > ul > li button{
-    @apply p-3
-  }
-  .pagination > ul > li:first-child button{
-    @apply rounded-l-md
-  }
-  .pagination > ul > li:last-child button{
-    @apply rounded-r-md
   }
 }
 @font-face {
@@ -69,11 +58,11 @@ body{
   scrollbar-width: none;
   font-family: 'iransans' !important;
 }
+button{
+  cursor: pointer;
+}
 .hide-scroll::-webkit-scrollbar{
   display: none;
-}
-aside > div{
-  padding: 0 !important;
 }
 .title-modal > button{
   margin: 0;

@@ -16,7 +16,7 @@ const AdsItem = ({ data }) => {
                     {pathname === '/profile/my-posts' && <ModalDelete postId={post._id}/>}
                     <Link to={`/posts/edit/${post.hashId}/${post.slug}`}>
                         {pathname === '/profile/my-posts' && 
-                        <Button color="warning" size='sm' className='absolute z-[1] left-11'>
+                        <Button color="yellow" theme={{color:{yellow: "bg-yellow-400"}}} size='sm' className='absolute z-1 left-11'>
                             <AiFillEdit />
                         </Button>}
                     </Link>
@@ -40,7 +40,7 @@ const AdsItem = ({ data }) => {
                                 </div>
                             </div>
                             <div
-                                className='relative overflow-hidden rounded-md w-36 h-36 bg-gray-300 aspect-w-16 aspect-h-9 aspect-none'>
+                                className='relative overflow-hidden rounded-md w-36 h-36 bg-gray-300 aspect-square'>
                                 <img src={`${import.meta.env.VITE_BASE_API_URL}/images/${post.image.filename}`} className="absolute w-full h-full object-center" alt="test" />
                             </div>
                         </article>

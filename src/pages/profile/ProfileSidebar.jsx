@@ -19,7 +19,7 @@ const ProfileSidebar = () => {
         </div>
         <p className="hidden sm:block text-gray-500 text-xs pr-5 my-3">{user?.phoneNumber}</p>
         <p className="hidden sm:block text-gray-500 text-xs pr-5 my-3">{user?.email}</p>
-        <hr className="hidden mb-10 sm:block" />
+        <hr className="hidden mb-10 text-gray-300 sm:block" />
         <NavLink to={"/profile/bookmarks"} className={({ isActive }) =>
           isActive ? 'text-red-700' : 'text-black'
         }>

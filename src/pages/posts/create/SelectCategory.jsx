@@ -17,7 +17,7 @@ const SelectCategory = ({ formik,setCategoryName }) => {
     <>
       <ul className='flex-1'>
         {data?.map(item => (
-          <div key={item._id} className='flex items-center gap-x-2 border-b py-5 cursor-pointer hover:bg-gray-50'
+          <div key={item._id} className='flex items-center gap-x-2 border-b border-gray-300 py-5 cursor-pointer hover:bg-gray-50'
             onClick={() => selectCategory(item._id,item.title)}>
             <p dangerouslySetInnerHTML={{ __html: item.icon }} />
             <p className='text-gray-500 text-sm'>{item.title}</p>

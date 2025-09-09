@@ -7,9 +7,9 @@ const SidebarContainer = () => {
   return (
       <div className="flex mt-5 gap-x-4 overflow-auto sm:block sm:mt-0 sm:fixed sm:w-56 sm:top-28 sm:overflow-scroll sm:side-h hide-scroll z-10">
         <SidebarCategory/>
-        <hr />
+        <hr className='text-gray-300'/>
         <SidebarSort/>
-        <hr />
+        <hr className='text-gray-300'/>
         <SidebarFooter/>
       </div>
   )

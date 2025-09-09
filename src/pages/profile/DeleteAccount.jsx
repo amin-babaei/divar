@@ -21,8 +21,8 @@ const DeleteAccount = () => {
             </div>
             {showModal && (
                 <Modal reference={modalRef} title='حذف حساب کاربری' desc='با حذف حساب کاربری ، آگهی های شما نیز حذف می شود . آیا مطمئن هستید ؟'>
-                    <Button fullSized color='failure' onClick={() => setShowModal(false)}>خیر</Button>
-                    <Button fullSized color='success' onClick={() => dispatch({ type: 'DELETEUSER', payload: user?._id })}>بله</Button>
+                    <Button fullSized color='red' onClick={() => setShowModal(false)}>خیر</Button>
+                    <Button fullSized color='green' onClick={() => dispatch({ type: 'DELETEUSER', payload: user?._id })}>بله</Button>
                 </Modal>
             )}    
         </>

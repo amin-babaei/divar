@@ -120,7 +120,7 @@ const Message = () => {
     return (
         <>
             <UserMessage loading={isLoading} error={error} data={data} isTyping={isTyping}/>
-            <div className="border border-gray-100 h-[39rem] overflow-y-auto flex flex-col justify-between">
+            <div className="border border-gray-100 h-156 overflow-y-auto flex flex-col justify-between">
               {state === 'loading' ? <Skeleton count={4} wrapper={SkeletBox} borderRadius='1rem' className='py-7 rounded-2xl rounded-br-none' /> : null}
                <MessageBox loading={state} messages={messages} scrollRef={scrollRef} user={user._id} loadingMsg={loadingMsg} newMessage={newMessage}/>
                   {error?.response.status === 404 ? (

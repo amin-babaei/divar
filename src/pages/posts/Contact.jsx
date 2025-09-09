@@ -1,4 +1,4 @@
-import { Modal } from "flowbite-react"
+import { Modal, ModalBody, ModalHeader } from "flowbite-react"
 import { useState } from "react"
 
 const Contact = ({info}) => {
@@ -13,14 +13,14 @@ const Contact = ({info}) => {
                 show={showModal}
                 onClose={() => setShowModal(!showModal)}
                 size="md"
-                popup={true}
+                popup
                 position="center"
             >
-                <Modal.Header />
-                <Modal.Body className="font-light leading-8">
+                <ModalHeader />
+                <ModalBody className="font-light leading-8">
                     <p>ایمیل : {info.email}</p>
                     <p>شماره تماس : {info.phoneNumber}</p>
-                </Modal.Body>
+                </ModalBody>
             </Modal>
         </div>
     )

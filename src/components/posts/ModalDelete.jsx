@@ -28,11 +28,11 @@ const ModalDelete = ({ postId }) => {
     }
     return (
         <>
-            <Button color="failure" size='sm' className='absolute z-[1] left-0' onClick={() => setShowModal(true)}><BsTrashFill /></Button>
+            <Button color="red" size='sm' className='absolute z-1 left-0' onClick={() => setShowModal(true)}><BsTrashFill /></Button>
             {showModal && (
                 <Modal reference={modalRef} title='حذف آگهی' desc='آیا از حذف آگهی خود مطمئن هستید ؟'>
-                    <Button fullSized color='failure' onClick={() => setShowModal(false)}>خیر</Button>
-                    <Button fullSized color='success' onClick={() => handleDeletePost(postId)}>بله</Button>
+                    <Button fullSized color='red' onClick={() => setShowModal(false)}>خیر</Button>
+                    <Button fullSized color='green' onClick={() => handleDeletePost(postId)}>بله</Button>
                 </Modal>
             )}
         </>

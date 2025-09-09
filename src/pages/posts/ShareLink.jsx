@@ -1,4 +1,4 @@
-import { Modal } from "flowbite-react"
+import { Modal, ModalBody, ModalHeader } from "flowbite-react"
 import { useState } from "react"
 import { BsShare } from 'react-icons/bs'
 import {
@@ -28,10 +28,10 @@ const ShareLink = ({ slug, hashId }) => {
                 popup={true}
                 position="center"
             >
-                <Modal.Header />
-                <Modal.Body>
+                <ModalHeader />
+                <ModalBody>
                     <p className="font-normal text-sm text-center">اشتراک گذاری در :</p>
-                    <div className="space-y-6 flex gap-x-3 justify-center items-baseline">
+                    <div className="flex gap-x-3 justify-center items-baseline mt-4">
                         <FacebookShareButton
                             url={url}
                         >
@@ -58,7 +58,7 @@ const ShareLink = ({ slug, hashId }) => {
                             <LinkedinIcon size={40} round={true} />
                         </LinkedinShareButton>
                     </div>
-                </Modal.Body>
+                </ModalBody>
             </Modal>
         </div>
     )

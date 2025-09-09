@@ -20,7 +20,7 @@ const PostDetail = () => {
 
   return (
     <section className='font-light mt-5 container mx-auto px-3 lg:px-[170px]'>
-      {isError && <Button color="failure" onClick={refetch} size='md' className='m-auto'>
+      {isError && <Button color="red" onClick={refetch} size='md' className='m-auto'>
         تلاش مجدد
       </Button>}
       {data && (
@@ -37,10 +37,10 @@ const PostDetail = () => {
           />
           <Breadcrumb postCategory={data.category} title={data.title}/>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className='mt-5 order-1 md:order-none'>
+            <div className='mt-5 order-1 md:order-0'>
               <h2 className='text-xl font-medium'>{data.title}</h2>
               <p className='text-md mt-5 text-gray-500'>{toPersianDigits(moment(data.createdAt).locale('fa').fromNow())}</p>
-              <div className='flex items-center justify-between mt-4 border-b py-3'>
+              <div className='flex items-center justify-between mt-4 border-b border-gray-300 py-3'>
                 <h3>قیمت : </h3>
                 <p className='text-gray-500'>
                   {data.price > 0 ? (
@@ -54,7 +54,7 @@ const PostDetail = () => {
                   ) : 'توافقی'}
                 </p>
               </div>
-              <div className='flex items-center justify-between border-b py-3'>
+              <div className='flex items-center justify-between border-b border-gray-300 py-3'>
                 <h3>مایل به معاوضه : </h3>
                 <p className='text-gray-500'>
                   {data.isNetting ? 'هستم' : 'نیستم'}
@@ -74,14 +74,14 @@ const PostDetail = () => {
               <div className='whitespace-pre-wrap text-[15px] leading-8' dangerouslySetInnerHTML={{ __html: data.description }} />
             </div>
             <div>
-              <div className='relative overflow-hidden rounded-md w-full h-[26rem] bg-gray-300 aspect-w-10 aspect-h-9'>
+              <div className='relative overflow-hidden rounded-md w-full h-104 bg-gray-300 aspect-w-10 aspect-h-9'>
                 <img src={`${import.meta.env.VITE_BASE_API_URL}/images/${data.image.filename}`} className="absolute w-full h-full object-center" alt={data.title} />
               </div>
-              <div className='flex items-center gap-x-2 mt-5 border-b py-5 cursor-pointer'>
+              <div className='flex items-center gap-x-2 mt-5 border-b border-gray-300 py-5 cursor-pointer'>
                 <BsQuestionCircle className='text-gray-500' />
                 <p className='text-gray-500 text-sm'>راهنمای خرید امن</p>
               </div>
-              <div className='flex items-center gap-x-2 border-b py-5 cursor-pointer'>
+              <div className='flex items-center gap-x-2 border-b border-gray-300 py-5 cursor-pointer'>
                 <BsQuestionCircle className='text-gray-500' />
                 <p className='text-gray-500 text-sm'>ثبت تخلف و مشکل آگهی</p>
               </div>

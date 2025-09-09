@@ -1,10 +1,11 @@
-import { Button, Pagination } from "flowbite-react"
+import { Button } from "flowbite-react"
 import { usePostsVerify, useVerifyPost } from "../../hooks/api/usePostApi"
 import usePaginate from "../../hooks/usePaginate"
 import { Link } from "react-router"
 import Loading from "../../components/Loading"
 import ModalDelete from "../../components/posts/ModalDelete"
 import { toast } from "react-toastify"
+import PaginationUI from "../../components/Pagination"
 
 const VerifyPost = () => {
     const { currentPage, onPageChange } = usePaginate()
@@ -36,7 +37,7 @@ const VerifyPost = () => {
     }
     return (
         <>
-            {isError && <Button color="failure" onClick={refetch} size='md' className='mx-auto mt-40'>
+            {isError && <Button color="red" onClick={refetch} size='md' className='mx-auto mt-40'>
                 تلاش مجدد
             </Button>}
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 mt-10 md:mt-24 sm:mr-72">
@@ -58,20 +59,11 @@ const VerifyPost = () => {
                 ))}
             </div>
             {data && data.totalPages > 1 && (
-                <div className='flex justify-center sm:justify-end lg:justify-center my-10 md:mt-24'>
-                    <Pagination
-                        className='pagination'
-                        dir='ltr'
-                        currentPage={currentPage}
-                        layout="pagination"
-                        defaultValue={currentPage}
-                        onPageChange={onPageChange}
-                        showIcons={true}
-                        totalPages={data?.totalPages}
-                        previousLabel="قبلی"
-                        nextLabel="بعدی"
-                    />
-                </div>
+                <PaginationUI
+                    currentPage={currentPage}
+                    onPageChange={onPageChange}
+                    totalPages={data?.totalPages}
+                />
             )}
         </>
     )
