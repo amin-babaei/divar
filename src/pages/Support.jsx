@@ -1,10 +1,10 @@
-import signup from '../assets/01.png'
-import management from '../assets/02.png'
-import check from '../assets/03.png'
-import phone from '../assets/phone.svg'
-import warning from '../assets/warning-phone.svg'
-import envelope from '../assets/envelope.svg'
-import { SEO } from '../utils/SEO'
+import signup from '@/assets/01.png'
+import management from '@/assets/02.png'
+import check from '@/assets/03.png'
+import phone from '@/assets/phone.svg'
+import warning from '@/assets/warning-phone.svg'
+import envelope from '@/assets/envelope.svg'
+import { SEO } from '@/utils/SEO'
 
 const Support = () => {
     return (

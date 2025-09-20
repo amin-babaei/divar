@@ -4,8 +4,8 @@ import { BsFillPersonFill, BsBookmark, BsFillChatLeftDotsFill } from 'react-icon
 import { GrLogin } from 'react-icons/gr'
 import { RiFilePaper2Line } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router';
-import { useAuth, useAuthActions } from '../../context/AuthContext';
-import useClickOutside from '../../hooks/useClickOutside';
+import { useAuth, useAuthActions } from '@/context/AuthContext';
+import useClickOutside from '@/hooks/useClickOutside';
 
 const DropDown = () => {
     const { user, loading } = useAuth()
@@ -35,7 +35,7 @@ const DropDown = () => {
                     <div className='h-5 w-5 bg-white mr-1 shadow rotate-45 absolute top-16'></div>
                     <ul className='absolute top-[74px] shadow-md bg-white w-48 font-normal'>
                         {user.isAdmin ? (
-                            <Link to='/admin/post-verify'>
+                            <Link to='/admin/ads-verify'>
                                 <li className='p-4 text-xs text-red-500 border-b hover:bg-gray-50 font-bold'>
                                     پنل ادمین
                                 </li>
@@ -51,7 +51,7 @@ const DropDown = () => {
                                         نشان ها
                                 </li>
                             </Link>
-                            <Link to='/profile/my-posts'>
+                            <Link to='/profile/my-ads'>
                                 <li className='flex items-center gap-x-3 p-4 text-xs border-b cursor-pointer hover:bg-gray-50'>
                                     <RiFilePaper2Line size={16} />
                                         آگهی های من

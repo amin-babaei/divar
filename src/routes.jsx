@@ -1,66 +1,63 @@
-import {
-  createBrowserRouter,
-  redirect
-} from "react-router";
-import AppContainers from "./containers/AppContainers";
-import ProfileContainer from "./containers/ProfileContainer";
+import { createBrowserRouter, redirect } from "react-router";
+import ProfileLayout from "./layouts/ProfileLayout";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Support from "./pages/Support";
-import VerifyPost from "./pages/admin/VerifyPost";
+import VerifyAdsPage from "./pages/admin/VerifyAdsPage";
 import Chat from "./pages/chat/Chat";
 import Message from "./pages/chat/Message";
-import PostDetail from "./pages/posts/PostDetail";
-import CreatePost from "./pages/posts/create/CreatePost";
+import AdsDetail from "./pages/ads/AdsDetail";
+import CreateAdPage from "./pages/ads/create/CreateAdPage";
 import Bookmarks from "./pages/profile/Bookmarks";
-import MyPosts from "./pages/profile/MyPosts";
-import { SecureRoute } from "./utils/SecureRoute";
-import ProtectedAdmin from "./utils/checkAdmin";
-import Layout from "./containers/Layout";
+import MyAds from "./pages/profile/MyAds";
+import { SecureRoute } from "@/features/auth/SecureRoute";
+import SecureAdminRoute from "@/features/auth/admin/SecureAdminRoute";
+import Layout from "./layouts/RootLayout";
 import NotFound from "./pages/NotFound";
 import http from "./services/httpService";
+import Home from "./pages/Home";
 
 const router = createBrowserRouter([{
-  element: < Layout / > ,
-  errorElement: < NotFound / > ,
+  element: <Layout /> ,
+  errorElement: <NotFound /> ,
   // public routes
   children: [{
       index: true,
-      element: < AppContainers / >
+      element: <Home />
     },
     {
       path: "/support",
-      element: < Support / > ,
+      element: <Support /> ,
     },
     {
       path: "/signup",
-      element: < Signup / > ,
+      element: <Signup /> ,
     },
     {
       path: "/signin",
-      element: < Signin / > ,
+      element: <Signin /> ,
     },
     {
-      path: "/posts/:hashId/:slug",
-      element: < PostDetail / > ,
+      path: "/ads/:hashId/:slug",
+      element: <AdsDetail /> ,
     },
     // private routes
     {
-      element: < SecureRoute / > ,
+      element: <SecureRoute /> ,
       children: [{
-          path: "/posts/create",
-          element: < CreatePost / > ,
+          path: "/ads/create",
+          element: <CreateAdPage /> ,
         },
         {
-          path: "/posts/edit/:hashId/:slug",
-          element: < CreatePost / > ,
+          path: "/ads/edit/:hashId/:slug",
+          element: <CreateAdPage /> ,
         },
         {
           path: "/chat",
-          element: < Chat / > ,
+          element: <Chat / > ,
           children: [{
             path: "/chat/:chatId",
-            element: < Message / > ,
+            element: <Message /> ,
             loader: async ({
               params
             }) => {
@@ -99,14 +96,14 @@ const router = createBrowserRouter([{
         },
         {
           path: "/profile",
-          element: < ProfileContainer / > ,
+          element: <ProfileLayout /> ,
           children: [{
               path: "/profile/bookmarks",
-              element: < Bookmarks / > ,
+              element: <Bookmarks /> ,
             },
             {
-              path: "/profile/my-posts",
-              element: < MyPosts / > ,
+              path: "/profile/my-ads",
+              element: <MyAds /> ,
             },
           ],
         },
@@ -114,10 +111,10 @@ const router = createBrowserRouter([{
     },
     // admin routes
     {
-      element: < ProtectedAdmin / > ,
+      element: <SecureAdminRoute /> ,
       children: [{
-        path: "/admin/post-verify",
-        element: < VerifyPost / > ,
+        path: "/admin/ads-verify",
+        element: <VerifyAdsPage /> ,
       }, ],
     },
   ]

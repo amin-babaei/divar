@@ -29,7 +29,7 @@ const Navbar = () => {
                         پشتیبانی
                     </button>
                 </Link>
-                <Link to='/posts/create'>
+                <Link to='/ads/create'>
                     <button className='rounded px-4 py-[10px] bg-red-700 text-white text-sm flex items-center hover:bg-red-600 duration-300'>
                         ثبت آگهی
                     </button>

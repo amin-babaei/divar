@@ -1,5 +1,5 @@
 import { Component } from "react";
-import notfound from '../assets/404.png'
+import notfound from '@/assets/404.png'
 import { Link } from "react-router";
 
 class ErrorBoundary extends Component {

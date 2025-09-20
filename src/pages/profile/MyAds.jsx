@@ -1,24 +1,21 @@
-import Loading from "@/ui/Loading"
-import PostItem from '@/features/ads/AdsItem'
-import { BsBookmark } from "react-icons/bs"
-import { useBookmarks } from "@/features/profile/hooks/useBookmarks"
 import { Button } from "flowbite-react"
+import Loading from "@/ui/Loading"
+import AdsItem from '@/features/ads/AdsItem'
 import usePaginate from "@/hooks/usePaginate"
 import PaginationUI from "@/ui/Pagination"
+import { useMyAds } from "@/features/profile/hooks/useMyAds"
 
-const Bookmarks = () => {
+const MyAds = () => {
   const { currentPage, onPageChange } = usePaginate()
-  const { data, isLoading, isError, refetch } = useBookmarks(currentPage)
+  const { data, isLoading, isError, refetch } = useMyAds(currentPage)
 
   if (isLoading) return <Loading />
   if (data?.docs?.length === 0) {
     return (
       <div className="w-full flex flex-col items-center">
-        <img src="/bookmark.svg" alt="نشان شده ها" />
+        <img src="/myposts.svg" alt="آگهی های من" />
         <p className="text-sm text-gray-500 whitespace-pre-wrap">
-          برای نشان کردن آگهی ها از دکمه
-          <BsBookmark className="inline-block mx-1" />
-          در صفحه آگهی ها استفاده کنید
+          درحال حاظر آگهی ثبت شده ندارید
         </p>
       </div>
     )
@@ -29,7 +26,7 @@ const Bookmarks = () => {
         تلاش مجدد
       </Button>}
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 mt-10 md:mt-24 sm:mr-72">
-        <PostItem data={data} />
+        <AdsItem data={data} />
       </div>
       {data && data.totalPages > 1 && (
         <PaginationUI
@@ -42,4 +39,4 @@ const Bookmarks = () => {
   )
 }
 
-export default Bookmarks
+export default MyAds
